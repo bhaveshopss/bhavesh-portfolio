@@ -1,0 +1,65 @@
+/* ====================================================
+   BKP.DEV Portfolio — Global Styles & Performance
+   ==================================================== */
+
+/* Smooth scrolling for anchors */
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Performance: GPU-accelerate frequently animated elements */
+.animate-marquee,
+.animate-float,
+.animate-radar-sweep,
+.animate-pulse-glow,
+.animate-flow-dash,
+.animate-scan-line {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Performance: Use content-visibility for off-screen sections */
+section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
+}
+
+/* Performance: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Logo images in the marquee: optimize rendering */
+.logo-cloud-img {
+    image-rendering: auto;
+    contain: layout style paint;
+}
+
+/* Optimize paint for fixed elements */
+.fixed {
+    will-change: transform;
+}
+
+/* Fonts loaded via Google Fonts link tags with display=swap */
+
+/* Faster image loading visual */
+img {
+    content-visibility: auto;
+}
+
+/* Optimize scroll performance */
+* {
+    -webkit-overflow-scrolling: touch;
+}
