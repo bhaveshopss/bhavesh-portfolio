@@ -1,6 +1,5 @@
 import React from "react";
 import { PlusIcon } from "lucide-react";
-import { motion } from "framer-motion";
 import { cn } from "../../lib/utils";
 
 const row1 = [
@@ -91,8 +90,6 @@ function MarqueeRow({ logos, duration, reverse }: { logos: { name: string; src: 
 }
 
 function LogoCard({ logo }: { key?: string | number; logo: { name: string; src: string; color?: string } }) {
-  // Cast motion.div to any to avoid type errors
-  const MotionDiv = motion.div as any;
   const hoverColor = logo.color || "#00ff41";
 
   return (
@@ -100,15 +97,8 @@ function LogoCard({ logo }: { key?: string | number; logo: { name: string; src: 
       className="relative flex h-24 w-32 flex-col items-center justify-center border-r border-gray-200 dark:border-white/5 transition-colors hover:bg-white dark:hover:bg-white/10 shrink-0 group/card"
       style={{ "--hover-color": hoverColor } as React.CSSProperties}
     >
-      <MotionDiv
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{
-          duration: 0.6,
-          ease: "easeOut"
-        }}
-        className="flex items-center justify-center w-full h-full relative"
+      <div
+        className="flex items-center justify-center w-full h-full relative transition-transform duration-300 ease-out transform group-hover/card:scale-105"
       >
         {/* Pulsing Background Glow */}
         <div className="absolute inset-0 bg-[var(--hover-color)] opacity-0 group-hover/card:opacity-10 blur-xl group-hover/card:animate-pulse transition-opacity duration-500 rounded-full" />
@@ -122,7 +112,7 @@ function LogoCard({ logo }: { key?: string | number; logo: { name: string; src: 
           height="32"
           className="h-8 w-auto grayscale opacity-40 transition-all duration-300 group-hover/card:grayscale-0 group-hover/card:opacity-100 group-hover/card:scale-110 group-hover/card:drop-shadow-[0_0_8px_var(--hover-color)] cursor-pointer relative z-10"
         />
-      </MotionDiv>
+      </div>
     </div>
   );
 }

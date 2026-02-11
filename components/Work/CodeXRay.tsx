@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
 import { XRayNode } from '../../types';
 
 interface CodeXRayProps {
@@ -15,7 +15,15 @@ const CodeXRay: React.FC<CodeXRayProps> = ({ id, nodes, connections, title, vers
   const [activeNode, setActiveNode] = useState<XRayNode | null>(null);
   const [modalNode, setModalNode] = useState<XRayNode | null>(null);
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
-  const [rotation, setRotation] = useState({ x: 20, y: 0 });
+
+  // Optimization: Use MotionValues for rotation to avoid React re-renders on every mouse move
+  const rotateX = useMotionValue(20);
+  const rotateY = useMotionValue(0);
+
+  // Add simple spring physics for smoother movement
+  const springRotateX = useSpring(rotateX, { stiffness: 100, damping: 20 });
+  const springRotateY = useSpring(rotateY, { stiffness: 100, damping: 20 });
+
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Parallax / 3D Tilt Effect on Mouse Move
@@ -27,14 +35,16 @@ const CodeXRay: React.FC<CodeXRayProps> = ({ id, nodes, connections, title, vers
 
     // Calculate rotation based on cursor position relative to center
     // Range: -5 to 5 degrees
-    const rotateY = ((x / rect.width) - 0.5) * 10;
-    const rotateX = 20 + ((y / rect.height) - 0.5) * -10;
+    const rY = ((x / rect.width) - 0.5) * 10;
+    const rX = 20 + ((y / rect.height) - 0.5) * -10;
 
-    setRotation({ x: rotateX, y: rotateY });
+    rotateX.set(rX);
+    rotateY.set(rY);
   };
 
   const handleMouseLeave = () => {
-    setRotation({ x: 20, y: 0 }); // Reset to default isometric view
+    rotateX.set(20);
+    rotateY.set(0); // Reset to default isometric view
   };
 
   const getNodeColor = (type: string) => {
@@ -149,12 +159,9 @@ const CodeXRay: React.FC<CodeXRayProps> = ({ id, nodes, connections, title, vers
         {/* 3D TRANSFORMED PLANE */}
         <motion.div
           className="absolute inset-0 w-full h-full preserve-3d"
-          animate={{
-            rotateX: rotation.x,
-            rotateY: rotation.y,
-          }}
-          transition={{ type: 'spring', stiffness: 100, damping: 20 }}
           style={{
+            rotateX: springRotateX,
+            rotateY: springRotateY,
             transformOrigin: 'center center',
           }}
         >
