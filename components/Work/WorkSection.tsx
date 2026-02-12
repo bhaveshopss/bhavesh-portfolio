@@ -79,30 +79,30 @@ const WorkSection: React.FC = () => {
     <main className="relative z-10 container mx-auto px-4 py-8" id="work">
       {/* Background Ambience */}
       <div className="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
-         {/* Tech Blobs */}
-         <div className="absolute top-[10%] right-[0%] w-[400px] h-[400px] bg-accent-blue/5 rounded-full blur-[120px] animate-pulse-slow mix-blend-multiply dark:mix-blend-screen"></div>
-         <div className="absolute bottom-[20%] left-[0%] w-[400px] h-[400px] bg-accent-green/5 rounded-full blur-[120px] animate-pulse-slow delay-2000 mix-blend-multiply dark:mix-blend-screen"></div>
-         {/* Faint Grid */}
-         <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.03]" style={{ 
-             backgroundImage: 'linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)', 
-             backgroundSize: '100px 100px',
-             color: 'gray'
-         }}></div>
+        {/* Tech Blobs */}
+        <div className="absolute top-[10%] right-[0%] w-[400px] h-[400px] bg-accent-blue/5 rounded-full blur-[120px] animate-pulse-slow mix-blend-multiply dark:mix-blend-screen"></div>
+        <div className="absolute bottom-[20%] left-[0%] w-[400px] h-[400px] bg-accent-green/5 rounded-full blur-[120px] animate-pulse-slow delay-2000 mix-blend-multiply dark:mix-blend-screen"></div>
+        {/* Faint Grid */}
+        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.03]" style={{
+          backgroundImage: 'linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)',
+          backgroundSize: '100px 100px',
+          color: 'gray'
+        }}></div>
       </div>
 
       <div className="text-center mb-12 relative z-10">
-        <h2 className="font-display text-3xl md:text-5xl text-gray-900 dark:text-white uppercase font-bold tracking-tight">Cool stuff I've done</h2>
+        <h2 className="font-display text-3xl md:text-5xl text-gray-900 dark:text-white uppercase font-bold tracking-tight">Architectural Highlights</h2>
       </div>
 
       {/* Project 1 */}
       <div className="mb-24 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7">
-            <CodeXRay 
-              id="p1" 
-              nodes={nodes1} 
-              connections={connections1} 
-              title="Self-Healing CI/CD" 
+            <CodeXRay
+              id="p1"
+              nodes={nodes1}
+              connections={connections1}
+              title="Self-Healing CI/CD"
               version="SYSTEM ARCHITECTURE V4.0.2"
               logLines={logs1}
             />
@@ -152,11 +152,11 @@ const WorkSection: React.FC = () => {
             </div>
           </div>
           <div className="lg:col-span-7 lg:order-1">
-             <CodeXRay 
-              id="p2" 
-              nodes={nodes2} 
-              connections={connections2} 
-              title="MCP Architecture" 
+            <CodeXRay
+              id="p2"
+              nodes={nodes2}
+              connections={connections2}
+              title="MCP Architecture"
               version="MCP ARCH V2.1.0"
               logLines={logs2}
             />

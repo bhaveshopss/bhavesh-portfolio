@@ -28,18 +28,18 @@ const row3 = [
   { name: "Prometheus", src: "https://www.vectorlogo.zone/logos/prometheusio/prometheusio-icon.svg", color: "#E6522C" },
   { name: "Grafana", src: "https://www.vectorlogo.zone/logos/grafana/grafana-icon.svg", color: "#F46800" },
   { name: "Anthropic", src: "https://cdn.simpleicons.org/anthropic/D9B791", color: "#D9B791" },
-  { name: "PostgreSQL", src: "https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg", color: "#336791" },
-  { name: "Elastic", src: "https://www.vectorlogo.zone/logos/elastic/elastic-icon.svg", color: "#00C1DE" },
+  { name: "OpenAI", src: "https://www.vectorlogo.zone/logos/openai/openai-icon.svg", color: "#412991" }, // Added
+  { name: "LangChain", src: "https://raw.githubusercontent.com/langchain-ai/langchain/master/docs/static/img/langchain_logo.png", color: "#1C3C3C" }, // Added (Approximation or use generic if icon fails, but vectorlogo usually has it or simpleicons)
 ];
 
 const row4 = [
   { name: "TypeScript", src: "https://www.vectorlogo.zone/logos/typescriptlang/typescriptlang-icon.svg", color: "#3178C6" },
-  { name: "React", src: "https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg", color: "#61DAFB" },
-  { name: "Node.js", src: "https://www.vectorlogo.zone/logos/nodejs/nodejs-icon.svg", color: "#339933" },
+  { name: "PostgreSQL", src: "https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg", color: "#336791" }, // Moved here
+  { name: "Hugging Face", src: "https://www.vectorlogo.zone/logos/huggingface/huggingface-icon.svg", color: "#FFD21E" }, // Added
   { name: "MongoDB", src: "https://www.vectorlogo.zone/logos/mongodb/mongodb-icon.svg", color: "#47A248" },
   { name: "Redis", src: "https://www.vectorlogo.zone/logos/redis/redis-icon.svg", color: "#DC382D" },
   { name: "Kafka", src: "https://www.vectorlogo.zone/logos/apache_kafka/apache_kafka-icon.svg", color: "#231F20" },
-  { name: "Nginx", src: "https://www.vectorlogo.zone/logos/nginx/nginx-icon.svg", color: "#009639" },
+  { name: "React", src: "https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg", color: "#61DAFB" },
 ];
 
 export function LogoCloud({ className }: { className?: string }) {
