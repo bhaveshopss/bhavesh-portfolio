@@ -4,7 +4,6 @@
 
 /* Smooth scrolling for anchors */
 html {
-    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -45,11 +44,6 @@ section {
 .logo-cloud-img {
     image-rendering: auto;
     contain: layout style paint;
-}
-
-/* Optimize paint for fixed elements */
-.fixed {
-    will-change: transform;
 }
 
 /* Fonts loaded via Google Fonts link tags with display=swap */
