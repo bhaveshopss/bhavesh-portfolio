@@ -38,10 +38,10 @@ const About: React.FC = () => {
                 <p className="text-primary text-sm font-bold tracking-[0.2em] uppercase font-display">DevOps Engineer</p>
 
                 <div className="mt-6 w-full group transform transition-transform duration-300 hover:scale-102">
-                  <a href="#" className="block w-full text-center relative overflow-hidden rounded bg-gray-100 dark:bg-[rgba(30,30,30,0.8)] border border-gray-300 dark:border-terminal-green/40 hover:border-terminal-green p-3 transition-colors duration-300 cursor-interactive">
+                  <a href="/Bhavesh_Devops_Resume.pdf" target="_blank" rel="noopener noreferrer" className="block w-full text-center relative overflow-hidden rounded bg-gray-100 dark:bg-[rgba(30,30,30,0.8)] border border-gray-300 dark:border-terminal-green/40 hover:border-terminal-green p-3 transition-colors duration-300 cursor-interactive">
                     <div className="relative z-10 flex items-center justify-center gap-2 font-mono text-xs text-terminal-green font-bold tracking-widest">
-                      <span className="material-symbols-outlined text-sm">terminal</span>
-                      <span>$ GET_RESUME_V2.026.pdf</span>
+                      <span className="material-symbols-outlined text-sm">visibility</span>
+                      <span>View Resume</span>
                     </div>
                     <div className="absolute inset-0 bg-terminal-green/5 group-hover:bg-terminal-green/10 transition-colors duration-300"></div>
                   </a>
