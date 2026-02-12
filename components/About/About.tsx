@@ -32,16 +32,10 @@ const About: React.FC = () => {
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.15)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-20 bg-[length:100%_2px,3px_100%] pointer-events-none"></div>
               </div>
               <div className="p-6 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-black relative z-30">
-                <div className="font-mono text-[11px] text-primary mb-2 flex items-center justify-between uppercase tracking-widest font-bold">
-                  <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></span>
-                    ID: BKP-001
-                  </div>
-                  <span className="text-gray-500 dark:text-gray-400">LVL. 24</span>
-                </div>
-                <h3 className="text-gray-900 dark:text-white font-display text-3xl uppercase font-bold tracking-tighter mb-1">Bhavesh K. Parmar</h3>
+
+                <h3 className="text-gray-900 dark:text-white font-display text-3xl uppercase font-bold tracking-tighter mb-1 mt-2">Bhavesh K. Parmar</h3>
                 <div className="h-px w-full bg-gray-200 dark:bg-gray-700 my-3"></div>
-                <p className="text-primary text-sm font-bold tracking-[0.2em] uppercase font-display">System Architect</p>
+                <p className="text-primary text-sm font-bold tracking-[0.2em] uppercase font-display">DevOps Engineer</p>
 
                 <div className="mt-6 w-full group transform transition-transform duration-300 hover:scale-102">
                   <a href="#" className="block w-full text-center relative overflow-hidden rounded bg-gray-100 dark:bg-[rgba(30,30,30,0.8)] border border-gray-300 dark:border-terminal-green/40 hover:border-terminal-green p-3 transition-colors duration-300 cursor-interactive">
