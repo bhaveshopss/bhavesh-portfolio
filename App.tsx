@@ -8,6 +8,7 @@ import TechStack from './components/TechStack/TechStack';
 import About from './components/About/About';
 import Blog from './components/Blog/Blog';
 import Contact from './components/Contact/Contact';
+import { Analytics } from "@vercel/analytics/react";
 
 const App: React.FC = () => {
   const [scanlines, setScanlines] = useState(true);
@@ -46,6 +47,7 @@ const App: React.FC = () => {
       <About />
       <Blog />
       <Contact />
+      <Analytics />
     </div>
   );
 };
