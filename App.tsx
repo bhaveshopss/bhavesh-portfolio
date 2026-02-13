@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import Navbar from './components/Layout/Navbar';
 import Cursor from './components/Layout/Cursor';
 import OSSettings from './components/Layout/OSSettings';
 import Hero from './components/Hero/Hero';
-import WorkSection from './components/Work/WorkSection';
-import TechStack from './components/TechStack/TechStack';
-import About from './components/About/About';
-import Blog from './components/Blog/Blog';
-import Contact from './components/Contact/Contact';
 import { Analytics } from "@vercel/analytics/react";
+
+// Lazy load below-the-fold content to improve initial load time
+const WorkSection = lazy(() => import('./components/Work/WorkSection'));
+const TechStack = lazy(() => import('./components/TechStack/TechStack'));
+const About = lazy(() => import('./components/About/About'));
+const Blog = lazy(() => import('./components/Blog/Blog'));
+const Contact = lazy(() => import('./components/Contact/Contact'));
 
 const App: React.FC = () => {
   const [scanlines, setScanlines] = useState(true);
@@ -41,12 +43,20 @@ const App: React.FC = () => {
       />
 
       <Hero />
-      <WorkSection />
-      {/* Testimonials removed */}
-      <TechStack />
-      <About />
-      <Blog />
-      <Contact />
+
+      <Suspense fallback={
+        <div className="flex items-center justify-center w-full py-20">
+          <div className="text-primary font-mono animate-pulse">Loading system modules...</div>
+        </div>
+      }>
+        <WorkSection />
+        {/* Testimonials removed */}
+        <TechStack />
+        <About />
+        <Blog />
+        <Contact />
+      </Suspense>
+
       <Analytics />
     </div>
   );

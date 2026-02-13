@@ -1,0 +1,12 @@
+
+> bkp.dev---cyberpunk-portfolio@0.0.0 dev
+> vite
+
+Port 3000 is in use, trying another one...
+Port 3001 is in use, trying another one...
+
+  VITE v6.4.1  ready in 241 ms
+
+  ➜  Local:   http://localhost:3002/
+  ➜  Network: http://192.168.0.2:3002/
+2:53:29 PM [vite] (client) hmr update /index.css, /index.css?direct

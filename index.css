@@ -1,8 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* ====================================================
    BKP.DEV Portfolio — Global Styles & Performance
    ==================================================== */
 
-/* Smooth scrolling for anchors */
 html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
