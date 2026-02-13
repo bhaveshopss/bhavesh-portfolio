@@ -4,7 +4,7 @@ import HeroShutterText from '../ui/HeroShutterText';
 
 const Hero: React.FC = () => {
   return (
-    <header className="relative z-10 min-h-[70vh] flex flex-col justify-center items-center text-center px-4 pt-64 pb-8 overflow-hidden">
+    <header id="home" className="relative z-10 min-h-[70vh] flex flex-col justify-center items-center text-center px-4 pt-64 pb-8 overflow-hidden">
       {/* Background Atmosphere */}
       <div className="absolute inset-0 pointer-events-none z-0">
         {/* Slow Pulsing Glows with Color Shift */}

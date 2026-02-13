@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
     <>
       {/* Top Left: Brand Name — vertically centered with navbar */}
       <div className="fixed top-6 left-6 z-[60] flex items-center transition-opacity duration-500">
-        <a href="#" className="font-display font-bold tracking-tight text-xl text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors cursor-interactive">
+        <a href="#home" className="font-display font-bold tracking-tight text-xl text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors cursor-interactive">
           Bhavesh<span className="text-primary">ops</span>
         </a>
       </div>

@@ -1,16 +1,10 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Navbar from './components/Layout/Navbar';
 import Cursor from './components/Layout/Cursor';
 import OSSettings from './components/Layout/OSSettings';
 import Hero from './components/Hero/Hero';
 import { Analytics } from "@vercel/analytics/react";
-
-// Lazy load below-the-fold content to improve initial load time
-const WorkSection = lazy(() => import('./components/Work/WorkSection'));
-const TechStack = lazy(() => import('./components/TechStack/TechStack'));
-const About = lazy(() => import('./components/About/About'));
-const Blog = lazy(() => import('./components/Blog/Blog'));
-const Contact = lazy(() => import('./components/Contact/Contact'));
+import PortfolioContent from './components/Layout/PortfolioContent';
 
 const App: React.FC = () => {
   const [scanlines, setScanlines] = useState(true);
@@ -49,12 +43,7 @@ const App: React.FC = () => {
           <div className="text-primary font-mono animate-pulse">Loading system modules...</div>
         </div>
       }>
-        <WorkSection />
-        {/* Testimonials removed */}
-        <TechStack />
-        <About />
-        <Blog />
-        <Contact />
+        <PortfolioContent />
       </Suspense>
 
       <Analytics />
