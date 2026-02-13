@@ -5,12 +5,20 @@ import { motion } from 'framer-motion';
 
 const Hero: React.FC = () => {
     return (
-        <section className="relative min-h-screen flex flex-col justify-center items-center pt-24 pb-12 overflow-hidden bg-gray-50 dark:bg-[#050505] transition-colors duration-500" id="hero">
+        <section className="relative min-h-screen flex flex-col justify-center items-center pt-48 pb-12 overflow-hidden bg-gray-50 dark:bg-[#050505] transition-colors duration-500" id="hero">
 
             {/* System Status Widget - Absolute positioned in top right (handled by component styles themselves usually, but SystemHealth has absolute styles) */}
 
 
             <div className="container mx-auto px-4 z-10 flex flex-col items-center">
+
+                {/* Main Headline */}
+                <div className="text-center mb-8 relative z-20">
+                    <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter text-gray-900 dark:text-white leading-[0.9]">
+                        Engineering Reliability <br />
+                        <span className="text-primary">For the AI Era.</span>
+                    </h1>
+                </div>
 
                 {/* The 3D Grid & Description */}
                 <GithubGrid />
