@@ -8,7 +8,7 @@ interface CodeXRayProps {
   connections: React.ReactNode; // SVG paths for base connections
   title: string;
   version: string;
-  logLines: React.ReactNode;
+  logLines?: React.ReactNode;
 }
 
 const CodeXRay: React.FC<CodeXRayProps> = ({ id, nodes, connections, title, version, logLines }) => {
@@ -150,7 +150,7 @@ const CodeXRay: React.FC<CodeXRayProps> = ({ id, nodes, connections, title, vers
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="relative w-full h-[600px] bg-[#020205] rounded-3xl overflow-hidden border border-white/10 shadow-2xl group/scene perspective-container cursor-move"
+        className="relative w-full h-full min-h-[450px] bg-[#020205] rounded-2xl overflow-hidden border border-white/10 shadow-2xl group/scene perspective-container cursor-move"
       >
         {/* Background Grid & Stars */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-900/20 via-[#050505] to-[#000000]"></div>
@@ -318,36 +318,6 @@ const CodeXRay: React.FC<CodeXRayProps> = ({ id, nodes, connections, title, vers
 
 
       {/* --- TERMINAL LOG (Below the 3D Stage) --- */}
-      <div className="relative w-full bg-[#050505] border-x border-b border-white/10 rounded-b-xl overflow-hidden mt-[-10px] pt-4 z-40 shadow-xl">
-        {/* Green Glow Top Border */}
-        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-terminal-green/50 to-transparent"></div>
-
-        <div className="flex flex-col md:flex-row h-32 md:h-24">
-          {/* Status Panel */}
-          <div className="w-full md:w-48 bg-white/[0.02] border-r border-white/5 p-4 flex flex-col justify-center gap-2">
-            <div className="flex justify-between items-center text-[10px] font-mono text-gray-500">
-              <span>STATUS</span>
-              <span className="text-terminal-green animate-pulse">LIVE MONITORING</span>
-            </div>
-            <div className="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
-              <div className="h-full bg-terminal-green animate-sh-bar-anim w-[60%]"></div>
-            </div>
-          </div>
-
-          {/* Scrolling Logs */}
-          <div className="flex-1 p-3 overflow-hidden relative font-mono text-[10px] bg-black/40">
-            <div className="absolute inset-x-0 top-0 h-4 bg-gradient-to-b from-[#050505] to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute inset-x-0 bottom-0 h-4 bg-gradient-to-t from-[#050505] to-transparent z-10 pointer-events-none"></div>
-
-            <div className="h-full overflow-y-auto scrollbar-hide space-y-1.5">
-              <div className="animate-scroll-log opacity-80 hover:opacity-100 transition-opacity">
-                {logLines}
-                {logLines}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </>
   );
 };

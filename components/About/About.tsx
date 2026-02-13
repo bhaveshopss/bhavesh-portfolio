@@ -21,11 +21,11 @@ const About: React.FC = () => {
               className="bg-white dark:bg-card-dark rounded-none border border-gray-200 dark:border-gray-700 shadow-xl dark:shadow-2xl group overflow-hidden relative"
             >
               <div className="absolute inset-0 bg-grain opacity-20 pointer-events-none z-10"></div>
-              <div className="aspect-[3/4] relative overflow-hidden bg-gray-100 dark:bg-black contrast-125 filter grayscale hover:grayscale-0 transition-all duration-700">
+              <div className="aspect-[4/3] relative overflow-hidden bg-gray-100 dark:bg-black contrast-125 filter grayscale hover:grayscale-0 transition-all duration-700">
                 {/* Experience Log Photo */}
                 <img
                   alt="Bhavesh Kumar Parmar - Profile"
-                  className="object-cover w-full h-full opacity-100 scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="object-cover object-top w-full h-full opacity-100 scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
                   src="/bhavesh-profile-optimized.jpg"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"></div>
@@ -45,6 +45,89 @@ const About: React.FC = () => {
                     </div>
                     <div className="absolute inset-0 bg-terminal-green/5 group-hover:bg-terminal-green/10 transition-colors duration-300"></div>
                   </a>
+                </div>
+
+                {/* Certificates in Sidebar */}
+                <div className="mt-8">
+                  <h4 className="font-display text-sm text-gray-900 dark:text-white uppercase font-bold tracking-wider mb-4 border-l-2 border-primary pl-3">Licenses & Certifications</h4>
+
+                  <div className="space-y-3">
+                    {/* Cert 1: AWS */}
+                    <div className="group relative border border-gray-200 dark:border-white/10 rounded-lg p-3 hover:border-primary/50 transition-colors bg-gray-50/50 dark:bg-white/5">
+                      <div className="flex gap-3">
+                        <div className="w-8 h-8 shrink-0 bg-white rounded p-1 flex items-center justify-center border border-gray-200 dark:border-transparent">
+                          <img src="/Amazon_Web_Services-Logo.wine.svg" alt="AWS" className="w-full h-full object-contain" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h5 className="font-display text-xs text-gray-900 dark:text-white font-bold leading-tight line-clamp-2">AWS Certified Cloud Practitioner</h5>
+                          <div className="flex justify-between items-center mt-1">
+                            <span className="font-mono text-[9px] text-gray-700 dark:text-gray-400 uppercase">May 2025</span>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="font-mono text-[9px] text-gray-700 dark:text-gray-400 mt-2 truncate font-medium">Skills: AWS Auto Scaling, AWS Lambda +5</p>
+                    </div>
+
+                    {/* Cert 2: Oracle AI */}
+                    <div className="group relative border border-gray-200 dark:border-white/10 rounded-lg p-3 hover:border-primary/50 transition-colors bg-gray-50/50 dark:bg-white/5">
+                      <div className="flex gap-3">
+                        <div className="w-8 h-8 shrink-0 bg-white rounded p-1 flex items-center justify-center border border-gray-200 dark:border-transparent">
+                          <img src="https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg" alt="Oracle" className="w-full h-full object-contain" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h5 className="font-display text-xs text-gray-900 dark:text-white font-bold leading-tight line-clamp-2">Oracle AI Vector Search CP</h5>
+                          <div className="flex justify-between items-center mt-1">
+                            <span className="font-mono text-[9px] text-gray-700 dark:text-gray-400 uppercase">Apr 2025</span>
+                            <a href="/certificates/Oracle_AI_Vector_Search_Certified_Professional.pdf" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors">
+                              <span className="material-symbols-outlined text-[14px]">visibility</span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="font-mono text-[9px] text-gray-700 dark:text-gray-400 mt-2 truncate font-medium">Skills: Oracle Cloud, GenAI Studio +3</p>
+                    </div>
+
+
+
+                    {/* Cert 4: Ubuntu */}
+                    <div className="group relative border border-gray-200 dark:border-white/10 rounded-lg p-3 hover:border-primary/50 transition-colors bg-gray-50/50 dark:bg-white/5">
+                      <div className="flex gap-3">
+                        <div className="w-8 h-8 shrink-0 bg-white rounded p-1 flex items-center justify-center border border-gray-200 dark:border-transparent">
+                          <img src="https://www.vectorlogo.zone/logos/ubuntu/ubuntu-icon.svg" alt="Ubuntu" className="w-full h-full object-contain" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h5 className="font-display text-xs text-gray-900 dark:text-white font-bold leading-tight line-clamp-2">Ubuntu Linux Professional</h5>
+                          <div className="flex justify-between items-center mt-1">
+                            <span className="font-mono text-[9px] text-gray-700 dark:text-gray-400 uppercase">Mar 2025</span>
+                            <a href="/certificates/Ubuntu_Linux_Professional_Certificate.pdf" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors">
+                              <span className="material-symbols-outlined text-[14px]">visibility</span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="font-mono text-[9px] text-gray-700 dark:text-gray-400 mt-2 truncate font-medium">Skills: Linux Admin, CLI +3</p>
+                    </div>
+
+                    {/* Cert 5: Oracle */}
+                    <div className="group relative border border-gray-200 dark:border-white/10 rounded-lg p-3 hover:border-primary/50 transition-colors bg-gray-50/50 dark:bg-white/5">
+                      <div className="flex gap-3">
+                        <div className="w-8 h-8 shrink-0 bg-white rounded p-1 flex items-center justify-center border border-gray-200 dark:border-transparent">
+                          <img src="https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg" alt="Oracle" className="w-full h-full object-contain" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h5 className="font-display text-xs text-gray-900 dark:text-white font-bold leading-tight line-clamp-2">OCI Foundations Associate</h5>
+                          <div className="flex justify-between items-center mt-1">
+                            <span className="font-mono text-[9px] text-gray-700 dark:text-gray-400 uppercase">Feb 2025</span>
+                            <a href="/certificates/Oracle_Foundations_Associate_Certificate.pdf" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors">
+                              <span className="material-symbols-outlined text-[14px]">visibility</span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="font-mono text-[9px] text-gray-700 dark:text-gray-400 mt-2 truncate font-medium">Skills: OCI, Oracle +3</p>
+                    </div>
+
+                  </div>
                 </div>
               </div>
             </MotionDiv>
@@ -84,8 +167,8 @@ const About: React.FC = () => {
                     <h3 className="font-display text-2xl text-gray-900 dark:text-white font-bold uppercase tracking-wide group-hover:text-primary transition-colors">Shellkode</h3>
                     <span className="font-mono text-xs text-primary bg-primary/10 border border-primary/20 px-2 py-1 rounded uppercase tracking-wider font-bold">Feb 2025 - Present</span>
                   </div>
-                  <div className="text-gray-600 dark:text-gray-300 text-sm font-mono mb-4 uppercase tracking-wider font-bold">DevOps Engineer</div>
-                  <ul className="space-y-2 font-mono text-xs text-gray-700 dark:text-text-high-contrast font-medium">
+                  <div className="text-gray-600 dark:text-gray-300 text-sm font-mono mb-4 uppercase tracking-wider font-bold">Cloud Engineer</div>
+                  <ul className="space-y-2 font-mono text-xs text-gray-700 dark:text-gray-300 font-medium">
                     <li className="flex items-start gap-3 group/item">
                       <span className="text-primary mt-1 font-bold group-hover/item:translate-x-1 transition-transform">›</span>
                       <span>Achieved <span className="text-gray-900 dark:text-white font-bold">99.9% Uptime</span> for critical production workloads through proactive monitoring.</span>
@@ -113,17 +196,21 @@ const About: React.FC = () => {
 
                   <div className="flex flex-col md:flex-row md:items-baseline md:justify-between mb-2">
                     <h3 className="font-display text-2xl text-gray-900 dark:text-white font-bold uppercase tracking-wide group-hover:text-black dark:group-hover:text-white transition-colors">Independent Projects</h3>
-                    <span className="font-mono text-xs text-gray-500 dark:text-gray-400 border border-gray-300 dark:border-gray-700 px-2 py-1 rounded uppercase tracking-wider font-bold">2023 - 2025</span>
+                    <span className="font-mono text-xs text-gray-500 dark:text-gray-400 border border-gray-300 dark:border-gray-700 px-2 py-1 rounded uppercase tracking-wider font-bold">June 2024 - Jan 2025</span>
                   </div>
-                  <div className="text-gray-600 dark:text-gray-300 text-sm font-mono mb-4 uppercase tracking-wider font-bold">Full Stack Systems Engineering</div>
-                  <ul className="space-y-2 font-mono text-xs text-gray-700 dark:text-text-high-contrast font-medium">
+                  <div className="text-gray-600 dark:text-gray-300 text-sm font-mono mb-4 uppercase tracking-wider font-bold">Cloud Engineer</div>
+                  <ul className="space-y-2 font-mono text-xs text-gray-700 dark:text-gray-300 font-medium">
                     <li className="flex items-start gap-3 group/item">
                       <span className="text-gray-400 mt-1 font-bold group-hover/item:translate-x-1 transition-transform">›</span>
-                      <span>Developed custom LLM orchestration layer using LangChain and local Ollama instances.</span>
+                      <span>Provisioned and managed AWS infrastructure using Terraform, deploying 20+ resources including EC2, S3, Lambda, and VPC for cloud projects.</span>
                     </li>
                     <li className="flex items-start gap-3 group/item">
                       <span className="text-gray-400 mt-1 font-bold group-hover/item:translate-x-1 transition-transform">›</span>
-                      <span>Architected multi-region serverless APIs handling 10k+ req/s with sub-50ms latency.</span>
+                      <span>Deployed 3+ Kubernetes clusters (Kind, EKS) and containerized 10+ applications using Docker and Helm charts.</span>
+                    </li>
+                    <li className="flex items-start gap-3 group/item">
+                      <span className="text-gray-400 mt-1 font-bold group-hover/item:translate-x-1 transition-transform">›</span>
+                      <span>Developed automation tools using Python, Java, and Bash to streamline cloud resource management across 5+ AWS accounts.</span>
                     </li>
                   </ul>
                 </MotionDiv>
@@ -163,7 +250,7 @@ const About: React.FC = () => {
                       <div className="flex justify-between items-start flex-wrap gap-2">
                         <div>
                           <h3 className="font-display text-xl text-gray-900 dark:text-white font-bold uppercase tracking-tight group-hover:text-primary transition-colors">B.Tech in Computer Science</h3>
-                          <p className="font-mono text-sm text-gray-600 dark:text-gray-400 font-medium mt-1">JIET Jodhpur • 2021 - 2025</p>
+                          <p className="font-mono text-sm text-gray-700 dark:text-gray-400 font-medium mt-1">JIET Jodhpur • 2021 - 2025</p>
                         </div>
                         <span className="font-mono text-[10px] text-primary bg-primary/10 border border-primary/20 px-3 py-1 rounded-full uppercase font-bold tracking-wider">
                           GPA: 8.8/10
@@ -173,11 +260,11 @@ const About: React.FC = () => {
                       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="bg-white/50 dark:bg-black/20 p-3 rounded border border-gray-200 dark:border-white/5">
                           <div className="font-mono text-[10px] text-gray-500 dark:text-gray-400 uppercase font-bold mb-2">Specialization</div>
-                          <p className="text-xs text-gray-800 dark:text-gray-200 font-medium">Cloud Computing & Distributed Systems</p>
+                          <p className="text-xs text-gray-900 dark:text-gray-200 font-medium">Cloud Computing & Distributed Systems</p>
                         </div>
                         <div className="bg-white/50 dark:bg-black/20 p-3 rounded border border-gray-200 dark:border-white/5">
                           <div className="font-mono text-[10px] text-gray-500 dark:text-gray-400 uppercase font-bold mb-2">Relevant Coursework</div>
-                          <p className="text-xs text-gray-800 dark:text-gray-200 font-medium">Data Structures, OS, DBMS, Computer Networks</p>
+                          <p className="text-xs text-gray-900 dark:text-gray-200 font-medium">Data Structures, OS, DBMS, Computer Networks</p>
                         </div>
                       </div>
                     </div>
@@ -201,7 +288,7 @@ const About: React.FC = () => {
                       <div className="flex justify-between items-start flex-wrap gap-2">
                         <div>
                           <h3 className="font-display text-xl text-gray-900 dark:text-white font-bold uppercase tracking-tight group-hover:text-accent-green transition-colors">Student Council President</h3>
-                          <p className="font-mono text-sm text-gray-600 dark:text-gray-400 font-medium mt-1">University Chapter • Elected Leadership</p>
+                          <p className="font-mono text-sm text-gray-700 dark:text-gray-400 font-medium mt-1">University Chapter • Elected Leadership</p>
                         </div>
                         <span className="font-mono text-[10px] text-accent-green bg-accent-green/10 border border-accent-green/20 px-3 py-1 rounded-full uppercase font-bold tracking-wider">
                           Team of 50+
@@ -228,6 +315,8 @@ const About: React.FC = () => {
 
               </div>
             </div>
+
+
 
           </div>
         </div>

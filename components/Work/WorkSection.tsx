@@ -1,5 +1,6 @@
 import React from 'react';
 import CodeXRay from './CodeXRay';
+import LiveTerminal from './LiveTerminal';
 import { XRayNode } from '../../types';
 
 const WorkSection: React.FC = () => {
@@ -14,14 +15,14 @@ const WorkSection: React.FC = () => {
 
   const logs1 = (
     <>
-      <p className="text-gray-800 dark:text-white">INITIALIZING LOG_STREAM...</p>
-      <p>FETCHING CLOUD_METRICS...</p>
+      <p className="text-gray-400">INITIALIZING LOG_STREAM...</p>
+      <p className="text-gray-500">FETCHING CLOUD_METRICS...</p>
       <p className="text-accent-blue font-bold">K8S_POD: RESTARTING...</p>
-      <p>GEMINI_PRO: ANALYZING ROOT_CAUSE...</p>
+      <p className="text-gray-400">GEMINI_PRO: ANALYZING ROOT_CAUSE...</p>
       <p className="text-terminal-green font-bold">FIX_DEPLOYED: SUCCESS</p>
-      <p className="text-gray-800 dark:text-white">MCP_PROTOCOL: TOOL_CALL SUCCESSFUL</p>
-      <p>UPLOADING TELEMETRY...</p>
-      <p className="text-gray-800 dark:text-white">WAITING FOR NEXT TRIGGER...</p>
+      <p className="text-gray-300">MCP_PROTOCOL: TOOL_CALL SUCCESSFUL</p>
+      <p className="text-gray-500">UPLOADING TELEMETRY...</p>
+      <p className="text-gray-400">WAITING FOR NEXT TRIGGER...</p>
       <p>FETCHING CLOUD_METRICS...</p>
       <p className="text-accent-blue font-bold">K8S_POD: RESTARTING...</p>
       <p>GEMINI_PRO: ANALYZING ROOT_CAUSE...</p>
@@ -54,14 +55,14 @@ const WorkSection: React.FC = () => {
 
   const logs2 = (
     <>
-      <p className="text-gray-800 dark:text-white">LISTENING FOR TOOL_CALLS...</p>
-      <p>MCP_PROTOCOL: HANDSHAKE INITIATED</p>
+      <p className="text-gray-400">LISTENING FOR TOOL_CALLS...</p>
+      <p className="text-gray-500">MCP_PROTOCOL: HANDSHAKE INITIATED</p>
       <p className="text-accent-green font-bold">AWS_SERVER: REQUEST_RECEIVED</p>
-      <p>GEMINI_PRO: ANALYZING ROOT_CAUSE...</p>
+      <p className="text-gray-400">GEMINI_PRO: ANALYZING ROOT_CAUSE...</p>
       <p className="text-accent-blue font-bold">mTLS_AUTH: VERIFIED</p>
-      <p>MCP_PROTOCOL: TOOL_CALL SUCCESSFUL</p>
-      <p>QUERYING RDS_DATABASE...</p>
-      <p className="text-gray-800 dark:text-white">RESPONSE_READY: DATA_PACKED</p>
+      <p className="text-gray-300">MCP_PROTOCOL: TOOL_CALL SUCCESSFUL</p>
+      <p className="text-gray-500">QUERYING RDS_DATABASE...</p>
+      <p className="text-gray-300">RESPONSE_READY: DATA_PACKED</p>
     </>
   );
 
@@ -96,7 +97,7 @@ const WorkSection: React.FC = () => {
 
       {/* Project 1 */}
       <div className="mb-24 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           <div className="lg:col-span-7">
             <CodeXRay
               id="p1"
@@ -115,15 +116,18 @@ const WorkSection: React.FC = () => {
                 Redefining failure as a stage of progress. This architecture captures build/test logs via Python agents, sends them to Gemini 3 Pro for root cause analysis, and automatically pushes corrective PRs back to the repository.
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-3">
-              <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-lg">
-                <div className="font-mono text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mb-1">Downtime Reduction</div>
-                <div className="font-display text-xl text-gray-900 dark:text-white font-bold">94.2%</div>
+            <div>
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-2xl">
+                  <div className="font-mono text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mb-1">Downtime Reduction</div>
+                  <div className="font-display text-xl text-gray-900 dark:text-white font-bold">94.2%</div>
+                </div>
+                <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-2xl">
+                  <div className="font-mono text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mb-1">Mean Time to Fix</div>
+                  <div className="font-display text-xl text-gray-900 dark:text-white font-bold">&lt;2m</div>
+                </div>
               </div>
-              <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-lg">
-                <div className="font-mono text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mb-1">Mean Time to Fix</div>
-                <div className="font-display text-xl text-gray-900 dark:text-white font-bold">&lt;2m</div>
-              </div>
+              <LiveTerminal logLines={logs1} />
             </div>
           </div>
         </div>
@@ -131,7 +135,7 @@ const WorkSection: React.FC = () => {
 
       {/* Project 2 */}
       <div className="mb-16 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           <div className="lg:col-span-5 space-y-6 lg:order-2">
             <div>
               <span className="inline-block px-3 py-1 bg-accent-green/10 dark:bg-accent-green/15 border border-accent-green/40 text-accent-green text-xs font-mono font-bold rounded mb-4 uppercase tracking-widest">Technical Project</span>
@@ -140,15 +144,18 @@ const WorkSection: React.FC = () => {
                 Built a robust Model Context Protocol server enabling secure communication between Claude and internal enterprise databases on AWS. High-fidelity architectural implementation focusing on protocol isolation and secure tool execution.
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-3">
-              <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-lg">
-                <div className="font-mono text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mb-1">Latency</div>
-                <div className="font-display text-xl text-gray-900 dark:text-white font-bold">&lt;150ms</div>
+            <div>
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-2xl">
+                  <div className="font-mono text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mb-1">Latency</div>
+                  <div className="font-display text-xl text-gray-900 dark:text-white font-bold">&lt;150ms</div>
+                </div>
+                <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-2xl">
+                  <div className="font-mono text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mb-1">Security</div>
+                  <div className="font-display text-xl text-gray-900 dark:text-white font-bold">mTLS v1.3</div>
+                </div>
               </div>
-              <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-lg">
-                <div className="font-mono text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mb-1">Security</div>
-                <div className="font-display text-xl text-gray-900 dark:text-white font-bold">mTLS v1.3</div>
-              </div>
+              <LiveTerminal logLines={logs2} />
             </div>
           </div>
           <div className="lg:col-span-7 lg:order-1">

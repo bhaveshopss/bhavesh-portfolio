@@ -3,13 +3,15 @@ import { PlusIcon } from "lucide-react";
 import { cn } from "../../lib/utils";
 
 const row1 = [
-  { name: "AWS", src: "https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg", color: "#FF9900" },
+  { name: "AWS", src: "/Amazon_Web_Services-Logo.wine.svg", color: "#FF9900" },
   { name: "Google Cloud", src: "https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg", color: "#4285F4" },
   { name: "Azure", src: "https://www.vectorlogo.zone/logos/microsoft_azure/microsoft_azure-icon.svg", color: "#0078D4" },
   { name: "Kubernetes", src: "https://www.vectorlogo.zone/logos/kubernetes/kubernetes-icon.svg", color: "#326CE5" },
   { name: "Docker", src: "https://www.vectorlogo.zone/logos/docker/docker-icon.svg", color: "#2496ED" },
   { name: "Linux", src: "https://www.vectorlogo.zone/logos/linux/linux-icon.svg", color: "#FCC624" },
   { name: "OpenShift", src: "https://www.vectorlogo.zone/logos/openshift/openshift-icon.svg", color: "#EE0000" },
+  { name: "TypeScript", src: "https://www.vectorlogo.zone/logos/typescriptlang/typescriptlang-icon.svg", color: "#3178C6" },
+  { name: "PostgreSQL", src: "https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg", color: "#336791" },
 ];
 
 const row2 = [
@@ -20,6 +22,8 @@ const row2 = [
   { name: "Jenkins", src: "https://www.vectorlogo.zone/logos/jenkins/jenkins-icon.svg", color: "#D24939" },
   { name: "GitLab", src: "https://www.vectorlogo.zone/logos/gitlab/gitlab-icon.svg", color: "#FC6D26" },
   { name: "Ansible", src: "https://www.vectorlogo.zone/logos/ansible/ansible-icon.svg", color: "#EE0000" },
+  { name: "Hugging Face", src: "https://huggingface.co/front/assets/huggingface_logo-noborder.svg", color: "#FFD21E" },
+  { name: "MongoDB", src: "https://www.vectorlogo.zone/logos/mongodb/mongodb-icon.svg", color: "#47A248" },
 ];
 
 const row3 = [
@@ -28,15 +32,8 @@ const row3 = [
   { name: "Prometheus", src: "https://www.vectorlogo.zone/logos/prometheusio/prometheusio-icon.svg", color: "#E6522C" },
   { name: "Grafana", src: "https://www.vectorlogo.zone/logos/grafana/grafana-icon.svg", color: "#F46800" },
   { name: "Anthropic", src: "https://cdn.simpleicons.org/anthropic/D9B791", color: "#D9B791" },
-  { name: "OpenAI", src: "https://www.vectorlogo.zone/logos/openai/openai-icon.svg", color: "#412991" }, // Added
-  { name: "LangChain", src: "https://raw.githubusercontent.com/langchain-ai/langchain/master/docs/static/img/langchain_logo.png", color: "#1C3C3C" }, // Added (Approximation or use generic if icon fails, but vectorlogo usually has it or simpleicons)
-];
-
-const row4 = [
-  { name: "TypeScript", src: "https://www.vectorlogo.zone/logos/typescriptlang/typescriptlang-icon.svg", color: "#3178C6" },
-  { name: "PostgreSQL", src: "https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg", color: "#336791" }, // Moved here
-  { name: "Hugging Face", src: "https://www.vectorlogo.zone/logos/huggingface/huggingface-icon.svg", color: "#FFD21E" }, // Added
-  { name: "MongoDB", src: "https://www.vectorlogo.zone/logos/mongodb/mongodb-icon.svg", color: "#47A248" },
+  { name: "OpenAI", src: "https://cdn.simpleicons.org/openai/412991", color: "#412991" },
+  { name: "LangChain", src: "https://cdn.simpleicons.org/langchain/1C3C3C", color: "#1C3C3C" },
   { name: "Redis", src: "https://www.vectorlogo.zone/logos/redis/redis-icon.svg", color: "#DC382D" },
   { name: "Kafka", src: "https://www.vectorlogo.zone/logos/apache_kafka/apache_kafka-icon.svg", color: "#231F20" },
   { name: "React", src: "https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg", color: "#61DAFB" },
@@ -52,7 +49,6 @@ export function LogoCloud({ className }: { className?: string }) {
       <MarqueeRow logos={row1} duration="40s" />
       <MarqueeRow logos={row2} duration="35s" reverse />
       <MarqueeRow logos={row3} duration="45s" />
-      <MarqueeRow logos={row4} duration="30s" reverse />
 
       {/* Decorative Corners */}
       <PlusIcon className="absolute -top-1.5 -left-1.5 w-3 h-3 text-gray-400 dark:text-gray-600 z-30" />
@@ -69,20 +65,26 @@ function MarqueeRow({ logos, duration, reverse }: { logos: { name: string; src: 
       className="flex w-full group border-b last:border-b-0 border-gray-200 dark:border-white/5"
     >
       <div
-        className="flex animate-marquee min-w-full shrink-0 items-center gap-0 group-hover:[animation-play-state:paused]"
+        className="flex animate-marquee shrink-0 items-center gap-0 group-hover:[animation-play-state:paused]"
         style={{ animationDuration: duration, animationDirection: reverse ? 'reverse' : 'normal' }}
       >
         {logos.map((logo, i) => (
-          <LogoCard key={i} logo={logo} />
+          <LogoCard key={`a-${i}`} logo={logo} />
+        ))}
+        {logos.map((logo, i) => (
+          <LogoCard key={`b-${i}`} logo={logo} />
         ))}
       </div>
       <div
-        className="flex animate-marquee min-w-full shrink-0 items-center gap-0 group-hover:[animation-play-state:paused]"
+        className="flex animate-marquee shrink-0 items-center gap-0 group-hover:[animation-play-state:paused]"
         aria-hidden="true"
         style={{ animationDuration: duration, animationDirection: reverse ? 'reverse' : 'normal' }}
       >
         {logos.map((logo, i) => (
-          <LogoCard key={`dup-${i}`} logo={logo} />
+          <LogoCard key={`c-${i}`} logo={logo} />
+        ))}
+        {logos.map((logo, i) => (
+          <LogoCard key={`d-${i}`} logo={logo} />
         ))}
       </div>
     </div>

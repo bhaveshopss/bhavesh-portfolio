@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Layout/Navbar';
 import Cursor from './components/Layout/Cursor';
-import OSSettings from './components/Layout/OSSettings';
+
 import Hero from './components/Hero/Hero';
 import WorkSection from './components/Work/WorkSection';
 import TechStack from './components/TechStack/TechStack';
@@ -11,7 +11,7 @@ import Contact from './components/Contact/Contact';
 import { Analytics } from "@vercel/analytics/react";
 
 const App: React.FC = () => {
-  const [scanlines, setScanlines] = useState(true);
+  const [scanlines, setScanlines] = useState(false);
   const [grain, setGrain] = useState(true);
 
   // Apply visual effects
@@ -29,16 +29,11 @@ const App: React.FC = () => {
         id="grain-overlay"
       ></div>
 
-      {scanlines && <div className="scanline-overlay"></div>}
+
 
       <Cursor />
       <Navbar />
-      <OSSettings
-        scanlines={scanlines}
-        setScanlines={setScanlines}
-        grain={grain}
-        setGrain={setGrain}
-      />
+
 
       <Hero />
       <WorkSection />

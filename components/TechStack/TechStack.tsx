@@ -10,10 +10,10 @@ const TechStack: React.FC = () => {
 
   return (
     <section className="relative z-10 py-24 bg-gray-50 dark:bg-[#030303] overflow-hidden transition-colors duration-500" id="infrastructure">
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <MotionH2 
+          <MotionH2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -22,30 +22,30 @@ const TechStack: React.FC = () => {
           >
             Core <span className="text-primary">Infrastructure</span>
           </MotionH2>
-          <MotionP 
+          <MotionP
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-gray-600 dark:text-text-high-contrast max-w-2xl mx-auto font-medium text-base font-mono"
           >
-             The foundational systems powering my engineering reliability.
+            The foundational systems powering my engineering reliability.
           </MotionP>
         </div>
 
-        <MotionDiv 
+        <MotionDiv
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="max-w-5xl mx-auto"
+          className="w-full"
         >
           <LogoCloud />
         </MotionDiv>
-        
+
         {/* Decorative footer element instead of redundant text */}
         <div className="mt-12 flex justify-center opacity-30">
-            <div className="h-1 w-24 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+          <div className="h-1 w-24 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
         </div>
       </div>
     </section>
