@@ -6,7 +6,7 @@ interface LiveTerminalProps {
 
 const LiveTerminal: React.FC<LiveTerminalProps> = ({ logLines }) => {
     return (
-        <div className="w-full bg-[#050505] border border-white/10 rounded-2xl overflow-hidden shadow-xl mt-6">
+        <div className="w-full bg-[#050505] border border-white/10 rounded-card-lg overflow-hidden shadow-xl mt-6">
             <div className="flex flex-col h-40">
                 {/* Header / Status Bar */}
                 <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/[0.02]">

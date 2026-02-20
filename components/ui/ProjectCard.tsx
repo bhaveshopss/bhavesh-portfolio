@@ -18,7 +18,7 @@ const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(
       <div
         ref={ref}
         className={cn(
-          "group relative flex flex-col overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-card-light dark:bg-card-dark text-gray-900 dark:text-white shadow-sm transition-all duration-500 ease-in-out hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] hover:border-primary/50",
+          "group relative flex flex-col overflow-hidden rounded-card border border-border-light dark:border-white/10 bg-card-light dark:bg-card-dark text-gray-900 dark:text-white shadow-card transition-all duration-400 ease-smooth hover:-translate-y-2 hover:shadow-card-hover hover:shadow-glow-primary hover:border-primary/50",
           className
         )}
         {...props}
@@ -31,7 +31,7 @@ const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(
           <img
             src={imgSrc}
             alt={title}
-            className="h-full w-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110 grayscale group-hover:grayscale-0"
+            className="h-full w-full object-cover transition-transform duration-500 ease-smooth group-hover:scale-110 grayscale group-hover:grayscale-0"
             loading="lazy"
           />
           

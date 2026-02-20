@@ -14,30 +14,37 @@ const TechStack: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <MotionH2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
             className="font-display text-3xl md:text-5xl text-gray-900 dark:text-white mb-4 uppercase font-bold tracking-tight"
           >
             Core <span className="text-primary">Infrastructure</span>
           </MotionH2>
-          <MotionP
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
             className="text-gray-600 dark:text-text-high-contrast max-w-2xl mx-auto font-medium text-base font-mono"
           >
             The foundational systems powering my engineering reliability.
-          </MotionP>
+          </motion.p>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
+            className="w-24 h-1 bg-gradient-to-r from-primary via-accent-purple to-primary mx-auto mt-6 rounded-full"
+          />
         </div>
 
         <MotionDiv
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.4 }}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
           className="w-full"
         >
           <LogoCloud />

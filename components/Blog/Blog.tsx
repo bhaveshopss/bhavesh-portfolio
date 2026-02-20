@@ -1,5 +1,16 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { ProjectCard } from '../ui/ProjectCard';
+
+const MotionDiv = motion.div as any;
+const MotionH2 = motion.h2 as any;
+const MotionP = motion.p as any;
+const MotionA = motion.a as any;
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 },
+};
 
 interface BlogPost {
   id: number;
@@ -48,42 +59,86 @@ const Blog: React.FC = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-2 uppercase tracking-tight">
+            <MotionH2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+              className="font-display text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-2 uppercase tracking-tight"
+            >
               Neural <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent-purple">Dump</span>
-            </h2>
-            <p className="font-mono text-sm text-gray-500 dark:text-gray-400 max-w-xl">
+            </MotionH2>
+            <MotionP
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
+              className="font-mono text-sm text-gray-500 dark:text-gray-400 max-w-xl"
+            >
                   // LOGS.ARCHIVE_V1 <br />
               Thoughts on distributed systems, AI engineering, and digital entropy.
-            </p>
+            </MotionP>
+            <MotionDiv
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.25, ease: [0.4, 0, 0.2, 1] }}
+              className="w-16 h-0.5 bg-gradient-to-r from-primary to-accent-purple mt-4 rounded-full origin-left"
+            />
           </div>
 
-          <a href="#" className="hidden md:flex items-center gap-2 font-mono text-xs font-bold text-gray-900 dark:text-white border-b border-gray-900 dark:border-white pb-1 hover:text-primary dark:hover:text-primary hover:border-primary transition-all cursor-interactive group">
+          <MotionA
+            href="#"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
+            whileHover={{ x: 3 }}
+            className="hidden md:flex items-center gap-2 font-mono text-xs font-bold text-gray-900 dark:text-white border-b border-gray-900 dark:border-white pb-1 hover:text-primary dark:hover:text-primary hover:border-primary transition-all cursor-interactive group"
+          >
             VIEW_FULL_ARCHIVE
             <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-          </a>
+          </MotionA>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <MotionDiv
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ staggerChildren: 0.15, delayChildren: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {blogPosts.map((post) => (
-            <ProjectCard
+            <MotionDiv
               key={post.id}
-              imgSrc={post.image}
-              title={post.title}
-              description={post.excerpt}
-              link="#"
-              linkText={`READ ARTICLE (${post.readTime})`}
-              tags={post.tags}
-              date={post.date}
-            />
+              variants={cardVariants}
+              transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+            >
+              <ProjectCard
+                imgSrc={post.image}
+                title={post.title}
+                description={post.excerpt}
+                link="#"
+                linkText={`READ ARTICLE (${post.readTime})`}
+                tags={post.tags}
+                date={post.date}
+              />
+            </MotionDiv>
           ))}
-        </div>
+        </MotionDiv>
 
-        <div className="mt-12 text-center md:hidden">
+        <MotionDiv
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.6, ease: [0.4, 0, 0.2, 1] }}
+          className="mt-12 text-center md:hidden"
+        >
           <a href="#" className="inline-flex items-center gap-2 font-mono text-xs font-bold text-gray-900 dark:text-white border-b border-gray-900 dark:border-white pb-1 hover:text-primary dark:hover:text-primary hover:border-primary transition-all">
             VIEW_FULL_ARCHIVE <span className="material-symbols-outlined text-sm">arrow_forward</span>
           </a>
-        </div>
+        </MotionDiv>
       </div>
     </section>
   );

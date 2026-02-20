@@ -1,8 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+const certVariants = {
+  hidden: { opacity: 0, x: -15 },
+  visible: { opacity: 1, x: 0 },
+};
+
 const About: React.FC = () => {
-  // Cast motion components to any to avoid strict type issues
   const MotionDiv = motion.div as any;
   const MotionH2 = motion.h2 as any;
 
@@ -21,11 +25,11 @@ const About: React.FC = () => {
               className="bg-white dark:bg-card-dark rounded-none border border-gray-200 dark:border-gray-700 shadow-xl dark:shadow-2xl group overflow-hidden relative"
             >
               <div className="absolute inset-0 bg-grain opacity-20 pointer-events-none z-10"></div>
-              <div className="aspect-[4/3] relative overflow-hidden bg-gray-100 dark:bg-black contrast-125 filter grayscale hover:grayscale-0 transition-all duration-700">
+              <div className="aspect-[4/3] relative overflow-hidden bg-gray-100 dark:bg-black group">
                 {/* Experience Log Photo */}
                 <img
                   alt="Bhavesh Kumar Parmar - Profile"
-                  className="object-cover object-top w-full h-full opacity-100 scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="object-cover object-top w-full h-full opacity-100 scale-100 group-hover:scale-105 transition-transform duration-700 ease-out grayscale group-hover:grayscale-0 transition-all duration-500"
                   src="/bhavesh-profile-optimized.jpg"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"></div>
@@ -49,11 +53,24 @@ const About: React.FC = () => {
 
                 {/* Certificates in Sidebar */}
                 <div className="mt-8">
-                  <h4 className="font-display text-sm text-gray-900 dark:text-white uppercase font-bold tracking-wider mb-4 border-l-2 border-primary pl-3">Licenses & Certifications</h4>
+                  <MotionDiv
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                  >
+                    <h4 className="font-display text-sm text-gray-900 dark:text-white uppercase font-bold tracking-wider mb-4 border-l-2 border-primary pl-3">Licenses & Certifications</h4>
+                  </MotionDiv>
 
-                  <div className="space-y-3">
+                  <MotionDiv
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{ staggerChildren: 0.1, delayChildren: 0.15 }}
+                    className="space-y-3"
+                  >
                     {/* Cert 1: AWS */}
-                    <div className="group relative border border-gray-200 dark:border-white/10 rounded-lg p-3 hover:border-primary/50 transition-colors bg-gray-50/50 dark:bg-white/5">
+                    <MotionDiv variants={certVariants} transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }} className="group relative border border-gray-200 dark:border-white/10 rounded-card p-3 hover:border-primary/50 bg-gray-50/50 dark:bg-white/5 hover:translate-x-1 transition-all duration-300">
                       <div className="flex gap-3">
                         <div className="w-8 h-8 shrink-0 bg-white rounded p-1 flex items-center justify-center border border-gray-200 dark:border-transparent">
                           <img src="/Amazon_Web_Services-Logo.wine.svg" alt="AWS" className="w-full h-full object-contain" />
@@ -66,10 +83,10 @@ const About: React.FC = () => {
                         </div>
                       </div>
                       <p className="font-mono text-[9px] text-gray-700 dark:text-gray-400 mt-2 truncate font-medium">Skills: AWS Auto Scaling, AWS Lambda +5</p>
-                    </div>
+                    </MotionDiv>
 
                     {/* Cert 2: Oracle AI */}
-                    <div className="group relative border border-gray-200 dark:border-white/10 rounded-lg p-3 hover:border-primary/50 transition-colors bg-gray-50/50 dark:bg-white/5">
+                    <MotionDiv variants={certVariants} transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }} className="group relative border border-gray-200 dark:border-white/10 rounded-card p-3 hover:border-primary/50 bg-gray-50/50 dark:bg-white/5 hover:translate-x-1 transition-all duration-300">
                       <div className="flex gap-3">
                         <div className="w-8 h-8 shrink-0 bg-white rounded p-1 flex items-center justify-center border border-gray-200 dark:border-transparent">
                           <img src="https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg" alt="Oracle" className="w-full h-full object-contain" />
@@ -85,12 +102,12 @@ const About: React.FC = () => {
                         </div>
                       </div>
                       <p className="font-mono text-[9px] text-gray-700 dark:text-gray-400 mt-2 truncate font-medium">Skills: Oracle Cloud, GenAI Studio +3</p>
-                    </div>
+                    </MotionDiv>
 
 
 
                     {/* Cert 4: Ubuntu */}
-                    <div className="group relative border border-gray-200 dark:border-white/10 rounded-lg p-3 hover:border-primary/50 transition-colors bg-gray-50/50 dark:bg-white/5">
+                    <MotionDiv variants={certVariants} transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }} className="group relative border border-gray-200 dark:border-white/10 rounded-card p-3 hover:border-primary/50 bg-gray-50/50 dark:bg-white/5 hover:translate-x-1 transition-all duration-300">
                       <div className="flex gap-3">
                         <div className="w-8 h-8 shrink-0 bg-white rounded p-1 flex items-center justify-center border border-gray-200 dark:border-transparent">
                           <img src="https://www.vectorlogo.zone/logos/ubuntu/ubuntu-icon.svg" alt="Ubuntu" className="w-full h-full object-contain" />
@@ -106,10 +123,10 @@ const About: React.FC = () => {
                         </div>
                       </div>
                       <p className="font-mono text-[9px] text-gray-700 dark:text-gray-400 mt-2 truncate font-medium">Skills: Linux Admin, CLI +3</p>
-                    </div>
+                    </MotionDiv>
 
                     {/* Cert 5: Oracle */}
-                    <div className="group relative border border-gray-200 dark:border-white/10 rounded-lg p-3 hover:border-primary/50 transition-colors bg-gray-50/50 dark:bg-white/5">
+                    <MotionDiv variants={certVariants} transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }} className="group relative border border-gray-200 dark:border-white/10 rounded-card p-3 hover:border-primary/50 bg-gray-50/50 dark:bg-white/5 hover:translate-x-1 transition-all duration-300">
                       <div className="flex gap-3">
                         <div className="w-8 h-8 shrink-0 bg-white rounded p-1 flex items-center justify-center border border-gray-200 dark:border-transparent">
                           <img src="https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg" alt="Oracle" className="w-full h-full object-contain" />
@@ -125,9 +142,9 @@ const About: React.FC = () => {
                         </div>
                       </div>
                       <p className="font-mono text-[9px] text-gray-700 dark:text-gray-400 mt-2 truncate font-medium">Skills: OCI, Oracle +3</p>
-                    </div>
+                    </MotionDiv>
 
-                  </div>
+                  </MotionDiv>
                 </div>
               </div>
             </MotionDiv>
@@ -217,33 +234,49 @@ const About: React.FC = () => {
               </div>
             </div>
 
+            {/* Animated Divider */}
+            <MotionDiv
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: [0.4, 0, 0.2, 1] }}
+              className="h-px w-full bg-gradient-to-r from-transparent via-primary/30 to-transparent origin-left"
+            />
+
             {/* Education & Leadership Bento */}
             <div>
               <div className="flex items-center gap-4 mb-8">
                 <MotionH2
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  transition={{ duration: 0.6, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
                   className="font-display text-2xl md:text-3xl text-gray-900 dark:text-white uppercase font-bold tracking-tight"
                 >
                   Education & Leadership
                 </MotionH2>
-                <div className="h-px flex-grow bg-gray-300 dark:bg-gray-700"></div>
+                <MotionDiv
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                  className="h-px flex-grow bg-gray-300 dark:bg-gray-700 origin-left"
+                />
               </div>
               <div className="grid grid-cols-1 gap-6">
 
                 {/* Education Card - Wide */}
                 <MotionDiv
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
-                  className="relative group overflow-hidden bg-gray-50 dark:bg-[#111111]/80 border border-gray-200 dark:border-white/10 p-6 rounded-2xl hover:border-primary/50 transition-all duration-300"
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.6, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
+                  whileHover={{ y: -3 }}
+                  className="relative group overflow-hidden bg-gray-50 dark:bg-[#111111]/80 border border-border-light dark:border-white/10 p-6 rounded-card-lg hover:border-primary/50 hover:shadow-glow-primary transition-all duration-300"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="relative z-10 flex flex-col md:flex-row gap-6 items-start">
-                    <div className="w-12 h-12 rounded-lg bg-gray-200 dark:bg-white/5 flex items-center justify-center shrink-0 border border-gray-300 dark:border-white/10 group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 rounded-card bg-gray-200 dark:bg-white/5 flex items-center justify-center shrink-0 border border-gray-300 dark:border-white/10 group-hover:scale-110 transition-transform duration-300">
                       <span className="material-symbols-outlined text-2xl text-gray-700 dark:text-white group-hover:text-primary transition-colors">school</span>
                     </div>
                     <div className="flex-1 w-full">
@@ -273,15 +306,16 @@ const About: React.FC = () => {
 
                 {/* Leadership Card - Wide */}
                 <MotionDiv
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4 }}
-                  className="relative group overflow-hidden bg-gray-50 dark:bg-[#111111]/80 border border-gray-200 dark:border-white/10 p-6 rounded-2xl hover:border-accent-green/50 transition-all duration-300"
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.6, delay: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                  whileHover={{ y: -3 }}
+                  className="relative group overflow-hidden bg-gray-50 dark:bg-[#111111]/80 border border-border-light dark:border-white/10 p-6 rounded-card-lg hover:border-accent-green/50 hover:shadow-glow-green transition-all duration-300"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-accent-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="relative z-10 flex flex-col md:flex-row gap-6 items-start">
-                    <div className="w-12 h-12 rounded-lg bg-gray-200 dark:bg-white/5 flex items-center justify-center shrink-0 border border-gray-300 dark:border-white/10 group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 rounded-card bg-gray-200 dark:bg-white/5 flex items-center justify-center shrink-0 border border-gray-300 dark:border-white/10 group-hover:scale-110 transition-transform duration-300">
                       <span className="material-symbols-outlined text-2xl text-gray-700 dark:text-white group-hover:text-accent-green transition-colors">diversity_3</span>
                     </div>
                     <div className="flex-1 w-full">

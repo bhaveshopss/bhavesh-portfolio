@@ -2,6 +2,8 @@ import React from 'react';
 import CodeXRay from './CodeXRay';
 import LiveTerminal from './LiveTerminal';
 import { XRayNode } from '../../types';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 const WorkSection: React.FC = () => {
   // Project 1 Data
@@ -75,6 +77,44 @@ const WorkSection: React.FC = () => {
     </>
   );
 
+  // Project 3 Data
+  const nodes3: XRayNode[] = [
+    { id: '1', label: 'EC2 INSTANCE', subLabel: 'Target', type: 'server', x: 15, y: 50, codeLanguage: 'bash', codeSnippet: `df -h /var/log\nFilesystem      Size  Used Avail Use% Mounted on\n/dev/xvda1       20G   19G  1.0G  95% /` },
+    { id: '2', label: 'CLOUDWATCH', subLabel: 'Monitor', type: 'cloud', x: 35, y: 30, codeLanguage: 'json', codeSnippet: `{\n  "AlarmName": "DiskSpaceExhaustion",\n  "NewStateValue": "ALARM",\n  "Reason": "Threshold Crossed"\n}` },
+    { id: '3', label: 'LAMBDA SRE', subLabel: 'Brain', type: 'process', x: 55, y: 50, codeLanguage: 'python', codeSnippet: `def lambda_handler(event, context):\n    alarm = parse_sns(event)\n    diagnostics = run_ssm(alarm.instance_id)\n    return analyze_and_remediate(diagnostics)` },
+    { id: '4', label: 'GEMINI AI', subLabel: 'Analysis', type: 'ai', x: 75, y: 50, codeLanguage: 'text', codeSnippet: `Root Cause: Nginx access.log has grown to 18GB.\n\nRecommended Action:\n1. Archive log to S3\n2. Truncate current file\n3. Restart Nginx` },
+    { id: '5', label: 'AWS SSM', subLabel: 'Action', type: 'default', x: 55, y: 70, codeLanguage: 'yaml', codeSnippet: `schemaVersion: '2.2'\ndescription: 'Auto-remediate Disk Full'\nname: 'TruncateLogs'\ninputs:\n  runCommand:\n  - '> /var/log/nginx/access.log'` },
+  ];
+
+  const logs3 = (
+    <>
+      <p className="text-gray-400">MONITORING SYSTEM_METRICS...</p>
+      <p className="text-red-400 font-bold">ALARM: DISK_SPACE_EXHAUSTION (&gt;85%)</p>
+      <p className="text-gray-500">SNS: TRIGGERING LAMBDA_SRE_BRAIN</p>
+      <p className="text-gray-400">SSM: GATHERING DIAGNOSTICS...</p>
+      <p className="text-accent-blue font-bold">GEMINI_PRO: ANALYZING ROOT_CAUSE...</p>
+      <p className="text-gray-300">ACTION_PLAN: ARCHIVE &amp; TRUNCATE LOGS</p>
+      <p className="text-terminal-green font-bold">SSM_RUN_COMMAND: EXECUTING FIX...</p>
+      <p className="text-gray-500">DISK_USAGE NORMALIZED (12%)</p>
+      <p className="text-accent-green font-bold">INCIDENT_RESOLVED: AUTO-HEALED</p>
+    </>
+  );
+
+  const connections3 = (
+    <>
+      {/* EC2 -> CW */}
+      <path className="animate-flow-dash" d="M15,50 L35,30" fill="none" stroke="rgba(239, 68, 68, 0.8)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
+      {/* CW -> Lambda */}
+      <path className="animate-flow-dash" d="M35,30 L55,50" fill="none" stroke="rgba(59, 130, 246, 0.9)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
+      {/* Lambda -> Gemini */}
+      <path className="animate-flow-dash" d="M55,50 L75,50" fill="none" stroke="rgba(168, 85, 247, 0.9)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
+      {/* Gemini -> SSM */}
+      <path className="animate-flow-dash" d="M75,50 Q65,60 55,70" fill="none" stroke="rgba(168, 85, 247, 0.9)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
+      {/* SSM -> EC2 */}
+      <path className="animate-flow-dash" d="M55,70 L15,50" fill="none" stroke="rgba(16, 185, 129, 0.8)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
+    </>
+  );
+
 
   return (
     <main className="relative z-10 container mx-auto px-4 py-8" id="work">
@@ -92,11 +132,32 @@ const WorkSection: React.FC = () => {
       </div>
 
       <div className="text-center mb-12 relative z-10">
-        <h2 className="font-display text-3xl md:text-5xl text-gray-900 dark:text-white uppercase font-bold tracking-tight">Architectural Highlights</h2>
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+          className="font-display text-3xl md:text-5xl text-gray-900 dark:text-white uppercase font-bold tracking-tight"
+        >
+          Architectural Highlights
+        </motion.h2>
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
+          className="w-24 h-1 bg-gradient-to-r from-primary via-accent-purple to-primary mx-auto mt-4 rounded-full"
+        />
       </div>
 
       {/* Project 1 */}
-      <div className="mb-24 relative z-10">
+      <motion.div 
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-100px' }}
+        transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+        className="mb-24 relative z-10"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           <div className="lg:col-span-7">
             <CodeXRay
@@ -110,19 +171,27 @@ const WorkSection: React.FC = () => {
           </div>
           <div className="lg:col-span-5 space-y-6">
             <div>
-              <span className="inline-block px-3 py-1 bg-accent-blue/10 dark:bg-accent-blue/15 border border-accent-blue/40 text-accent-blue text-xs font-mono font-bold rounded mb-4 uppercase tracking-widest">Technical Project</span>
-              <h3 className="font-display text-2xl md:text-3xl mb-4 text-gray-900 dark:text-white uppercase font-bold">Self-Healing CI/CD</h3>
+              <motion.span 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="inline-block px-3 py-1 bg-accent-blue/10 dark:bg-accent-blue/15 border border-accent-blue/40 text-accent-blue text-xs font-mono font-bold rounded-badge mb-4 uppercase tracking-widest"
+              >
+                Technical Project
+              </motion.span>
+              <h3 className="font-display text-2xl md:text-3xl mb-4 text-gray-900 dark:text-white uppercase font-bold group-hover:text-primary transition-colors duration-300">Self-Healing CI/CD</h3>
               <p className="font-body text-gray-700 dark:text-text-high-contrast text-base leading-relaxed font-medium">
                 Redefining failure as a stage of progress. This architecture captures build/test logs via Python agents, sends them to Gemini 3 Pro for root cause analysis, and automatically pushes corrective PRs back to the repository.
               </p>
             </div>
             <div>
               <div className="grid grid-cols-2 gap-3 mb-6">
-                <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-2xl">
+                <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-card">
                   <div className="font-mono text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mb-1">Downtime Reduction</div>
                   <div className="font-display text-xl text-gray-900 dark:text-white font-bold">94.2%</div>
                 </div>
-                <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-2xl">
+                <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-card">
                   <div className="font-mono text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mb-1">Mean Time to Fix</div>
                   <div className="font-display text-xl text-gray-900 dark:text-white font-bold">&lt;2m</div>
                 </div>
@@ -131,26 +200,40 @@ const WorkSection: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Project 2 */}
-      <div className="mb-16 relative z-10">
+      <motion.div 
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-100px' }}
+        transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+        className="mb-16 relative z-10"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           <div className="lg:col-span-5 space-y-6 lg:order-2">
             <div>
-              <span className="inline-block px-3 py-1 bg-accent-green/10 dark:bg-accent-green/15 border border-accent-green/40 text-accent-green text-xs font-mono font-bold rounded mb-4 uppercase tracking-widest">Technical Project</span>
-              <h3 className="font-display text-2xl md:text-3xl mb-4 text-gray-900 dark:text-white uppercase font-bold">Anthropic MCP Server</h3>
+              <motion.span 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="inline-block px-3 py-1 bg-accent-green/10 dark:bg-accent-green/15 border border-accent-green/40 text-accent-green text-xs font-mono font-bold rounded-badge mb-4 uppercase tracking-widest"
+              >
+                Technical Project
+              </motion.span>
+              <h3 className="font-display text-2xl md:text-3xl mb-4 text-gray-900 dark:text-white uppercase font-bold group-hover:text-accent-green transition-colors duration-300">Anthropic MCP Server</h3>
               <p className="font-body text-gray-700 dark:text-text-high-contrast text-base leading-relaxed font-medium">
                 Built a robust Model Context Protocol server enabling secure communication between Claude and internal enterprise databases on AWS. High-fidelity architectural implementation focusing on protocol isolation and secure tool execution.
               </p>
             </div>
             <div>
               <div className="grid grid-cols-2 gap-3 mb-6">
-                <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-2xl">
+                <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-card">
                   <div className="font-mono text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mb-1">Latency</div>
                   <div className="font-display text-xl text-gray-900 dark:text-white font-bold">&lt;150ms</div>
                 </div>
-                <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-2xl">
+                <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-card">
                   <div className="font-mono text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mb-1">Security</div>
                   <div className="font-display text-xl text-gray-900 dark:text-white font-bold">mTLS v1.3</div>
                 </div>
@@ -169,7 +252,59 @@ const WorkSection: React.FC = () => {
             />
           </div>
         </div>
-      </div>
+      </motion.div>
+
+      {/* Project 3 */}
+      <motion.div 
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-100px' }}
+        transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+        className="mb-24 relative z-10"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          <div className="lg:col-span-7">
+            <CodeXRay
+              id="p3"
+              nodes={nodes3}
+              connections={connections3}
+              title="AWS Self-Healing AI SRE"
+              version="AI SRE V1.0.0"
+              logLines={logs3}
+            />
+          </div>
+          <div className="lg:col-span-5 space-y-6">
+            <div>
+              <motion.span 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="inline-block px-3 py-1 bg-accent-blue/10 dark:bg-accent-blue/15 border border-accent-blue/40 text-accent-blue text-xs font-mono font-bold rounded-badge mb-4 uppercase tracking-widest"
+              >
+                Technical Project
+              </motion.span>
+              <h3 className="font-display text-2xl md:text-3xl mb-4 text-gray-900 dark:text-white uppercase font-bold group-hover:text-primary transition-colors duration-300">AI SRE Command Center</h3>
+              <p className="font-body text-gray-700 dark:text-text-high-contrast text-base leading-relaxed font-medium">
+                Autonomous, self-healing AWS infrastructure driven by Google Gemini. The system monitors EC2 metrics via CloudWatch, triggers Lambda incident handlers, runs diagnostics via SSM, and executes AI-suggested remediations automatically, complete with a real-time WebSocket dashboard.
+              </p>
+            </div>
+            <div>
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-card">
+                  <div className="font-mono text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mb-1">Architecture</div>
+                  <div className="font-display text-xl text-gray-900 dark:text-white font-bold">AWS Serverless</div>
+                </div>
+                <div className="p-3 border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 rounded-card">
+                  <div className="font-mono text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase mb-1">Mean Time to Restore</div>
+                  <div className="font-display text-xl text-gray-900 dark:text-white font-bold">&lt;3m</div>
+                </div>
+              </div>
+              <LiveTerminal logLines={logs3} />
+            </div>
+          </div>
+        </div>
+      </motion.div>
 
     </main>
   );

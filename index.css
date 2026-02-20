@@ -63,3 +63,15 @@ img {
 * {
     -webkit-overflow-scrolling: touch;
 }
+
+/* Contribution grid glow wave shimmer */
+@keyframes contribution-shimmer {
+    0%, 70%, 100% {
+        background: transparent;
+        box-shadow: none;
+    }
+    35% {
+        background: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 0 6px rgba(0, 255, 65, 0.3);
+    }
+}

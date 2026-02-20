@@ -150,7 +150,7 @@ const CodeXRay: React.FC<CodeXRayProps> = ({ id, nodes, connections, title, vers
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="relative w-full h-full min-h-[450px] bg-[#020205] rounded-2xl overflow-hidden border border-white/10 shadow-2xl group/scene perspective-container cursor-move"
+        className="relative w-full h-full min-h-[450px] bg-[#020205] rounded-card-lg overflow-hidden border border-white/10 shadow-2xl group/scene perspective-container cursor-move"
       >
         {/* Background Grid & Stars */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-900/20 via-[#050505] to-[#000000]"></div>
