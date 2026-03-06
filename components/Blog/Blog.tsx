@@ -20,6 +20,7 @@ interface BlogPost {
   tags: string[];
   readTime: string;
   image: string;
+  link: string;
 }
 
 const blogPosts: BlogPost[] = [
@@ -30,7 +31,8 @@ const blogPosts: BlogPost[] = [
     date: "2024.03.15",
     tags: ["K8S", "EDGE", "DEVOPS"],
     readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1605745341112-85968b19335b?q=80&w=2071&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1605745341112-85968b19335b?q=80&w=2071&auto=format&fit=crop",
+    link: "/blog/kubernetes-edge-latency.html"
   },
   {
     id: 2,
@@ -39,7 +41,8 @@ const blogPosts: BlogPost[] = [
     date: "2024.02.28",
     tags: ["AI", "LLM", "ARCH"],
     readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2000&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2000&auto=format&fit=crop",
+    link: "/blog/resilient-llm-chains.html"
   },
   {
     id: 3,
@@ -48,7 +51,8 @@ const blogPosts: BlogPost[] = [
     date: "2024.01.10",
     tags: ["CI/CD", "CULTURE"],
     readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2071&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2071&auto=format&fit=crop",
+    link: "/blog/death-of-staging.html"
   }
 ];
 
@@ -119,7 +123,7 @@ const Blog: React.FC = () => {
                 imgSrc={post.image}
                 title={post.title}
                 description={post.excerpt}
-                link="#"
+                link={post.link}
                 linkText={`READ ARTICLE (${post.readTime})`}
                 tags={post.tags}
                 date={post.date}

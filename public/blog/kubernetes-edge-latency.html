@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kubernetes at the Edge: Latency Lessons | Bhaveshops</title>
+  <meta name="description" content="Deploying lightweight K3s clusters across geographic locations — lessons learned about distributed state, latency budgets, and edge Kubernetes." />
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: { extend: {
+        colors: { primary: "#6366f1", "terminal-green": "#00ff41" },
+        fontFamily: { display: ["Space Grotesk","sans-serif"], mono: ["JetBrains Mono","monospace"] },
+      }}
+    };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    article h2 { scroll-margin-top: 80px; }
+    pre { overflow-x: auto; }
+    code:not(pre code) { background: rgba(99,102,241,0.1); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; }
+  </style>
+</head>
+<body class="bg-[#050505] text-gray-300 font-[Space_Grotesk]">
+
+  <!-- Nav -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-white/5">
+    <div class="max-w-3xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="/" class="font-bold text-white text-lg tracking-tight">Bhavesh<span class="text-primary">ops</span></a>
+      <a href="/#blog" class="font-mono text-xs text-gray-400 hover:text-primary transition-colors uppercase tracking-widest">&larr; Back to Blog</a>
+    </div>
+  </nav>
+
+  <article class="max-w-3xl mx-auto px-6 pt-28 pb-20">
+    <!-- Header -->
+    <div class="mb-12">
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="font-mono text-[10px] font-bold text-primary uppercase tracking-wider border border-primary/20 bg-primary/5 px-2 py-0.5 rounded">K8S</span>
+        <span class="font-mono text-[10px] font-bold text-primary uppercase tracking-wider border border-primary/20 bg-primary/5 px-2 py-0.5 rounded">EDGE</span>
+        <span class="font-mono text-[10px] font-bold text-primary uppercase tracking-wider border border-primary/20 bg-primary/5 px-2 py-0.5 rounded">DEVOPS</span>
+      </div>
+      <h1 class="font-display text-3xl md:text-5xl font-bold text-white uppercase tracking-tight leading-tight mb-4">Kubernetes at the Edge: Latency Lessons</h1>
+      <div class="flex items-center gap-4 font-mono text-xs text-gray-500">
+        <span>2024.03.15</span>
+        <span class="text-gray-700">|</span>
+        <span>5 min read</span>
+        <span class="text-gray-700">|</span>
+        <span>Bhavesh Kumar Parmar</span>
+      </div>
+    </div>
+
+    <!-- Cover -->
+    <div class="rounded-xl overflow-hidden border border-white/10 mb-12">
+      <img src="https://images.unsplash.com/photo-1605745341112-85968b19335b?q=80&w=2071&auto=format&fit=crop" alt="Kubernetes Edge Computing" class="w-full h-64 md:h-80 object-cover" loading="lazy" />
+    </div>
+
+    <!-- Content -->
+    <div class="prose prose-invert max-w-none space-y-6 text-gray-300 leading-relaxed">
+
+      <p class="text-lg text-gray-200 font-medium">
+        When we decided to deploy K3s clusters across 50+ geographic locations for a real-time IoT analytics platform, we thought the hardest part would be Kubernetes itself. We were wrong. The real challenge was physics.
+      </p>
+
+      <h2 class="text-2xl font-display font-bold text-white uppercase tracking-tight mt-12 mb-4">The Architecture</h2>
+
+      <p>Our setup was straightforward on paper: lightweight <code>K3s</code> clusters at each edge location, a central control plane on AWS EKS, and ArgoCD syncing configurations through GitOps. Each edge cluster ran 3-5 nodes handling local data ingestion, transformation, and real-time alerting.</p>
+
+      <pre class="bg-[#0a0a0a] border border-white/10 rounded-lg p-4 font-mono text-sm text-gray-300"><code># K3s edge cluster provisioning
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server \
+  --cluster-init \
+  --tls-san edge-node-01.region-ap.internal \
+  --disable traefik \
+  --disable servicelb \
+  --write-kubeconfig-mode 644" sh -</code></pre>
+
+      <h2 class="text-2xl font-display font-bold text-white uppercase tracking-tight mt-12 mb-4">Lesson 1: Latency Budgets Are Non-Negotiable</h2>
+
+      <p>Our first mistake was treating latency as an afterthought. When your edge nodes in Mumbai need to sync state with a control plane in <code>us-east-1</code>, you're looking at 180-220ms round-trip. That may sound small, but when your reconciliation loop runs every 10 seconds and each sync involves 3-4 API calls, you've already consumed 800ms of your budget on network alone.</p>
+
+      <p>We solved this by implementing a <strong class="text-white">tiered sync strategy</strong>:</p>
+
+      <ul class="space-y-2 ml-4">
+        <li class="flex items-start gap-2"><span class="text-primary mt-1.5 text-sm">&#9656;</span><span><strong class="text-white">Critical configs</strong> (security policies, RBAC): Synced immediately via webhook push</span></li>
+        <li class="flex items-start gap-2"><span class="text-primary mt-1.5 text-sm">&#9656;</span><span><strong class="text-white">Application deployments</strong>: Synced every 30s with exponential backoff on failure</span></li>
+        <li class="flex items-start gap-2"><span class="text-primary mt-1.5 text-sm">&#9656;</span><span><strong class="text-white">Observability data</strong>: Batched and shipped every 60s to reduce API pressure</span></li>
+      </ul>
+
+      <h2 class="text-2xl font-display font-bold text-white uppercase tracking-tight mt-12 mb-4">Lesson 2: etcd is Your Bottleneck</h2>
+
+      <p>K3s uses SQLite by default for its datastore, which works great for single-node setups. But at the edge, when you need HA across 3 nodes with unreliable networking between them, SQLite falls apart. We switched to embedded etcd with aggressive compaction settings:</p>
+
+      <pre class="bg-[#0a0a0a] border border-white/10 rounded-lg p-4 font-mono text-sm text-gray-300"><code># etcd optimization for edge environments
+--etcd-arg quota-backend-bytes=2147483648
+--etcd-arg auto-compaction-mode=periodic
+--etcd-arg auto-compaction-retention=1h
+--etcd-arg snapshot-count=5000</code></pre>
+
+      <p>This reduced our etcd database size by 60% and cut leader election time from 12s to under 3s during network partitions.</p>
+
+      <h2 class="text-2xl font-display font-bold text-white uppercase tracking-tight mt-12 mb-4">Lesson 3: GitOps at Scale Needs Sharding</h2>
+
+      <p>Running a single ArgoCD instance managing 50+ clusters is a recipe for OOMKilled pods. We sharded ArgoCD by region — one instance per geographic zone, each watching its own cluster set. This reduced memory usage by 75% and sync times by 80%.</p>
+
+      <pre class="bg-[#0a0a0a] border border-white/10 rounded-lg p-4 font-mono text-sm text-gray-300"><code># ArgoCD ApplicationSet for regional sharding
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: edge-apps
+spec:
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            region: ap-south
+  template:
+    spec:
+      destination:
+        server: '{{server}}'
+      source:
+        repoURL: git@github.com:org/edge-configs.git
+        path: 'clusters/{{name}}'</code></pre>
+
+      <h2 class="text-2xl font-display font-bold text-white uppercase tracking-tight mt-12 mb-4">Key Takeaways</h2>
+
+      <ul class="space-y-2 ml-4">
+        <li class="flex items-start gap-2"><span class="text-[#00ff41] mt-1.5 text-sm">&#10003;</span><span>Speed of light is the only hard limit — design your sync strategy around it, not against it</span></li>
+        <li class="flex items-start gap-2"><span class="text-[#00ff41] mt-1.5 text-sm">&#10003;</span><span>Edge clusters must be autonomous — they should survive 100% control plane disconnection</span></li>
+        <li class="flex items-start gap-2"><span class="text-[#00ff41] mt-1.5 text-sm">&#10003;</span><span>Shard your GitOps tooling early — a single ArgoCD instance won't scale past 20 clusters</span></li>
+        <li class="flex items-start gap-2"><span class="text-[#00ff41] mt-1.5 text-sm">&#10003;</span><span>Monitor etcd obsessively at the edge — it's the first thing to break on unreliable networks</span></li>
+      </ul>
+
+      <div class="mt-12 pt-8 border-t border-white/10">
+        <p class="text-gray-500 font-mono text-xs uppercase tracking-widest">End of Transmission</p>
+      </div>
+    </div>
+  </article>
+
+  <footer class="border-t border-white/5 py-8 text-center">
+    <a href="/" class="font-mono text-xs text-gray-600 hover:text-primary transition-colors uppercase tracking-widest">bhaveshops.in</a>
+  </footer>
+</body>
+</html>
