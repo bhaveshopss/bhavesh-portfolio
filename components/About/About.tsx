@@ -11,7 +11,7 @@ const About: React.FC = () => {
   const MotionH2 = motion.h2 as any;
 
   return (
-    <section className="relative z-10 py-16 bg-white dark:bg-[#080808] border-t border-gray-200 dark:border-gray-800 transition-colors duration-500" id="about">
+    <section className="relative z-10 py-16 bg-white dark:bg-[#080808] border-t border-gray-200 dark:border-gray-800" id="about">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 
@@ -29,7 +29,7 @@ const About: React.FC = () => {
                 {/* Experience Log Photo */}
                 <img
                   alt="Bhavesh Kumar Parmar - Profile"
-                  className="object-cover object-top w-full h-full opacity-100 scale-100 group-hover:scale-105 transition-transform duration-700 ease-out grayscale group-hover:grayscale-0 transition-all duration-500"
+                  className="object-cover object-top w-full h-full opacity-100 scale-100 group-hover:scale-105 group-hover:grayscale transition-all duration-700 ease-out"
                   src="/bhavesh-profile-optimized.jpg"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"></div>
@@ -168,7 +168,15 @@ const About: React.FC = () => {
                 <span className="font-mono text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest">v2025.02</span>
               </div>
 
-              <div className="relative pl-8 border-l border-gray-300 dark:border-gray-700 space-y-12">
+              <div className="relative pl-8 space-y-12">
+                {/* Animated timeline line */}
+                <MotionDiv
+                  initial={{ scaleY: 0 }}
+                  whileInView={{ scaleY: 1 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+                  className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-gray-300 dark:via-gray-700 to-transparent origin-top"
+                />
                 {/* Job 1 */}
                 <MotionDiv
                   initial={{ opacity: 0, x: 20 }}

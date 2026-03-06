@@ -54,7 +54,7 @@ const blogPosts: BlogPost[] = [
 
 const Blog: React.FC = () => {
   return (
-    <section id="blog" className="relative z-10 py-24 bg-white dark:bg-[#050505] border-t border-gray-200 dark:border-white/5 transition-colors duration-500">
+    <section id="blog" className="relative z-10 py-24 bg-white dark:bg-[#050505] border-t border-gray-200 dark:border-white/5">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">

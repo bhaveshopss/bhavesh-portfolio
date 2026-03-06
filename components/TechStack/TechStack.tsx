@@ -9,7 +9,7 @@ const TechStack: React.FC = () => {
   const MotionDiv = motion.div as any;
 
   return (
-    <section className="relative z-10 py-24 bg-gray-50 dark:bg-[#030303] overflow-hidden transition-colors duration-500" id="infrastructure">
+    <section className="relative z-10 py-24 bg-gray-50 dark:bg-[#030303] overflow-hidden" id="infrastructure">
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">

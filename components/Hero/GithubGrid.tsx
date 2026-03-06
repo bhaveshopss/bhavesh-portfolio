@@ -117,24 +117,20 @@ interface GridCellProps {
 
 const GridCell = React.memo<GridCellProps>(({ cell, hasAnimated, onHover, onLeave }) => {
   const colors = getLevelColor(cell.level);
-  const entranceDelay = cell.weekIndex * 0.025 + cell.dayIndex * 0.008;
+  const entranceDelay = cell.weekIndex * 0.015 + cell.dayIndex * 0.005;
   const elevation = cell.level * 3;
 
   return (
-    <MotionDiv
-      initial={{ opacity: 0, scale: 0 }}
-      animate={hasAnimated ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-      transition={{
-        delay: entranceDelay,
-        duration: 0.3,
-        ease: [0.4, 0, 0.2, 1],
-      }}
+    <div
       onMouseEnter={(e: React.MouseEvent) => onHover(cell, e)}
       onMouseLeave={onLeave}
       className="relative cursor-interactive group/cell"
       style={{
         aspectRatio: '1',
         transformStyle: 'preserve-3d' as const,
+        opacity: hasAnimated ? 1 : 0,
+        transform: hasAnimated ? 'scale(1)' : 'scale(0)',
+        transition: `opacity 0.3s ease ${entranceDelay}s, transform 0.3s ease ${entranceDelay}s`,
       }}
     >
       {/* Main face */}
@@ -154,8 +150,8 @@ const GridCell = React.memo<GridCellProps>(({ cell, hasAnimated, onHover, onLeav
         {/* Hover highlight */}
         <div className="absolute inset-0 bg-white/30 opacity-0 group-hover/cell:opacity-100 transition-opacity duration-200 rounded-[2px]" />
 
-        {/* Glow wave shimmer for high-activity cells */}
-        {cell.level >= 3 && (
+        {/* Glow wave shimmer only for max-activity cells */}
+        {cell.level >= 4 && (
           <div
             className="absolute inset-0 rounded-[2px] pointer-events-none"
             style={{
@@ -194,7 +190,7 @@ const GridCell = React.memo<GridCellProps>(({ cell, hasAnimated, onHover, onLeav
           />
         </>
       )}
-    </MotionDiv>
+    </div>
   );
 });
 
@@ -235,6 +231,14 @@ const GithubGrid: React.FC = () => {
     mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
   };
 
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length !== 1) return;
+    const touch = e.touches[0];
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set((touch.clientX - rect.left) / rect.width - 0.5);
+    mouseY.set((touch.clientY - rect.top) / rect.height - 0.5);
+  };
+
   const handleMouseLeave = () => {
     mouseX.set(0);
     mouseY.set(0);
@@ -254,7 +258,7 @@ const GithubGrid: React.FC = () => {
   const handleCellLeave = useCallback(() => setTooltip(null), []);
 
   return (
-    <div className="relative w-full max-w-2xl mt-16 mb-16 group" style={{ perspective: 1000 }}>
+    <div className="relative w-full max-w-2xl mt-8 mb-8 md:mt-16 md:mb-16 group" style={{ perspective: 1000 }}>
 
       {/* Label */}
       <MotionDiv
@@ -274,6 +278,8 @@ const GithubGrid: React.FC = () => {
         style={{ rotateX, rotateY, transformStyle: 'preserve-3d' as const }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleMouseLeave}
         className="relative p-6 md:p-8 bg-white/80 dark:bg-[#0a0a0a]/90 border border-black/5 dark:border-white/10 rounded-card-lg backdrop-blur-sm"
       >
         {/* Ambient glow */}
@@ -466,7 +472,7 @@ const GithubGrid: React.FC = () => {
 
       {/* Description Text */}
       <div className="mt-12 text-center relative z-10 px-4">
-        <p className="max-w-xl mx-auto text-base md:text-lg text-gray-600 dark:text-text-high-contrast font-medium font-mono leading-relaxed transition-colors duration-500">
+        <p className="max-w-xl mx-auto text-base md:text-lg text-gray-600 dark:text-text-high-contrast font-medium font-mono leading-relaxed">
           Bhavesh Kumar Parmar, DevOps & AIOps Engineer constructing self-healing infrastructures and intelligent pipelines.
         </p>
       </div>

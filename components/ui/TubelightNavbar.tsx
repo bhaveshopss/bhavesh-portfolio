@@ -55,7 +55,7 @@ export function TubelightNavbar({ items, className }: NavBarProps) {
         className,
       )}
     >
-      <div className="flex items-center gap-3 bg-white/50 dark:bg-white/5 border border-gray-200 dark:border-white/10 backdrop-blur-lg py-1 px-1 rounded-full shadow-lg">
+      <div className="flex items-center gap-3 bg-white/80 dark:bg-black/80 border border-gray-200 dark:border-white/10 backdrop-blur-md py-1 px-1 rounded-full shadow-lg" role="navigation" aria-label="Main navigation">
         {items.map((item) => {
           const Icon = item.icon
           const isActive = activeTab === item.name
@@ -65,6 +65,8 @@ export function TubelightNavbar({ items, className }: NavBarProps) {
             <div key={item.name} className="relative nav-item-container">
               <a
                 href={hasSubItems ? "#" : item.url}
+                aria-haspopup={hasSubItems ? "true" : undefined}
+                aria-expanded={hasSubItems && isActive ? isDropdownOpen : undefined}
                 onClick={(e) => {
                   if (hasSubItems) {
                     e.preventDefault();

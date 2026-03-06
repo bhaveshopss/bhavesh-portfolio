@@ -31,7 +31,7 @@ const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(
           <img
             src={imgSrc}
             alt={title}
-            className="h-full w-full object-cover transition-transform duration-500 ease-smooth group-hover:scale-110 grayscale group-hover:grayscale-0"
+            className="h-full w-full object-cover transition-all duration-500 ease-smooth group-hover:scale-110 group-hover:grayscale"
             loading="lazy"
           />
           

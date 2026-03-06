@@ -22,10 +22,10 @@ html {
     -webkit-backface-visibility: hidden;
 }
 
-/* Performance: Use content-visibility for off-screen sections */
+/* Sections use contain for paint optimization without content-visibility
+   (content-visibility: auto causes jarring pop-in that breaks scroll animations) */
 section {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 600px;
+    contain: layout style;
 }
 
 /* Performance: Reduce motion for users who prefer it */
@@ -47,21 +47,33 @@ section {
     contain: layout style paint;
 }
 
-/* Optimize paint for fixed elements */
-.fixed {
-    will-change: transform;
-}
+/* Only promote specific fixed elements that actually animate */
 
 /* Fonts loaded via Google Fonts link tags with display=swap */
 
-/* Faster image loading visual */
-img {
-    content-visibility: auto;
+/* Smooth scrolling containers only */
+.overflow-y-auto,
+.overflow-auto {
+    -webkit-overflow-scrolling: touch;
 }
 
-/* Optimize scroll performance */
-* {
-    -webkit-overflow-scrolling: touch;
+/* Screen reader only utility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Focus visible ring for keyboard navigation */
+:focus-visible {
+    outline: 2px solid #6366f1;
+    outline-offset: 2px;
 }
 
 /* Contribution grid glow wave shimmer */

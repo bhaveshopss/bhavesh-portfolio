@@ -98,6 +98,7 @@ function LogoCard({ logo }: { key?: string | number; logo: { name: string; src: 
     <div
       className="relative flex h-24 w-32 flex-col items-center justify-center border-r border-gray-200 dark:border-white/5 transition-colors hover:bg-white dark:hover:bg-white/10 shrink-0 group/card"
       style={{ "--hover-color": hoverColor } as React.CSSProperties}
+      title={logo.name}
     >
       <div
         className="flex items-center justify-center w-full h-full relative transition-transform duration-300 ease-out transform group-hover/card:scale-105"
@@ -114,6 +115,13 @@ function LogoCard({ logo }: { key?: string | number; logo: { name: string; src: 
           height="32"
           className="h-8 w-auto grayscale opacity-40 transition-all duration-300 group-hover/card:grayscale-0 group-hover/card:opacity-100 group-hover/card:scale-110 group-hover/card:drop-shadow-[0_0_8px_var(--hover-color)] cursor-pointer relative z-10"
         />
+      </div>
+
+      {/* Tooltip */}
+      <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 translate-y-full opacity-0 group-hover/card:opacity-100 transition-all duration-200 pointer-events-none z-30">
+        <div className="px-2 py-1 bg-gray-900 dark:bg-black text-white text-[10px] font-mono font-bold rounded shadow-lg border border-white/10 whitespace-nowrap uppercase tracking-wider">
+          {logo.name}
+        </div>
       </div>
     </div>
   );

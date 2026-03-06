@@ -33,16 +33,11 @@ const WorkSection: React.FC = () => {
 
   const connections1 = (
     <>
-      {/* Dev -> Repo */}
-      <path className="animate-flow-dash text-gray-500 dark:text-white/60" d="M15,50 L35,50" fill="none" stroke="currentColor" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
-      {/* Repo -> Pipeline */}
-      <path className="animate-flow-dash" d="M35,50 L55,30" fill="none" stroke="rgba(59, 130, 246, 0.9)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
-      {/* Pipeline -> AI */}
-      <path className="animate-flow-dash" d="M55,30 L75,50" fill="none" stroke="rgba(168, 85, 247, 0.9)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
-      {/* AI -> Action */}
-      <path className="animate-flow-dash" d="M75,50 Q65,60 55,70" fill="none" stroke="rgba(168, 85, 247, 0.9)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
-      {/* Action -> Repo (Feedback) */}
-      <path className="animate-flow-dash" d="M55,70 L35,50" fill="none" stroke="rgba(16, 185, 129, 0.8)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
+      <path d="M15,50 L35,50" fill="none" stroke="rgba(99,102,241,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" className="animate-flow-dash" strokeDasharray="4,6" />
+      <path d="M35,50 L55,30" fill="none" stroke="rgba(59,130,246,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" className="animate-flow-dash" strokeDasharray="4,6" />
+      <path d="M55,30 L75,50" fill="none" stroke="rgba(168,85,247,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" className="animate-flow-dash" strokeDasharray="4,6" />
+      <path d="M75,50 Q65,60 55,70" fill="none" stroke="rgba(168,85,247,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" className="animate-flow-dash" strokeDasharray="4,6" />
+      <path d="M55,70 L35,50" fill="none" stroke="rgba(16,185,129,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" className="animate-flow-dash" strokeDasharray="4,6" />
     </>
   );
 
@@ -70,10 +65,10 @@ const WorkSection: React.FC = () => {
 
   const connections2 = (
     <>
-      <path className="animate-flow-dash" d="M10,50 L30,50" fill="none" stroke="rgba(59, 130, 246, 0.9)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
-      <path className="animate-flow-dash" d="M30,50 L50,50" fill="none" stroke="rgba(59, 130, 246, 0.9)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
-      <path className="animate-flow-dash" d="M50,50 L70,50" fill="none" stroke="rgba(16, 185, 129, 0.9)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
-      <path className="animate-flow-dash" d="M70,50 L90,50" fill="none" stroke="rgba(52, 211, 153, 0.9)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
+      <path d="M10,50 L30,50" fill="none" stroke="rgba(59,130,246,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" className="animate-flow-dash" strokeDasharray="4,6" />
+      <path d="M30,50 L50,50" fill="none" stroke="rgba(59,130,246,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" className="animate-flow-dash" strokeDasharray="4,6" />
+      <path d="M50,50 L70,50" fill="none" stroke="rgba(16,185,129,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" className="animate-flow-dash" strokeDasharray="4,6" />
+      <path d="M70,50 L90,50" fill="none" stroke="rgba(52,211,153,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" className="animate-flow-dash" strokeDasharray="4,6" />
     </>
   );
 
@@ -102,16 +97,11 @@ const WorkSection: React.FC = () => {
 
   const connections3 = (
     <>
-      {/* EC2 -> CW */}
-      <path className="animate-flow-dash" d="M15,50 L35,30" fill="none" stroke="rgba(239, 68, 68, 0.8)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
-      {/* CW -> Lambda */}
-      <path className="animate-flow-dash" d="M35,30 L55,50" fill="none" stroke="rgba(59, 130, 246, 0.9)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
-      {/* Lambda -> Gemini */}
-      <path className="animate-flow-dash" d="M55,50 L75,50" fill="none" stroke="rgba(168, 85, 247, 0.9)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
-      {/* Gemini -> SSM */}
-      <path className="animate-flow-dash" d="M75,50 Q65,60 55,70" fill="none" stroke="rgba(168, 85, 247, 0.9)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
-      {/* SSM -> EC2 */}
-      <path className="animate-flow-dash" d="M55,70 L15,50" fill="none" stroke="rgba(16, 185, 129, 0.8)" strokeDasharray="5,5" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
+      <path d="M15,50 L35,30" fill="none" stroke="rgba(239,68,68,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" className="animate-flow-dash" strokeDasharray="4,6" />
+      <path d="M35,30 L55,50" fill="none" stroke="rgba(59,130,246,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" className="animate-flow-dash" strokeDasharray="4,6" />
+      <path d="M55,50 L75,50" fill="none" stroke="rgba(168,85,247,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" className="animate-flow-dash" strokeDasharray="4,6" />
+      <path d="M75,50 Q65,60 55,70" fill="none" stroke="rgba(168,85,247,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" className="animate-flow-dash" strokeDasharray="4,6" />
+      <path d="M55,70 L15,50" fill="none" stroke="rgba(16,185,129,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" className="animate-flow-dash" strokeDasharray="4,6" />
     </>
   );
 
@@ -156,9 +146,9 @@ const WorkSection: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-        className="mb-24 relative z-10"
+        className="mb-12 md:mb-24 relative z-10"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-stretch">
           <div className="lg:col-span-7">
             <CodeXRay
               id="p1"
@@ -208,9 +198,9 @@ const WorkSection: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-        className="mb-16 relative z-10"
+        className="mb-12 md:mb-16 relative z-10"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-stretch">
           <div className="lg:col-span-5 space-y-6 lg:order-2">
             <div>
               <motion.span 
@@ -260,9 +250,9 @@ const WorkSection: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-        className="mb-24 relative z-10"
+        className="mb-12 md:mb-24 relative z-10"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-stretch">
           <div className="lg:col-span-7">
             <CodeXRay
               id="p3"

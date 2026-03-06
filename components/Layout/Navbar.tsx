@@ -1,7 +1,10 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { TubelightNavbar } from '../ui/TubelightNavbar';
 import { ThemeToggle } from '../ui/ThemeToggle';
 import { Briefcase, Zap, Layers, User, FileText, Share2, Linkedin, Github, Mail, Download } from 'lucide-react';
+
+const MotionDiv = motion.div as any;
 
 const Navbar: React.FC = () => {
   const navItems = [
@@ -29,20 +32,30 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      {/* Top Left: Brand Name — vertically centered with navbar */}
-      <div className="fixed top-6 left-6 z-[60] flex items-center transition-opacity duration-500">
+      {/* Top Left: Brand Name — slides in from left */}
+      <MotionDiv
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
+        className="fixed top-6 left-6 z-[60] flex items-center"
+      >
         <a href="#" className="font-display font-bold tracking-tight text-xl text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors cursor-interactive">
           Bhavesh<span className="text-primary">ops</span>
         </a>
-      </div>
+      </MotionDiv>
 
       {/* Top Center/Bottom Center: Tubelight Navigation */}
       <TubelightNavbar items={navItems} />
 
-      {/* Top Right: Theme Toggle */}
-      <div className="fixed top-6 right-16 md:right-20 z-[60]">
+      {/* Top Right: Theme Toggle — slides in from right */}
+      <MotionDiv
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
+        className="fixed top-6 right-16 md:right-20 z-[60]"
+      >
         <ThemeToggle />
-      </div>
+      </MotionDiv>
     </>
   );
 };

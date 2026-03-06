@@ -1,4 +1,4 @@
-import { useInView } from 'framer-motion';
+import { useInView, useReducedMotion } from 'framer-motion';
 import { useRef, useCallback } from 'react';
 
 export interface AnimationConfig {
@@ -80,3 +80,17 @@ export const springTransition = {
   stiffness: 300,
   damping: 30,
 };
+
+// Hook to check for reduced motion preference
+export function useAccessibleAnimation() {
+  const prefersReducedMotion = useReducedMotion();
+  return {
+    prefersReducedMotion,
+    getTransition: (transition: Record<string, any>) =>
+      prefersReducedMotion ? { duration: 0 } : transition,
+    getVariants: (variants: Record<string, any>) =>
+      prefersReducedMotion
+        ? { hidden: { opacity: 1 }, visible: { opacity: 1 } }
+        : variants,
+  };
+}
