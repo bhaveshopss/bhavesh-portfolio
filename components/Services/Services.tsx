@@ -92,7 +92,6 @@ const TiltCard: React.FC<{ children: React.ReactNode; className?: string; style?
       style={{
         ...style,
         transition: 'transform 0.2s ease-out',
-        transformStyle: 'preserve-3d' as const,
       }}
     >
       {/* Dynamic light reflection layer */}
@@ -162,7 +161,7 @@ const Services: React.FC = () => {
                   style={{ background: `radial-gradient(circle at 50% 0%, ${service.color}08, transparent 70%)` }}
                 />
 
-                <div className="relative z-10" style={{ transform: 'translateZ(20px)' }}>
+                <div className="relative z-10">
                   {/* Icon + Stat */}
                   <div className="flex items-start justify-between mb-4">
                     <div

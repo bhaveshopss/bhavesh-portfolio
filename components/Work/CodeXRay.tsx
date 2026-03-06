@@ -74,8 +74,6 @@ const CodeXRay: React.FC<CodeXRayProps> = ({ id, nodes, connections, title, vers
           100% { stroke-dashoffset: 0; }
         }
         @keyframes xr-ring { 0% { transform: scale(1); opacity: 0.5 } 100% { transform: scale(2.8); opacity: 0 } }
-        @keyframes xr-sweep { 0% { left: -10% } 100% { left: 110% } }
-        @keyframes xr-scan { 0% { transform: translateY(-100%) } 100% { transform: translateY(100%) } }
         @keyframes xr-orbit { 0% { transform: rotate(0deg) } 100% { transform: rotate(360deg) } }
         @keyframes xr-glow-pulse { 0%, 100% { opacity: 0.4 } 50% { opacity: 1 } }
         .xr-flow-line-${id} {
@@ -124,20 +122,14 @@ const CodeXRay: React.FC<CodeXRayProps> = ({ id, nodes, connections, title, vers
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.06)_0%,transparent_70%)]" />
         <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.3) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
-        {/* Hex grid overlay */}
-        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='52' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 15v22L30 52 0 37V15z' fill='none' stroke='%236366f1' stroke-width='0.5'/%3E%3C/svg%3E")`, backgroundSize: '60px 52px' }} />
-
-        {/* Radar sweep */}
-        <div className="absolute top-0 bottom-0 w-[200px] pointer-events-none z-30 opacity-20" style={{ background: 'linear-gradient(90deg, transparent, rgba(99,102,241,0.15), transparent)', animation: `xr-sweep 6s linear infinite` }} />
-
-        {/* Horizontal scan line */}
-        <div className="absolute left-0 right-0 h-[1px] pointer-events-none z-30 opacity-15" style={{ background: 'linear-gradient(90deg, transparent 5%, rgba(0,255,65,0.5) 50%, transparent 95%)', animation: 'xr-scan 8s linear infinite' }} />
+        {/* Subtle hex tint — static, no animation */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(99,102,241,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.08) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
         {/* ── 3D SCENE ── */}
         <motion.div className="absolute inset-0 w-full h-full" style={{ rotateX: springRotateX, rotateY: springRotateY, transformOrigin: 'center center', transformStyle: 'preserve-3d' as any }}>
 
           {/* Floor grid */}
-          <div className="absolute inset-[-60%] w-[220%] h-[220%] opacity-[0.12] pointer-events-none" style={{ background: 'linear-gradient(rgba(99,102,241,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.12) 1px, transparent 1px)', backgroundSize: '50px 50px', transform: 'translateZ(0)' }} />
+          <div className="absolute inset-0 opacity-[0.1] pointer-events-none" style={{ background: 'linear-gradient(rgba(99,102,241,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.1) 1px, transparent 1px)', backgroundSize: '50px 50px', transform: 'translateZ(0)' }} />
 
           {/* Central platform glow */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[50%] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)', transform: 'translateZ(1px)' }} />

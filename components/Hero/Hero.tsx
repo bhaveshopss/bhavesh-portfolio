@@ -75,7 +75,6 @@ const Hero: React.FC = () => {
                                 width: item.size * 2,
                                 height: item.size * 2,
                                 background: item.color,
-                                backdropFilter: 'blur(1px)',
                             }}
                         >
                             <span

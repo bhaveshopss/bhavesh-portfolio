@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import React, { useEffect, useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 const MotionDiv = motion.div as any;
 const MotionH2 = motion.h2 as any;
@@ -56,30 +56,9 @@ const CountUp: React.FC<{ target: number; suffix: string; prefix?: string; activ
   return <>{prefix}{display}{suffix}</>;
 };
 
-const SPRING = { stiffness: 120, damping: 25, mass: 0.5 };
-
 const MetricsDashboard: React.FC = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-
-  // 3D tilt for the whole metrics grid
-  const tiltRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), SPRING);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), SPRING);
-
-  const handleTiltMove = useCallback((e: React.MouseEvent) => {
-    if (!tiltRef.current) return;
-    const rect = tiltRef.current.getBoundingClientRect();
-    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
-    mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
-  }, [mouseX, mouseY]);
-
-  const handleTiltLeave = useCallback(() => {
-    mouseX.set(0);
-    mouseY.set(0);
-  }, [mouseX, mouseY]);
 
   return (
     <section className="relative z-10 py-16 md:py-24 bg-gray-50 dark:bg-[#050505] border-t border-gray-200 dark:border-white/5" id="ops" ref={ref}>
@@ -113,22 +92,15 @@ const MetricsDashboard: React.FC = () => {
           />
         </div>
 
-        <div
-          ref={tiltRef}
-          onMouseMove={handleTiltMove}
-          onMouseLeave={handleTiltLeave}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8"
-          style={{ perspective: 1200 }}
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
 
-          {/* Metrics Grid — 3D tilting */}
+          {/* Metrics Grid */}
           <MotionDiv
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
             transition={{ staggerChildren: 0.08, delayChildren: 0.2 }}
             className="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-4"
-            style={{ rotateX, rotateY, transformStyle: 'preserve-3d' as const }}
           >
             {metrics.map((metric) => (
               <MotionDiv
@@ -136,7 +108,6 @@ const MetricsDashboard: React.FC = () => {
                 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
                 className="group relative bg-white dark:bg-[#0a0a0a] border border-gray-200 dark:border-white/10 rounded-card-lg p-5 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-300 overflow-hidden hover:-translate-y-1"
-                style={{ transform: 'translateZ(30px)' }}
               >
                 {/* Subtle glow on hover */}
                 <div
