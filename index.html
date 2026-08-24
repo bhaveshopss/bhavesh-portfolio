@@ -18,10 +18,13 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://bhaveshops.in" />
+  <meta property="og:site_name" content="Bhaveshops" />
+  <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="Bhavesh Kumar Parmar - DevOps & AIOps Engineer" />
   <meta property="og:description"
     content="Engineering reliability for the AI era. Portfolio of Bhavesh Kumar Parmar showcasing CI/CD, Kubernetes, cloud infrastructure, and AI-driven operations." />
   <meta property="og:image" content="https://bhaveshops.in/bhavesh-profile-optimized.jpg" />
+  <meta property="og:image:alt" content="Bhavesh Kumar Parmar, DevOps & AIOps Engineer" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
@@ -33,20 +36,102 @@
 
   <link rel="icon" type="image/png" href="/logo.png" />
 
-  <!-- Structured Data (JSON-LD) -->
+  <!-- Structured Data (JSON-LD): Person + WebSite + FAQPage for SEO & AI Answer Engines -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Bhavesh Kumar Parmar",
-      "jobTitle": "DevOps & AIOps Engineer",
-      "url": "https://bhaveshops.in",
-      "sameAs": [
-        "https://linkedin.com/in/bhaveshops",
-        "https://github.com/bhaveshopss"
-      ],
-      "image": "https://bhaveshops.in/bhavesh-profile-optimized.jpg",
-      "description": "Senior DevOps & AIOps Engineer specializing in Kubernetes, AWS, and Cloud Infrastructure."
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://bhaveshops.in/#person",
+          "name": "Bhavesh Kumar Parmar",
+          "alternateName": "Bhaveshops",
+          "jobTitle": "DevOps & AIOps Engineer",
+          "description": "Senior DevOps & AIOps Engineer specializing in Kubernetes, AWS, Cloud Infrastructure, and AI-driven operations. Expert in CI/CD, Terraform, and Distributed Systems.",
+          "url": "https://bhaveshops.in",
+          "email": "mailto:workwithbhavesh@gmail.com",
+          "image": "https://bhaveshops.in/bhavesh-profile-optimized.jpg",
+          "sameAs": [
+            "https://www.linkedin.com/in/bhaveshops/",
+            "https://github.com/bhaveshopss"
+          ],
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Shellkode"
+          },
+          "alumniOf": {
+            "@type": "EducationalOrganization",
+            "name": "JIET Jodhpur"
+          },
+          "knowsAbout": [
+            "Kubernetes", "AWS", "Cloud Architecture", "Terraform", "Infrastructure as Code",
+            "CI/CD", "ArgoCD", "GitOps", "Docker", "AIOps", "Site Reliability Engineering",
+            "Observability", "Prometheus", "Grafana", "Python", "Go", "TypeScript",
+            "Distributed Systems", "AI-driven Operations", "DevSecOps"
+          ],
+          "hasCredential": [
+            { "@type": "Certification", "name": "AWS Certified Cloud Practitioner", "dateIssued": "2025-05" },
+            { "@type": "Certification", "name": "Oracle AI Vector Search Certified Professional", "dateIssued": "2025-04" },
+            { "@type": "Certification", "name": "Ubuntu Linux Professional", "dateIssued": "2025-03" },
+            { "@type": "Certification", "name": "OCI Foundations Associate", "dateIssued": "2025-02" }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://bhaveshops.in/#website",
+          "url": "https://bhaveshops.in",
+          "name": "Bhaveshops — Bhavesh Kumar Parmar, DevOps & AIOps Engineer",
+          "description": "Engineering reliability for the AI era: CI/CD, Kubernetes, cloud infrastructure, and AI-driven operations.",
+          "publisher": { "@id": "https://bhaveshops.in/#person" },
+          "inLanguage": "en"
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://bhaveshops.in/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What does Bhavesh Kumar Parmar specialize in?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "DevOps and AIOps engineering — CI/CD automation, Infrastructure as Code with Terraform, Kubernetes operations, AWS cloud architecture, observability, and AI-driven incident response."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is Bhavesh available for new roles or freelance work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. He is open to full-time DevOps, AIOps, and SRE roles as well as selective freelance cloud engagements. Reach him at workwithbhavesh@gmail.com or on LinkedIn."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where does Bhavesh work currently?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "He is a Cloud Engineer at Shellkode (since February 2025), where he has achieved 99.9% uptime for critical production workloads and cut AWS costs by 20% through automated scaling."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Which certifications does Bhavesh hold?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AWS Certified Cloud Practitioner (May 2025), Oracle AI Vector Search Certified Professional (Apr 2025), Ubuntu Linux Professional (Mar 2025), and OCI Foundations Associate (Feb 2025)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is Bhavesh's educational background?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "B.Tech in Computer Science from JIET Jodhpur (2021–2025), GPA 8.8/10, with a specialization in Cloud Computing & Distributed Systems."
+              }
+            }
+          ]
+        }
+      ]
     }
   </script>
 

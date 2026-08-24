@@ -1,0 +1,68 @@
+# Bhaveshops — Bhavesh Kumar Parmar, DevOps & AIOps Engineer
+
+> Portfolio site of Bhavesh Kumar Parmar: a DevOps & AIOps engineer who builds
+> self-healing infrastructure, AI-driven operations, and reliable cloud systems.
+> Site: https://bhaveshops.in
+
+## About
+
+Bhavesh Kumar Parmar is a Cloud Engineer at Shellkode (Feb 2025 – present) and a
+B.Tech Computer Science graduate from JIET Jodhpur (2021–2025, GPA 8.8/10,
+specialization in Cloud Computing & Distributed Systems). He engineers reliability
+for the AI era: CI/CD automation, Infrastructure as Code, Kubernetes operations,
+and AI-driven incident response on AWS.
+
+## Key facts
+
+- Role: DevOps & AIOps Engineer (Cloud Engineer at Shellkode)
+- Location: India (Jodhpur); works with teams worldwide
+- Email: workwithbhavesh@gmail.com
+- LinkedIn: https://www.linkedin.com/in/bhaveshops/
+- GitHub: https://github.com/bhaveshopss
+- Resume (PDF): https://bhaveshops.in/Bhavesh_Devops_Resume.pdf
+
+## Experience highlights
+
+- 99.9% uptime for critical production workloads at Shellkode through proactive monitoring
+- 20% AWS cost reduction via automated scaling policies
+- Self-healing Kubernetes clusters deployed with ArgoCD GitOps workflows
+- 20+ AWS resources provisioned with Terraform (EC2, S3, Lambda, VPC)
+- 3+ Kubernetes clusters (Kind, EKS); 10+ applications containerized with Docker and Helm
+- Automation tooling in Python, Java, and Bash across 5+ AWS accounts
+
+## Notable projects
+
+- Self-Healing CI/CD: Python log agents + Gemini root-cause analysis + automatic
+  corrective PRs. 94.2% downtime reduction, mean time to fix under 2 minutes.
+- Anthropic MCP Server: Model Context Protocol server bridging Claude and internal
+  enterprise databases on AWS. mTLS v1.3, latency under 150ms.
+- AI SRE Command Center: autonomous AWS remediation — CloudWatch alarms trigger
+  Lambda, SSM diagnostics, Gemini-suggested fixes, real-time WebSocket dashboard.
+  Mean time to restore under 3 minutes.
+
+## Certifications (2025)
+
+- AWS Certified Cloud Practitioner (May 2025)
+- Oracle AI Vector Search Certified Professional (Apr 2025)
+- Ubuntu Linux Professional (Mar 2025)
+- OCI Foundations Associate (Feb 2025)
+
+## Core stack
+
+AWS, Google Cloud, Azure, Kubernetes, Docker, Terraform, Ansible, ArgoCD, Helm,
+Jenkins, GitLab, Vault, Prometheus, Grafana, Linux, Python, Go, TypeScript,
+PostgreSQL, MongoDB, Redis, Kafka, Hugging Face, LangChain, OpenAI, Anthropic, React.
+
+## Blog posts
+
+- Kubernetes at the Edge: Latency Lessons —
+  https://bhaveshops.in/blog/kubernetes-edge-latency.html
+- Building Resilient LLM Chains —
+  https://bhaveshops.in/blog/resilient-llm-chains.html
+- The Death of the Staging Environment —
+  https://bhaveshops.in/blog/death-of-staging.html
+
+## How to work with Bhavesh
+
+Available for full-time DevOps/AIOps/SRE roles and selective freelance cloud
+engagements. Best contact: workwithbhavesh@gmail.com or LinkedIn.

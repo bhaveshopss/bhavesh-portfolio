@@ -170,6 +170,54 @@ const Contact: React.FC = () => {
               GITHUB_REPO
             </MotionA>
           </MotionDiv>
+          {/* FAQ — visible content matching FAQPage structured data (AEO) */}
+          <MotionDiv
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
+            className="max-w-3xl mx-auto mt-20 text-left"
+          >
+            <p className="font-mono text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-widest font-bold mb-6 text-center">
+              // FAQ.FREQUENTLY_ASKED
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[
+                {
+                  q: 'What does Bhavesh specialize in?',
+                  a: 'DevOps and AIOps engineering — CI/CD automation, Infrastructure as Code with Terraform, Kubernetes operations, AWS cloud architecture, observability, and AI-driven incident response.',
+                },
+                {
+                  q: 'Is Bhavesh available for new roles or freelance work?',
+                  a: 'Yes. He is open to full-time DevOps, AIOps, and SRE roles as well as selective freelance cloud engagements. Reach him at workwithbhavesh@gmail.com or on LinkedIn.',
+                },
+                {
+                  q: 'Where does Bhavesh work currently?',
+                  a: 'He is a Cloud Engineer at Shellkode (since February 2025), where he has achieved 99.9% uptime for critical production workloads and cut AWS costs by 20% through automated scaling.',
+                },
+                {
+                  q: 'Which certifications does Bhavesh hold?',
+                  a: 'AWS Certified Cloud Practitioner (May 2025), Oracle AI Vector Search Certified Professional (Apr 2025), Ubuntu Linux Professional (Mar 2025), and OCI Foundations Associate (Feb 2025).',
+                },
+                {
+                  q: "What is Bhavesh's educational background?",
+                  a: 'B.Tech in Computer Science from JIET Jodhpur (2021–2025), GPA 8.8/10, with a specialization in Cloud Computing & Distributed Systems.',
+                },
+              ].map((faq) => (
+                <div
+                  key={faq.q}
+                  className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-card p-5"
+                >
+                  <h3 className="font-display text-sm font-bold text-gray-900 dark:text-white mb-2">
+                    {faq.q}
+                  </h3>
+                  <p className="font-mono text-xs leading-relaxed text-gray-500 dark:text-gray-400">
+                    {faq.a}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </MotionDiv>
         </div>
       </section>
 

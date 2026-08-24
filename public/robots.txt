@@ -1,3 +1,59 @@
+# robots.txt — https://bhaveshops.in
+
 User-agent: *
 Allow: /
+
+# ---- Explicitly welcome AI answer engines (AEO) ----
+
+# OpenAI / ChatGPT
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic / Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Google AI (AI Overviews / Gemini)
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Common Crawl (used by many AI training sets)
+User-agent: CCBot
+Allow: /
+
+# Amazon (Alexa / Bedrock)
+User-agent: Amazonbot
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+# Sitemap
 Sitemap: https://bhaveshops.in/sitemap.xml
