@@ -171,3 +171,8 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+.blush-texture {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.22) 1px, transparent 1px);
+  background-size: 6px 6px;
+}

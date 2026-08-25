@@ -40,6 +40,7 @@ test.describe('portfolio core', () => {
     for (const width of [1440, 1024, 768, 375, 320]) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto(BASE);
+      await page.evaluate(() => document.fonts.ready);
       await page.waitForTimeout(600);
       const overflow = await page.evaluate(
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth

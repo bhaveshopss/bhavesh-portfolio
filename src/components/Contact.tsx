@@ -1,11 +1,12 @@
-import { Mail, Phone, Linkedin, Github, ArrowRight, ArrowUpRight } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { Mail, Phone, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { identity, navLinks, posts } from '../data/content';
 import { Reveal, Section, SectionLabel } from './Reveal';
 
 export function Contact() {
   return (
-    <Section id="contact" className="pb-8 pt-16 sm:pt-20">
-      <SectionLabel index="03" title="Contact" />
+    <Section id="contact" className="pb-8 pt-16 sm:pt-24">
+      <SectionLabel index="05" title="Contact" />
       <Reveal delay={1}>
         <h2 className="mt-10 max-w-3xl font-display text-5xl font-semibold leading-[1.0] tracking-tight text-ink sm:text-6xl md:text-7xl">
           Let's build what's next.
@@ -42,7 +43,7 @@ export function Contact() {
 
 export function Blog() {
   return (
-    <Section id="blog" className="pb-8 pt-14">
+    <Section id="blog" className="pb-8 pt-16">
       <SectionLabel index="04" title="Writing" />
       <div className="mt-8">
         {posts.map((post, i) => (
@@ -74,14 +75,80 @@ export function Blog() {
   );
 }
 
+const GLYPHS: Record<string, string[]> = {
+  b: ['10000', '10000', '11110', '10001', '10001', '10001', '11110'],
+  h: ['10001', '10001', '11110', '10001', '10001', '10001', '10001'],
+  a: ['01110', '00001', '01111', '10001', '10001', '10011', '01101'],
+  v: ['10001', '10001', '10001', '10001', '10001', '01010', '00100'],
+  e: ['01110', '10001', '11111', '10000', '01110', '00001', '01110'],
+  s: ['01111', '10000', '10000', '01110', '00001', '00001', '11110'],
+  '.': ['00000', '00000', '00000', '00000', '00000', '00100', '00100'],
+};
+
+const DOT_COLORS = ['#EFEFEA', '#9DB8FA', '#E8C46A', '#E879B9', '#7EE0D2'];
+
+function DottedWordmark() {
+  const ref = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = ref.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const word = 'bhavesh.';
+    const dot = 5;
+    const gap = 2;
+    const glyphW = 5;
+    const letterGap = 2;
+    const totalUnits = word.length * (glyphW + letterGap);
+    const width = totalUnits * (dot + gap);
+    const height = 7 * (dot + gap);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, width, height);
+
+    let unit = 0;
+    let dotIndex = 0;
+    for (const ch of word) {
+      const glyph = GLYPHS[ch];
+      if (!glyph) {
+        unit += glyphW + letterGap;
+        continue;
+      }
+      for (let y = 0; y < 7; y++) {
+        for (let x = 0; x < glyphW; x++) {
+          if (glyph[y][x] !== '1') continue;
+          ctx.fillStyle = DOT_COLORS[dotIndex % DOT_COLORS.length];
+          dotIndex++;
+          ctx.beginPath();
+          ctx.arc(
+            unit * (dot + gap) + x * (dot + gap) + dot / 2,
+            y * (dot + gap) + dot / 2,
+            dot / 2,
+            0,
+            Math.PI * 2
+          );
+          ctx.fill();
+        }
+      }
+      unit += glyphW + letterGap;
+    }
+  }, []);
+
+  return <canvas ref={ref} aria-hidden className="w-full max-w-2xl" style={{ height: 'auto', imageRendering: 'auto' }} />;
+}
+
 export function Footer({ onContactClick }: { onContactClick: () => void }) {
   return (
-    <footer className="px-4 pb-6 pt-10 sm:px-6 lg:px-8">
+    <footer className="px-4 pb-6 pt-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl rounded-[1.75rem] bg-signal p-8 text-cream sm:p-12">
         <div className="grid gap-10 md:grid-cols-2">
           <div>
             <p className="font-mono text-[13px] uppercase tracking-[0.18em]">
-              · Reliability is leverage
+              • Reliability is leverage
             </p>
             <p className="mt-4 max-w-xs text-[14px] leading-relaxed opacity-90">
               Hand the systems work to someone who treats uptime, AI operations, and product
@@ -92,13 +159,13 @@ export function Footer({ onContactClick }: { onContactClick: () => void }) {
               className="group mt-6 inline-flex items-center gap-2 border-b border-cream/60 pb-1 font-mono text-[13px] uppercase tracking-[0.14em] transition-colors hover:border-cream"
             >
               Start a conversation
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight className="h-4 w-4" />
             </button>
           </div>
 
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
             <div>
-              <p className="font-mono text-[12px] uppercase tracking-[0.16em] opacity-80">· Site</p>
+              <p className="font-mono text-[12px] uppercase tracking-[0.16em] opacity-80">• Site</p>
               <ul className="mt-4 space-y-2.5">
                 {navLinks.slice(0, 4).map((link) => (
                   <li key={link.id}>
@@ -107,14 +174,14 @@ export function Footer({ onContactClick }: { onContactClick: () => void }) {
                       className="group flex items-center gap-2 text-[13.5px] opacity-90 transition-opacity hover:opacity-100"
                     >
                       {link.label}
-                      <ArrowRight className="h-3 w-3 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100" />
+                      <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
                     </a>
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <p className="font-mono text-[12px] uppercase tracking-[0.16em] opacity-80">· Elsewhere</p>
+              <p className="font-mono text-[12px] uppercase tracking-[0.16em] opacity-80">• Elsewhere</p>
               <ul className="mt-4 space-y-2.5">
                 {[
                   { label: 'LinkedIn', href: identity.linkedin },
@@ -129,14 +196,14 @@ export function Footer({ onContactClick }: { onContactClick: () => void }) {
                       className="group flex items-center gap-2 text-[13.5px] opacity-90 transition-opacity hover:opacity-100"
                     >
                       {link.label}
-                      <ArrowUpRight className="h-3 w-3 opacity-0 transition-all duration-300 group-hover:opacity-100" />
+                      <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </a>
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <p className="font-mono text-[12px] uppercase tracking-[0.16em] opacity-80">· Direct</p>
+              <p className="font-mono text-[12px] uppercase tracking-[0.16em] opacity-80">• Direct</p>
               <ul className="mt-4 space-y-2.5 text-[13.5px] opacity-90">
                 <li className="flex items-start gap-2">
                   <Mail className="mt-0.5 h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
@@ -153,12 +220,16 @@ export function Footer({ onContactClick }: { onContactClick: () => void }) {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-cream/25 pt-6 sm:flex-row sm:items-center">
-          <p className="font-display text-[15px] font-bold tracking-tight">
-            bhavesh<span className="opacity-60">.</span>
-          </p>
+        <div className="mt-12">
+          <DottedWordmark />
+        </div>
+
+        <div className="mt-8 flex flex-col items-start justify-between gap-3 border-t border-cream/25 pt-6 sm:flex-row sm:items-center">
           <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] opacity-70">
             © {new Date().getFullYear()} {identity.name} — {identity.location}
+          </p>
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] opacity-70">
+            DevOps → AIOps → Founder's Office
           </p>
         </div>
       </div>

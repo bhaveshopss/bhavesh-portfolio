@@ -26,7 +26,7 @@ export default function App() {
       <main>
         <Hero onContactClick={openContact} />
         <StackStrip />
-        <AboutMe />
+        <AboutMe onHireClick={openContact} />
         <Work />
         <Credentials />
         <BigStatement onContactClick={openContact} />
@@ -42,7 +42,7 @@ export default function App() {
         transition={{ duration: 0.7, delay: 1.2, ease: EASE }}
         onClick={() => setAgentOpen(true)}
         aria-label="Open Bhavesh's AI concierge"
-        className="group fixed bottom-5 right-5 z-40 flex items-center gap-2.5 rounded-full border border-ink/15 bg-white/90 py-2.5 pl-4 pr-5 shadow-[0_8px_32px_rgba(19,19,17,0.14)] backdrop-blur-xl transition-all duration-300 hover:border-signal/50 md:bottom-6 md:right-6"
+        className="group fixed bottom-20 right-5 z-40 flex items-center gap-2.5 rounded-full border border-ink/15 bg-white/90 py-2.5 pl-4 pr-5 shadow-[0_8px_32px_rgba(19,19,17,0.14)] backdrop-blur-xl transition-all duration-300 hover:border-signal/50 md:bottom-6 md:right-6"
       >
         <span className="relative flex h-5 w-5 items-center justify-center">
           <span

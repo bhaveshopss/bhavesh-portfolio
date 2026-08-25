@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { identity } from '../data/content';
-import { PixelScene } from './PixelArt';
+import { PixelFigure } from './PixelArt';
 import { EASE } from './Reveal';
 
 const INTRO_LINES = [
   `Hi, I'm ${identity.shortName.split(' ')[0]} — a human, not an AI employee.`,
-  "I build infrastructure that heals itself and the AI that runs it.",
+  'I build infrastructure that heals itself and the AI that runs it.',
   'Three years, three roles, one direction: more leverage per decision.',
 ];
 
@@ -40,7 +40,7 @@ function TypewriterCard() {
       initial={{ opacity: 0, y: -12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
-      className="w-[300px] rounded-xl border border-ink/10 bg-paper p-5 font-mono text-[12.5px] leading-relaxed text-ink-soft shadow-[0_2px_20px_rgba(19,19,17,0.06)] sm:w-[340px]"
+      className="w-[290px] rounded-xl border border-ink/10 bg-[#E4E4DE] p-5 font-mono text-[12.5px] leading-relaxed text-ink shadow-[0_2px_20px_rgba(19,19,17,0.08)] sm:w-[335px]"
     >
       {INTRO_LINES.slice(0, lineIndex).map((line, i) => (
         <p key={i} className="mb-2.5 last:mb-0">
@@ -68,10 +68,6 @@ export function Hero({ onContactClick }: { onContactClick: () => void }) {
 
   return (
     <section id="top" ref={ref} className="relative flex min-h-svh flex-col overflow-hidden">
-      <div className="pointer-events-none absolute inset-x-0 top-24 mx-auto h-[46vh] max-w-4xl opacity-90" aria-hidden>
-        <PixelScene seed={13} layers={['#D8E2FC', '#B4C6F8', '#8FA8F0']} accent="#E879B9" density={0.32} />
-      </div>
-
       <div className="relative mx-auto flex w-full max-w-6xl flex-1 flex-col px-5 pt-28 sm:px-8 lg:px-10">
         <div className="flex justify-end">
           <TypewriterCard />
@@ -81,34 +77,45 @@ export function Hero({ onContactClick }: { onContactClick: () => void }) {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5, ease: EASE }}
-          className="mt-auto pb-6 pt-16 font-display text-[15px] font-medium text-ink-soft sm:text-base"
+          className="mb-auto mt-10 w-fit rounded-full border border-ink/10 bg-paper px-4 py-2 font-mono text-[11.5px] tracking-wide text-ink-soft"
         >
-          {identity.role} · {identity.company} — {identity.location}
+          {identity.role} · {identity.company} · {identity.location}
         </motion.p>
       </div>
 
       <motion.div style={{ y: contentY, opacity: contentOpacity }} className="relative">
-        <h1
-          className="select-none px-5 font-display text-[clamp(5rem,21.5vw,19rem)] font-black leading-[0.78] tracking-[-0.05em] text-ink sm:px-8 lg:px-10"
-          aria-label="bhavesh"
-        >
-          <span aria-hidden className="flex justify-between">
-            {'bhavesh'.split('').map((letter, i) => (
-              <span key={i} className="inline-block overflow-hidden pb-[0.06em] -mb-[0.06em]">
-                <motion.span
-                  className="inline-block will-change-transform"
-                  initial={{ y: '108%' }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 0.9, delay: 0.35 + i * 0.05, ease: EASE }}
-                >
-                  {letter}
-                </motion.span>
-              </span>
-            ))}
-          </span>
-        </h1>
+        <div className="relative">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="pointer-events-none absolute bottom-[52%] right-[3%] z-0 w-[34%] max-w-[520px] sm:right-[6%]"
+            aria-hidden
+          >
+            <PixelFigure cell={6} />
+          </motion.div>
+          <h1
+            className="relative z-10 select-none whitespace-nowrap text-center font-display text-[24.5vw] font-black leading-[0.78] tracking-[-0.055em] text-ink"
+            aria-label="bhavesh"
+          >
+            <span aria-hidden className="inline-flex">
+              {'bhavesh'.split('').map((letter, i) => (
+                <span key={i} className="inline-block overflow-hidden pb-[0.06em] -mb-[0.06em]">
+                  <motion.span
+                    className="inline-block will-change-transform"
+                    initial={{ y: '108%' }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 0.9, delay: 0.35 + i * 0.05, ease: EASE }}
+                  >
+                    {letter}
+                  </motion.span>
+                </span>
+              ))}
+            </span>
+          </h1>
+        </div>
 
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-5 pb-12 pt-8 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:px-10">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-5 pb-12 pt-10 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:px-10">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -126,26 +133,10 @@ export function Hero({ onContactClick }: { onContactClick: () => void }) {
           >
             <button
               onClick={onContactClick}
-              className="rounded-full bg-ink px-6 py-3 font-mono text-[13.5px] text-cream transition-all duration-200 hover:scale-[1.03] hover:bg-signal active:scale-[0.98]"
+              className="rounded-full bg-ink px-7 py-3 font-mono text-[13.5px] text-cream transition-all duration-200 hover:scale-[1.03] hover:bg-signal active:scale-[0.98]"
             >
               Hire Me
             </button>
-            <a
-              href={identity.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full border border-ink/15 bg-white/60 px-6 py-3 font-mono text-[13.5px] text-ink backdrop-blur-sm transition-all duration-200 hover:scale-[1.03] hover:border-ink/30 hover:bg-white"
-            >
-              GitHub
-            </a>
-            <a
-              href={identity.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full border border-ink/15 bg-white/60 px-6 py-3 font-mono text-[13.5px] text-ink backdrop-blur-sm transition-all duration-200 hover:scale-[1.03] hover:border-ink/30 hover:bg-white"
-            >
-              LinkedIn
-            </a>
           </motion.div>
         </div>
       </motion.div>

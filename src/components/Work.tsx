@@ -4,14 +4,13 @@ import { Reveal, SectionLabel } from './Reveal';
 
 export function Work() {
   return (
-    <section id="work" className="scroll-mt-20 px-4 py-10 sm:px-6 lg:px-8">
+    <section id="work" className="scroll-mt-20 px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <SectionLabel index="01" title="Selected work" />
 
         <Reveal delay={1}>
           <h2 className="mt-8 max-w-2xl font-display text-4xl font-semibold leading-[1.02] tracking-tight text-ink sm:text-5xl">
-            Systems that operate
-            <span className="text-ink-low"> themselves.</span>
+            Systems that operate themselves.
           </h2>
         </Reveal>
 
@@ -23,7 +22,7 @@ export function Work() {
                   i === 1
                     ? 'bg-signal text-cream'
                     : i === 2
-                      ? 'bg-ink text-cream'
+                      ? 'bg-blush text-ink blush-texture'
                       : 'border border-ink/10 bg-paper text-ink'
                 }`}
               >

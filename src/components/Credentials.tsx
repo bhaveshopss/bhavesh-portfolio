@@ -7,7 +7,7 @@ export function Credentials() {
   const rest = credentials.filter((c) => !featured.includes(c));
 
   return (
-    <Section id="credentials" className="py-14 sm:py-20">
+    <Section id="credentials" className="py-16 sm:py-24">
       <SectionLabel index="02" title="Credentials & recognition" />
 
       <div className="mt-10 grid gap-4 md:grid-cols-2">

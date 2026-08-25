@@ -12,13 +12,13 @@ const TABS: { id: Tab; label: string; dot: string }[] = [
   { id: 'faq', label: 'FAQs', dot: '#E879B9' },
 ];
 
-function RolesGrid() {
+function RolesGrid({ onHireClick }: { onHireClick: () => void }) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const active = roleCards.find((r) => r.id === activeId);
 
   return (
     <div className="relative">
-      <div className="grid grid-cols-2 gap-x-2 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
+      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-ink/10 sm:grid-cols-3 lg:grid-cols-6">
         {roleCards.map((role) => (
           <button
             key={role.id}
@@ -26,13 +26,11 @@ function RolesGrid() {
             onMouseEnter={() => setActiveId(role.id)}
             onFocus={() => setActiveId(role.id)}
             aria-expanded={activeId === role.id}
-            className="group flex cursor-pointer flex-col items-center gap-3 rounded-xl p-2 transition-colors duration-300 hover:bg-ink/[0.03]"
+            className={`flex min-h-[150px] cursor-pointer flex-col items-center justify-center gap-3 p-4 transition-colors duration-300 ${
+              activeId === role.id ? 'bg-white' : 'bg-cream hover:bg-paper'
+            }`}
           >
-            <div
-              className={`rounded-lg p-1 transition-transform duration-300 group-hover:scale-110 ${
-                activeId === role.id ? 'scale-110' : ''
-              }`}
-            >
+            <div className={`transition-transform duration-300 ${activeId === role.id ? 'scale-110' : ''}`}>
               <PixelSprite seed={role.seed} palette={role.palette} size={64} />
             </div>
             <span className="text-center font-mono text-[11px] leading-tight text-ink-soft">
@@ -46,16 +44,16 @@ function RolesGrid() {
         {active && (
           <motion.div
             key={active.id}
-            initial={window.matchMedia('(prefers-reduced-motion: reduce)').matches ? { opacity: 0 } : { opacity: 0, y: 14, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.99 }}
+            initial={window.matchMedia('(prefers-reduced-motion: reduce)').matches ? { opacity: 0 } : { opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.35, ease: EASE }}
-            className="mt-8 rounded-2xl border border-ink/10 bg-paper p-6 shadow-[0_4px_30px_rgba(19,19,17,0.07)] sm:p-8"
+            className="mt-6 rounded-2xl border border-ink/10 bg-paper/90 p-6 shadow-[0_4px_30px_rgba(19,19,17,0.08)] backdrop-blur-md sm:p-8"
           >
-            <h3 className="font-display text-xl font-semibold tracking-tight text-ink">
+            <h3 className="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl lg:text-5xl">
               {active.title}
             </h3>
-            <div className="mt-5 grid gap-6 md:grid-cols-3">
+            <div className="mt-6 grid gap-6 md:grid-cols-3">
               {[
                 { label: 'Strengths', body: active.strengths },
                 { label: 'Best used', body: active.bestUsed },
@@ -72,13 +70,22 @@ function RolesGrid() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <div className="mt-10 flex justify-center">
+        <button
+          onClick={onHireClick}
+          className="rounded-full bg-ink px-7 py-3 font-mono text-[13.5px] text-cream transition-all duration-200 hover:scale-[1.03] hover:bg-signal active:scale-[0.98]"
+        >
+          Hire Me
+        </button>
+      </div>
     </div>
   );
 }
 
 function JourneyColumns() {
   return (
-    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+    <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
       {timeline.map((stage, i) => (
         <Reveal key={stage.id} delay={i}>
           <div className="relative border-l-2 border-ink/15 pl-6">
@@ -138,7 +145,7 @@ function FaqList() {
   );
 }
 
-export function AboutMe() {
+export function AboutMe({ onHireClick }: { onHireClick: () => void }) {
   const [tab, setTab] = useState<Tab>('roles');
 
   useEffect(() => {
@@ -151,9 +158,9 @@ export function AboutMe() {
   }, []);
 
   return (
-    <section id="about" className="scroll-mt-20 px-4 py-10 sm:px-6 lg:px-8">
+    <section id="about" className="scroll-mt-20 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
       <Reveal>
-        <div className="mx-auto max-w-6xl rounded-[1.75rem] border border-ink/10 bg-cream shadow-[0_2px_40px_rgba(19,19,17,0.04)]">
+        <div className="mx-auto max-w-6xl rounded-[1.75rem] border border-ink/10 bg-paper shadow-[0_2px_40px_rgba(19,19,17,0.05)]">
           <div className="grid lg:grid-cols-[220px_1fr]">
             <div className="border-b border-ink/10 p-7 sm:p-9 lg:border-b-0 lg:border-r">
               <p className="font-display text-xl font-semibold tracking-tight text-ink">About me</p>
@@ -190,7 +197,7 @@ export function AboutMe() {
                       I play different roles across everything I build
                     </h2>
                   </div>
-                  <RolesGrid />
+                  <RolesGrid onHireClick={onHireClick} />
                 </>
               )}
               {tab === 'journey' && (
@@ -202,6 +209,14 @@ export function AboutMe() {
                     </h2>
                   </div>
                   <JourneyColumns />
+                  <div className="mt-10 flex justify-center">
+                    <button
+                      onClick={onHireClick}
+                      className="rounded-full bg-ink px-7 py-3 font-mono text-[13.5px] text-cream transition-all duration-200 hover:scale-[1.03] hover:bg-signal active:scale-[0.98]"
+                    >
+                      Hire Me
+                    </button>
+                  </div>
                 </>
               )}
               {tab === 'faq' && (
@@ -213,6 +228,14 @@ export function AboutMe() {
                     </h2>
                   </div>
                   <FaqList />
+                  <div className="mt-10 flex justify-center">
+                    <button
+                      onClick={onHireClick}
+                      className="rounded-full bg-ink px-7 py-3 font-mono text-[13.5px] text-cream transition-all duration-200 hover:scale-[1.03] hover:bg-signal active:scale-[0.98]"
+                    >
+                      Hire Me
+                    </button>
+                  </div>
                 </>
               )}
             </div>
