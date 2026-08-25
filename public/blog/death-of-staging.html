@@ -1,81 +1,78 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Death of the Staging Environment | Bhaveshops</title>
   <meta name="description" content="Why we moved to ephemeral preview environments for every PR and how it accelerated our deployment velocity by 40%." />
+  <meta name="author" content="Bhavesh Kumar Parmar" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#060605" />
+  <link rel="canonical" href="https://bhaveshops.in/blog/death-of-staging.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="The Death of the Staging Environment | Bhaveshops" />
+  <meta property="og:description" content="Why we moved to ephemeral preview environments for every PR and how it accelerated our deployment velocity by 40%." />
+  <meta property="og:url" content="https://bhaveshops.in/blog/death-of-staging.html" />
   <link rel="icon" type="image/png" href="/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: "class",
-      theme: { extend: {
-        colors: { primary: "#6366f1", "terminal-green": "#00ff41" },
-        fontFamily: { display: ["Space Grotesk","sans-serif"], mono: ["JetBrains Mono","monospace"] },
-      }}
-    };
-  </script>
-  <style>
-    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-    pre { overflow-x: auto; }
-    code:not(pre code) { background: rgba(99,102,241,0.1); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;900&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/blog/blog.css" />
 </head>
-<body class="bg-[#050505] text-gray-300 font-[Space_Grotesk]">
-
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-white/5">
-    <div class="max-w-3xl mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="/" class="font-bold text-white text-lg tracking-tight">Bhavesh<span class="text-primary">ops</span></a>
-      <a href="/#blog" class="font-mono text-xs text-gray-400 hover:text-primary transition-colors uppercase tracking-widest">&larr; Back to Blog</a>
-    </div>
+<body>
+  <nav class="site-nav">
+    <a class="brand" href="/">bhavesh<em>.</em></a>
+    <a class="back-link" href="/#blog">&larr; Back to blog</a>
   </nav>
 
-  <article class="max-w-3xl mx-auto px-6 pt-28 pb-20">
-    <div class="mb-12">
-      <div class="flex flex-wrap gap-2 mb-4">
-        <span class="font-mono text-[10px] font-bold text-primary uppercase tracking-wider border border-primary/20 bg-primary/5 px-2 py-0.5 rounded">CI/CD</span>
-        <span class="font-mono text-[10px] font-bold text-primary uppercase tracking-wider border border-primary/20 bg-primary/5 px-2 py-0.5 rounded">CULTURE</span>
+  <main class="post">
+      <div class="post-meta">
+        <span>2024.01.10</span><span class="sep">/</span><span>6 min read</span><span class="sep">/</span><span>Bhavesh Kumar Parmar</span><span class="sep">/</span><span>CI/CD CULTURE</span>
       </div>
-      <h1 class="font-display text-3xl md:text-5xl font-bold text-white uppercase tracking-tight leading-tight mb-4">The Death of the Staging Environment</h1>
-      <div class="flex items-center gap-4 font-mono text-xs text-gray-500">
+
+    <h1>The Death of the Staging Environment</h1>
+
+    <div>
+      <div>
+        <span>CI/CD</span>
+        <span>CULTURE</span>
+      </div>
+      
+      <div>
         <span>2024.01.10</span>
-        <span class="text-gray-700">|</span>
+        <span>|</span>
         <span>6 min read</span>
-        <span class="text-gray-700">|</span>
+        <span>|</span>
         <span>Bhavesh Kumar Parmar</span>
       </div>
     </div>
 
-    <div class="rounded-xl overflow-hidden border border-white/10 mb-12">
-      <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2071&auto=format&fit=crop" alt="CI/CD Pipeline" class="w-full h-64 md:h-80 object-cover" loading="lazy" />
+    <div>
+      <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2071&auto=format&fit=crop" alt="CI/CD Pipeline" loading="lazy" />
     </div>
 
-    <div class="prose prose-invert max-w-none space-y-6 text-gray-300 leading-relaxed">
+    <div>
 
-      <p class="text-lg text-gray-200 font-medium">
+      <p>
         Our staging environment was a graveyard. It was always broken, never matched production, and every team was fighting over it. So we killed it. Here's what we built instead — and why deployment velocity jumped 40% in two months.
       </p>
 
-      <h2 class="text-2xl font-display font-bold text-white uppercase tracking-tight mt-12 mb-4">The Problem with Shared Staging</h2>
+      <h2>The Problem with Shared Staging</h2>
 
       <p>If you've worked on a team with more than 5 developers, you know the pain. The shared staging environment becomes a bottleneck:</p>
 
-      <ul class="space-y-2 ml-4">
-        <li class="flex items-start gap-2"><span class="text-red-400 mt-1.5 text-sm">&#10007;</span><span><strong class="text-white">Contention</strong>: Team A deploys their branch, breaks Team B's tests. Everyone waits.</span></li>
-        <li class="flex items-start gap-2"><span class="text-red-400 mt-1.5 text-sm">&#10007;</span><span><strong class="text-white">Drift</strong>: Staging accumulates config changes that never reach prod. "Works on staging" means nothing.</span></li>
-        <li class="flex items-start gap-2"><span class="text-red-400 mt-1.5 text-sm">&#10007;</span><span><strong class="text-white">Cost</strong>: Running a full production-mirror 24/7 for intermittent testing is wasteful.</span></li>
-        <li class="flex items-start gap-2"><span class="text-red-400 mt-1.5 text-sm">&#10007;</span><span><strong class="text-white">Stale data</strong>: Staging databases are either too old to be useful or too fresh to be safe.</span></li>
+      <ul>
+        <li><span>&#10007;</span><span><strong>Contention</strong>: Team A deploys their branch, breaks Team B's tests. Everyone waits.</span></li>
+        <li><span>&#10007;</span><span><strong>Drift</strong>: Staging accumulates config changes that never reach prod. "Works on staging" means nothing.</span></li>
+        <li><span>&#10007;</span><span><strong>Cost</strong>: Running a full production-mirror 24/7 for intermittent testing is wasteful.</span></li>
+        <li><span>&#10007;</span><span><strong>Stale data</strong>: Staging databases are either too old to be useful or too fresh to be safe.</span></li>
       </ul>
 
-      <h2 class="text-2xl font-display font-bold text-white uppercase tracking-tight mt-12 mb-4">The Replacement: Ephemeral Preview Environments</h2>
+      <h2>The Replacement: Ephemeral Preview Environments</h2>
 
       <p>Every pull request now gets its own isolated environment — spun up on PR open, destroyed on PR merge/close. The full stack: application, database (seeded with anonymized data), and a unique URL.</p>
 
-      <pre class="bg-[#0a0a0a] border border-white/10 rounded-lg p-4 font-mono text-sm text-gray-300"><code># GitHub Actions: Spin up preview on PR
+      <pre><code># GitHub Actions: Spin up preview on PR
 name: Preview Environment
 on:
   pull_request:
@@ -111,11 +108,11 @@ jobs:
               body: '&#128640; Preview deployed: https://pr-${{ github.event.number }}.preview.bhaveshops.in'
             })</code></pre>
 
-      <h2 class="text-2xl font-display font-bold text-white uppercase tracking-tight mt-12 mb-4">The Cleanup Pipeline</h2>
+      <h2>The Cleanup Pipeline</h2>
 
-      <p>Equally important — environments <strong class="text-white">must</strong> auto-destroy. Otherwise you've just created 50 staging environments instead of one. We use a GitHub Action on PR close:</p>
+      <p>Equally important — environments <strong>must</strong> auto-destroy. Otherwise you've just created 50 staging environments instead of one. We use a GitHub Action on PR close:</p>
 
-      <pre class="bg-[#0a0a0a] border border-white/10 rounded-lg p-4 font-mono text-sm text-gray-300"><code>on:
+      <pre><code>on:
   pull_request:
     types: [closed]
 
@@ -129,42 +126,44 @@ jobs:
           helm uninstall preview-${{ github.event.number }} -n $NAMESPACE
           kubectl delete namespace $NAMESPACE</code></pre>
 
-      <h2 class="text-2xl font-display font-bold text-white uppercase tracking-tight mt-12 mb-4">Cost Control: The Surprise Win</h2>
+      <h2>Cost Control: The Surprise Win</h2>
 
-      <p>Counter-intuitively, ephemeral environments cost <strong class="text-white">less</strong> than our always-on staging. Here's why:</p>
+      <p>Counter-intuitively, ephemeral environments cost <strong>less</strong> than our always-on staging. Here's why:</p>
 
-      <div class="bg-[#0a0a0a] border border-white/10 rounded-lg p-6 my-8">
-        <table class="w-full font-mono text-sm">
+      <div>
+        <table>
           <thead>
-            <tr class="text-gray-500 text-xs uppercase tracking-widest">
-              <th class="text-left pb-3">Metric</th>
-              <th class="text-right pb-3">Staging</th>
-              <th class="text-right pb-3">Ephemeral</th>
+            <tr>
+              <th>Metric</th>
+              <th>Staging</th>
+              <th>Ephemeral</th>
             </tr>
           </thead>
-          <tbody class="text-gray-300">
-            <tr class="border-t border-white/5"><td class="py-2">Monthly AWS cost</td><td class="text-right">$2,400</td><td class="text-right text-[#00ff41]">$890</td></tr>
-            <tr class="border-t border-white/5"><td class="py-2">Avg. environment uptime</td><td class="text-right">24/7</td><td class="text-right text-[#00ff41]">4.2 hrs</td></tr>
-            <tr class="border-t border-white/5"><td class="py-2">Deploy conflicts/week</td><td class="text-right">8</td><td class="text-right text-[#00ff41]">0</td></tr>
-            <tr class="border-t border-white/5"><td class="py-2">Prod parity</td><td class="text-right">~70%</td><td class="text-right text-[#00ff41]">99%</td></tr>
+          <tbody>
+            <tr><td>Monthly AWS cost</td><td>$2,400</td><td>$890</td></tr>
+            <tr><td>Avg. environment uptime</td><td>24/7</td><td>4.2 hrs</td></tr>
+            <tr><td>Deploy conflicts/week</td><td>8</td><td>0</td></tr>
+            <tr><td>Prod parity</td><td>~70%</td><td>99%</td></tr>
           </tbody>
         </table>
       </div>
 
-      <h2 class="text-2xl font-display font-bold text-white uppercase tracking-tight mt-12 mb-4">The Cultural Shift</h2>
+      <h2>The Cultural Shift</h2>
 
       <p>The biggest impact wasn't technical — it was behavioral. When every PR has a live URL, code reviews get better. Product managers click the link and give feedback before merge. QA tests on the actual branch, not a shared mess. The feedback loop tightened from days to hours.</p>
 
-      <p>Staging isn't dead because it was a bad idea. It's dead because <strong class="text-white">isolated, on-demand environments</strong> are a better one. If your team is still fighting over a shared staging env, it's time to let go.</p>
+      <p>Staging isn't dead because it was a bad idea. It's dead because <strong>isolated, on-demand environments</strong> are a better one. If your team is still fighting over a shared staging env, it's time to let go.</p>
 
-      <div class="mt-12 pt-8 border-t border-white/10">
-        <p class="text-gray-500 font-mono text-xs uppercase tracking-widest">End of Transmission</p>
+      <div>
+        <p>End of Transmission</p>
       </div>
     </div>
-  </article>
+  
 
-  <footer class="border-t border-white/5 py-8 text-center">
-    <a href="/" class="font-mono text-xs text-gray-600 hover:text-primary transition-colors uppercase tracking-widest">bhaveshops.in</a>
-  </footer>
+  <div class="post-end">
+    <span>End of transmission</span>
+    <a href="/#blog">More field notes</a>
+  </div>
+  </main>
 </body>
 </html>

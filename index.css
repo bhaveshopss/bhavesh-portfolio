@@ -1,89 +1,179 @@
-/* ====================================================
-   BKP.DEV Portfolio — Global Styles & Performance
-   ==================================================== */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Smooth scrolling for anchors */
 html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
 }
 
-/* Performance: GPU-accelerate frequently animated elements */
-.animate-marquee,
-.animate-float,
-.animate-radar-sweep,
-.animate-pulse-glow,
-.animate-flow-dash,
-.animate-scan-line {
-    will-change: transform;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+html,
+body,
+#root {
+  background-color: #060605;
 }
 
-/* Sections use contain for paint optimization without content-visibility
-   (content-visibility: auto causes jarring pop-in that breaks scroll animations) */
-section {
-    contain: layout style;
+body {
+  color: #f4f4ef;
+  font-family: 'Archivo', system-ui, sans-serif;
+  overflow-x: hidden;
 }
 
-/* Performance: Reduce motion for users who prefer it */
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
+::selection {
+  background-color: #ffb020;
+  color: #060605;
 }
 
-/* Logo images in the marquee: optimize rendering */
-.logo-cloud-img {
-    image-rendering: auto;
-    contain: layout style paint;
-}
-
-/* Only promote specific fixed elements that actually animate */
-
-/* Fonts loaded via Google Fonts link tags with display=swap */
-
-/* Smooth scrolling containers only */
-.overflow-y-auto,
-.overflow-auto {
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Screen reader only utility */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-
-/* Focus visible ring for keyboard navigation */
 :focus-visible {
-    outline: 2px solid #6366f1;
-    outline-offset: 2px;
+  outline: 2px solid #ffb020;
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
-/* Contribution grid glow wave shimmer */
-@keyframes contribution-shimmer {
-    0%, 70%, 100% {
-        background: transparent;
-        box-shadow: none;
-    }
-    35% {
-        background: rgba(255, 255, 255, 0.12);
-        box-shadow: 0 0 6px rgba(0, 255, 65, 0.3);
-    }
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(to right, rgba(244, 244, 240, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(244, 244, 240, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, black 30%, transparent 75%);
+}
+
+.glow-field {
+  background:
+    radial-gradient(ellipse 55% 45% at 70% 20%, rgba(255, 176, 32, 0.07), transparent 65%),
+    radial-gradient(ellipse 40% 35% at 15% 75%, rgba(255, 176, 32, 0.045), transparent 60%);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.mask-line {
+  clip-path: inset(0 0 -0.12em 0);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.panel-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(244, 244, 240, 0.15) transparent;
+}
+
+.prose-concierge {
+  color: #9c9c94;
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+.prose-concierge h1,
+.prose-concierge h2,
+.prose-concierge h3 {
+  color: #f4f4ef;
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-weight: 600;
+  margin: 1.6em 0 0.5em;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.prose-concierge h1 {
+  font-size: 22px;
+}
+.prose-concierge h2 {
+  font-size: 18px;
+}
+.prose-concierge h3 {
+  font-size: 15px;
+}
+.prose-concierge p {
+  margin: 0.9em 0;
+}
+.prose-concierge a {
+  color: #ffb020;
+  text-decoration: underline;
+}
+.prose-concierge ul,
+.prose-concierge ol {
+  margin: 0.9em 0;
+  padding-left: 1.3em;
+}
+.prose-concierge ul {
+  list-style: disc;
+}
+.prose-concierge ol {
+  list-style: decimal;
+}
+.prose-concierge li {
+  margin: 0.4em 0;
+}
+.prose-concierge code {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 12px;
+  background: rgba(244, 244, 240, 0.06);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+.prose-concierge pre {
+  background: #060605;
+  border: 1px solid rgba(244, 244, 240, 0.08);
+  border-radius: 10px;
+  padding: 14px;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+.prose-concierge pre code {
+  background: transparent;
+  padding: 0;
+}
+.prose-concierge blockquote {
+  border-left: 2px solid #ffb020;
+  margin: 1em 0;
+  padding-left: 1em;
+  color: #f4f4ef;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -1,49 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from './components/Layout/Navbar';
-import Cursor from './components/Layout/Cursor';
-import ScrollProgress from './components/ui/ScrollProgress';
-import ScrollToTop from './components/ui/ScrollToTop';
-import SectionNav from './components/ui/SectionNav';
+import { useCallback, useState } from 'react';
+import { motion } from 'framer-motion';
+import { Sparkle } from 'lucide-react';
+import { Nav } from './src/components/Nav';
+import { Hero } from './src/components/Hero';
+import { Career } from './src/components/Career';
+import { Work } from './src/components/Work';
+import { Credentials } from './src/components/Credentials';
+import { Range } from './src/components/Range';
+import { About } from './src/components/About';
+import { Blog } from './src/components/Blog';
+import { Contact, Footer } from './src/components/Contact';
+import { Concierge, scrollToSection } from './src/agent/Concierge';
+import { EASE } from './src/components/Reveal';
 
-import Hero from './components/Hero/Hero';
-import Services from './components/Services/Services';
-import WorkSection from './components/Work/WorkSection';
-import TechStack from './components/TechStack/TechStack';
-import MetricsDashboard from './components/Metrics/MetricsDashboard';
-import About from './components/About/About';
-import Blog from './components/Blog/Blog';
-import Contact from './components/Contact/Contact';
-import { Analytics } from "@vercel/analytics/react";
+export default function App() {
+  const [agentOpen, setAgentOpen] = useState(false);
 
-const App: React.FC = () => {
-  const [grain, setGrain] = useState(true);
+  const openContact = useCallback(() => {
+    scrollToSection('contact');
+  }, []);
 
   return (
-    <div className={`min-h-screen bg-background-light dark:bg-background-dark text-gray-900 dark:text-text-high-contrast font-body selection:bg-primary selection:text-white overflow-x-hidden relative`}>
-      {/* Global Overlays */}
-      <div
-        className={`fixed inset-0 pointer-events-none z-50 bg-grain mix-blend-overlay ${grain ? 'opacity-30 dark:opacity-20' : 'opacity-10 dark:opacity-5'}`}
-        id="grain-overlay"
-        style={{ willChange: 'auto' }}
-      ></div>
+    <div className="grain min-h-screen bg-ink font-display text-paper-hi">
+      <Nav onContactClick={openContact} />
 
-      <ScrollProgress />
-      <Cursor />
-      <Navbar />
-      <SectionNav />
-      <ScrollToTop />
+      <main>
+        <Hero onContactClick={openContact} />
+        <Career />
+        <Work />
+        <Credentials />
+        <Range />
+        <About />
+        <Blog />
+        <Contact />
+      </main>
 
-      <Hero />
-      <Services />
-      <WorkSection />
-      <TechStack />
-      <MetricsDashboard />
-      <About />
-      <Blog />
-      <Contact />
-      <Analytics />
+      <Footer />
+
+      <motion.button
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 1.2, ease: EASE }}
+        onClick={() => setAgentOpen(true)}
+        aria-label="Open Bhavesh's AI concierge"
+        className="group fixed bottom-5 right-5 z-40 flex items-center gap-2.5 rounded-full border border-line bg-ink-card/90 py-2.5 pl-4 pr-5 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all duration-300 hover:border-signal/40 md:bottom-6 md:right-6"
+      >
+        <span className="relative flex h-5 w-5 items-center justify-center">
+          <span
+            className="absolute h-full w-full rounded-full bg-signal/20 blur-[6px] transition-all duration-300 group-hover:bg-signal/35"
+            aria-hidden
+          />
+          <Sparkle className="relative h-3.5 w-3.5 text-signal" />
+        </span>
+        <span className="font-mono text-[12px] font-medium text-paper-hi">Ask Bhavesh</span>
+      </motion.button>
+
+      <Concierge open={agentOpen} onClose={() => setAgentOpen(false)} />
     </div>
   );
-};
-
-export default App;
+}
