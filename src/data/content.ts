@@ -322,12 +322,95 @@ export const faqs = [
   },
 ]
 
+export type RoleCard = {
+  id: string
+  title: string
+  seed: number
+  palette: string[]
+  strengths: string
+  bestUsed: string
+  output: string
+}
+
+export const roleCards: RoleCard[] = [
+  {
+    id: 'devops',
+    title: 'DevOps Engineer',
+    seed: 11,
+    palette: ['#2B4BF2', '#9DB8FA', '#131311'],
+    strengths:
+      'Multi-client cloud estates on AWS, Azure, and GCP. Kubernetes (EKS/GKE) operations, Terraform at 200+ resources, GitOps pipelines with ArgoCD and GitHub Actions.',
+    bestUsed:
+      'Teams that need production to stay at 99.9% uptime while deployment frequency keeps climbing — without headcount growing with it.',
+    output:
+      'Golden-path pipelines, infrastructure as code, observability stacks, and FinOps policies that cut spend 20%.',
+  },
+  {
+    id: 'aiops',
+    title: 'AIOps Engineer',
+    seed: 29,
+    palette: ['#E879B9', '#F5B8D8', '#131311'],
+    strengths:
+      'LLM & RAG infrastructure on high-performance compute, agentic workflows with LangChain and Gemini, Anthropic MCP servers for safe tool execution.',
+    bestUsed:
+      'Operations that drown humans — log triage, incident diagnosis, cloud inventory — turned into systems that resolve themselves.',
+    output:
+      'Self-healing CI/CD (80%+ of common errors auto-triaged), AI SRE command center with sub-3-minute MTTR, 1,000+ daily GenAI requests served.',
+  },
+  {
+    id: 'founders-office',
+    title: "Technical Founder's Office",
+    seed: 47,
+    palette: ['#131311', '#6E6E66', '#2B4BF2'],
+    strengths:
+      'Systems-level judgment formed across reliability and AI operations. Translates ambiguity into build decisions with evidence.',
+    bestUsed:
+      'Founders who need technical strategy and execution in the same seat — architecture calls, vendor and build-or-buy, momentum on what matters.',
+    output:
+      'Decision memos, architecture direction, and shipped work that compounds — not slide decks.',
+  },
+  {
+    id: 'sre',
+    title: 'Site Reliability Engineer',
+    seed: 63,
+    palette: ['#2B4BF2', '#131311', '#9DB8FA'],
+    strengths:
+      'SLO-driven operations: Prometheus, Grafana, Datadog, OpenTelemetry. Incident response playbooks and postmortems that actually change outcomes.',
+    bestUsed:
+      'Environments where MTTD and MTTR are board-level numbers — MTTD cut 50%, MTTR cut 30% through SOPs and knowledge loops.',
+    output:
+      'Alerting that pages only when it matters, dashboards people trust, incident processes the whole team can run.',
+  },
+  {
+    id: 'cloud-architect',
+    title: 'Cloud Architect',
+    seed: 81,
+    palette: ['#E879B9', '#2B4BF2', '#131311'],
+    strengths:
+      'Well-architected multi-cloud design across AWS, GCP, and Azure — networking, IAM, VPC, load balancing, CDN, disaster recovery.',
+    bestUsed:
+      'Greenfield platforms and multi-tenant estates that must be secure, auditable, and cost-modelled from day one.',
+    output:
+      'Reference architectures, Terraform modules, and security baselines (Vault, Trivy, OPA) ready for audit.',
+  },
+  {
+    id: 'automation',
+    title: 'Automation Engineer',
+    seed: 97,
+    palette: ['#131311', '#E879B9', '#6E6E66'],
+    strengths:
+      'Python, Java, and Bash tooling that removes toil — across 5+ AWS accounts and every layer from DNS to deploy.',
+    bestUsed:
+      'Any workflow a team does more than twice a week by hand: provisioning, auditing, reporting, cleanup.',
+    output:
+      'CLI tools and background agents that quietly do the boring work — like natural-language inventory across 15+ AWS accounts, 90% faster.',
+  },
+]
+
 export const sections = [
-  { id: 'career', label: 'Career' },
+  { id: 'about', label: 'About' },
   { id: 'work', label: 'Work' },
   { id: 'credentials', label: 'Credentials' },
-  { id: 'range', label: 'Range' },
-  { id: 'about', label: 'About' },
   { id: 'blog', label: 'Blog' },
   { id: 'contact', label: 'Contact' },
 ] as const

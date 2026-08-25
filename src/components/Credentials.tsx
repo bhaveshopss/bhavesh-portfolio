@@ -7,56 +7,50 @@ export function Credentials() {
   const rest = credentials.filter((c) => !featured.includes(c));
 
   return (
-    <Section id="credentials" className="py-24 sm:py-32">
-      <SectionLabel index="03" title="Credentials & recognition" />
+    <Section id="credentials" className="py-14 sm:py-20">
+      <SectionLabel index="02" title="Credentials & recognition" />
 
-      <Reveal delay={1}>
-        <h2 className="mt-8 max-w-2xl font-display text-4xl font-semibold leading-[1.02] tracking-tight text-paper-hi sm:text-5xl md:text-6xl">
-          Verified, not
-          <span className="text-paper-low"> decorated.</span>
-        </h2>
-      </Reveal>
-
-      <div className="mt-14 grid gap-4 sm:mt-16 md:grid-cols-2">
+      <div className="mt-10 grid gap-4 md:grid-cols-2">
         {featured.map((cred, i) => (
           <Reveal key={cred.name} delay={i}>
             <div
-              className={`group relative overflow-hidden rounded-2xl border p-8 transition-colors duration-500 sm:p-10 ${
-                cred.kind === 'award'
-                  ? 'border-signal/30 bg-signal-dim'
-                  : 'border-line bg-ink-raised hover:border-signal/25'
+              className={`flex h-full items-start justify-between gap-6 rounded-2xl p-7 sm:p-8 ${
+                cred.kind === 'award' ? 'bg-signal text-cream' : 'border border-ink/10 bg-paper'
               }`}
             >
-              <div className="flex items-start justify-between">
-                <span
-                  className={`flex h-11 w-11 items-center justify-center rounded-full border ${
-                    cred.kind === 'award'
-                      ? 'border-signal/40 bg-signal/15 text-signal'
-                      : 'border-line text-paper-mid'
-                  }`}
-                >
+              <div>
+                <div className="flex items-center gap-3">
                   {cred.kind === 'award' ? (
                     <Trophy className="h-5 w-5" strokeWidth={1.5} />
                   ) : (
-                    <Award className="h-5 w-5" strokeWidth={1.5} />
+                    <Award className="h-5 w-5 text-ink-mid" strokeWidth={1.5} />
                   )}
-                </span>
-                <span className="font-mono text-[11px] text-paper-low">{cred.date}</span>
-              </div>
-
-              <h3 className="mt-8 font-display text-2xl font-semibold tracking-tight text-paper-hi sm:text-3xl">
-                {cred.name}
-              </h3>
-              <p className="mt-2 font-mono text-[11.5px] uppercase tracking-[0.16em] text-paper-mid">
-                {cred.issuer}
-              </p>
-
-              {cred.kind === 'award' && (
-                <p className="mt-5 max-w-sm text-[13px] leading-relaxed text-paper-mid">
-                  First place at Ignition — Shellkode's internal hackathon — competing across the
-                  whole company.
+                  <span
+                    className={`font-mono text-[11px] uppercase tracking-[0.14em] ${
+                      cred.kind === 'award' ? 'opacity-70' : 'text-ink-low'
+                    }`}
+                  >
+                    {cred.issuer}
+                  </span>
+                </div>
+                <h3 className="mt-4 font-display text-2xl font-semibold tracking-tight">
+                  {cred.name}
+                </h3>
+                <p
+                  className={`mt-2 font-mono text-[11px] ${
+                    cred.kind === 'award' ? 'opacity-70' : 'text-ink-low'
+                  }`}
+                >
+                  {cred.date}
                 </p>
-              )}
+              </div>
+              <span
+                className={`font-mono text-[10px] uppercase tracking-[0.14em] ${
+                  cred.kind === 'award' ? 'opacity-60' : 'text-ink-low'
+                }`}
+              >
+                {cred.kind === 'award' ? '1st place' : 'verified'}
+              </span>
             </div>
           </Reveal>
         ))}
@@ -65,18 +59,18 @@ export function Credentials() {
       <div className="mt-4">
         {rest.map((cred, i) => (
           <Reveal key={cred.name} delay={Math.min(i, 2)}>
-            <div className="flex items-baseline justify-between gap-4 border-b border-line py-4 transition-colors duration-300 hover:border-signal/25">
+            <div className="flex items-baseline justify-between gap-4 border-b border-ink/10 py-4">
               <div className="flex items-baseline gap-4">
-                <span className="font-mono text-[10.5px] text-signal/70">
-                  0{credentials.indexOf(cred) + 1}
+                <span className="font-mono text-[10.5px] text-signal">
+                  {String(credentials.indexOf(cred) + 1).padStart(2, '0')}
                 </span>
-                <h3 className="font-display text-[15px] font-medium text-paper-hi">{cred.name}</h3>
+                <h3 className="font-display text-[15px] font-medium text-ink">{cred.name}</h3>
               </div>
               <div className="flex shrink-0 items-baseline gap-5">
-                <span className="hidden font-mono text-[11px] text-paper-low sm:inline">
+                <span className="hidden font-mono text-[11px] text-ink-low sm:inline">
                   {cred.issuer}
                 </span>
-                <span className="font-mono text-[11px] text-paper-mid">{cred.date}</span>
+                <span className="font-mono text-[11px] text-ink-mid">{cred.date}</span>
               </div>
             </div>
           </Reveal>

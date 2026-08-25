@@ -18,7 +18,8 @@ import {
   type AgentAction,
   type AgentReply,
 } from './knowledge';
-import { routeIntent } from './intents';
+import { intentTabs } from './knowledge';
+import { routeIntent, type Intent } from './intents';
 import { EASE } from '../components/Reveal';
 
 type Message = {
@@ -81,15 +82,15 @@ function MessageBlock({ message }: { message: Message }) {
       className={isUser ? 'flex justify-end' : 'flex flex-col gap-2.5'}
     >
       {!isUser && (
-        <span className="flex items-center gap-1.5 font-mono text-[9.5px] uppercase tracking-[0.18em] text-paper-low">
+        <span className="flex items-center gap-1.5 font-mono text-[9.5px] uppercase tracking-[0.18em] text-ink-low">
           <Sparkle className="h-2.5 w-2.5 text-signal" /> Concierge
         </span>
       )}
       <div
         className={`max-w-[92%] rounded-2xl px-4 py-3 text-[13px] leading-relaxed whitespace-pre-line ${
           isUser
-            ? 'rounded-br-md bg-paper-hi text-ink'
-            : 'rounded-bl-md border border-line bg-ink-card text-paper-hi/90'
+            ? 'rounded-br-md bg-ink text-cream'
+            : 'rounded-bl-md border border-line bg-paper text-ink/90'
         }`}
       >
         {message.text}
@@ -106,7 +107,7 @@ function MessageBlock({ message }: { message: Message }) {
               href={link.url}
               target={link.url.startsWith('http') ? '_blank' : undefined}
               rel="noopener noreferrer"
-              className="group flex items-center gap-1.5 rounded-full border border-signal/40 bg-signal-dim px-3 py-1.5 font-mono text-[11px] text-signal transition-colors duration-300 hover:bg-signal hover:text-ink"
+              className="group flex items-center gap-1.5 rounded-full border border-signal/40 bg-signal-dim px-3 py-1.5 font-mono text-[11px] text-signal transition-colors duration-300 hover:bg-signal hover:text-white"
             >
               {link.label}
               <ArrowUpRight className="h-3 w-3" />
@@ -122,7 +123,7 @@ function Chip({ label, action, onRun }: { label: string; action: AgentAction; on
   return (
     <button
       onClick={() => onRun?.(action)}
-      className="rounded-full border border-line px-3 py-1.5 font-mono text-[11px] text-paper-mid transition-colors duration-300 hover:border-signal/50 hover:bg-signal-dim hover:text-paper-hi"
+      className="rounded-full border border-line px-3 py-1.5 font-mono text-[11px] text-ink-mid transition-colors duration-300 hover:border-signal/50 hover:bg-signal-dim hover:text-ink"
     >
       {label}
     </button>
@@ -225,6 +226,7 @@ export function Concierge({ open, onClose }: { open: boolean; onClose: () => voi
     (userText: string) => {
       const intent = routeIntent(userText);
       let reply: AgentReply;
+      const scrollTab = intentTabs[intent as Intent];
       if (intent === 'project_details') {
         const pid = /self.?healing|ci.?cd|pipeline/.test(userText.toLowerCase())
           ? projects[0].id
@@ -268,6 +270,9 @@ export function Concierge({ open, onClose }: { open: boolean; onClose: () => voi
                   ? { kind: 'blog-post', href: (reply.action as { postId: string }).postId }
                   : { kind: 'project', projectId: (reply.action as { projectId: string }).projectId }
             );
+          } else if (reply.action.type === 'scroll' && scrollTab) {
+            window.dispatchEvent(new CustomEvent('bhavesh:set-tab', { detail: scrollTab }));
+            runAction(reply.action);
           } else {
             runAction(reply.action);
           }
@@ -322,24 +327,24 @@ export function Concierge({ open, onClose }: { open: boolean; onClose: () => voi
             animate={reducedMotion() ? { opacity: 1 } : { x: 0, opacity: 1 }}
             exit={reducedMotion() ? { opacity: 0 } : { x: '100%', opacity: 0.4 }}
             transition={{ duration: 0.45, ease: EASE }}
-            className="fixed bottom-0 left-1/2 z-50 flex h-[88dvh] w-full -translate-x-1/2 flex-col overflow-hidden rounded-t-2xl border border-line bg-ink-raised/95 shadow-[0_-8px_60px_rgba(0,0,0,0.6)] backdrop-blur-2xl md:bottom-4 md:left-auto md:right-4 md:top-4 md:h-auto md:w-[420px] md:translate-x-0 md:rounded-2xl"
+            className="fixed bottom-0 left-1/2 z-50 flex h-[88dvh] w-full -translate-x-1/2 flex-col overflow-hidden rounded-t-2xl border border-line bg-white/95 shadow-[0_-8px_60px_rgba(19,19,17,0.18)] backdrop-blur-2xl md:bottom-4 md:left-auto md:right-4 md:top-4 md:h-auto md:w-[420px] md:translate-x-0 md:rounded-2xl"
           >
             <div className="flex items-center justify-between border-b border-line px-5 py-4">
               <div className="flex min-w-0 items-center gap-3">
                 {view.kind !== 'chat' && (
                   <button
                     onClick={() => setView({ kind: 'chat' })}
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line text-paper-mid transition-colors hover:border-signal/50 hover:text-paper-hi"
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line text-ink-mid transition-colors hover:border-signal/50 hover:text-ink"
                     aria-label="Back to conversation"
                   >
                     <ArrowLeft className="h-3.5 w-3.5" />
                   </button>
                 )}
                 <div className="min-w-0">
-                  <p className="truncate font-display text-[14px] font-semibold text-paper-hi">
+                  <p className="truncate font-display text-[14px] font-semibold text-ink">
                     {viewTitle ?? "Bhavesh's concierge"}
                   </p>
-                  <p className="flex items-center gap-1.5 font-mono text-[9.5px] uppercase tracking-[0.16em] text-paper-low">
+                  <p className="flex items-center gap-1.5 font-mono text-[9.5px] uppercase tracking-[0.16em] text-ink-low">
                     <span className="h-1.5 w-1.5 rounded-full bg-signal" />
                     {view.kind === 'chat' ? 'Local · verified answers' : 'Portfolio knowledge'}
                   </p>
@@ -348,7 +353,7 @@ export function Concierge({ open, onClose }: { open: boolean; onClose: () => voi
               <button
                 onClick={onClose}
                 aria-label="Close concierge"
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line text-paper-mid transition-colors hover:border-signal/50 hover:text-paper-hi"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line text-ink-mid transition-colors hover:border-signal/50 hover:text-ink"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -372,7 +377,7 @@ export function Concierge({ open, onClose }: { open: boolean; onClose: () => voi
                 )}
 
                 <div className="border-t border-line p-3.5">
-                  <div className="flex items-center gap-2 rounded-full border border-line bg-ink py-1.5 pl-4 pr-1.5 focus-within:border-signal/50">
+                  <div className="flex items-center gap-2 rounded-full border border-line bg-cream py-1.5 pl-4 pr-1.5 focus-within:border-signal/50">
                     <input
                       ref={inputRef}
                       value={input}
@@ -380,13 +385,13 @@ export function Concierge({ open, onClose }: { open: boolean; onClose: () => voi
                       onKeyDown={onInputKey}
                       placeholder="Ask about Bhavesh's work…"
                       aria-label="Ask the concierge"
-                      className="h-9 flex-1 bg-transparent font-mono text-[12.5px] text-paper-hi outline-none placeholder:text-paper-low"
+                      className="h-9 flex-1 bg-transparent font-mono text-[12.5px] text-ink outline-none placeholder:text-ink-low"
                     />
                     <button
                       onClick={() => submit(input)}
                       disabled={!input.trim() || typing}
                       aria-label="Send question"
-                      className="flex h-9 w-9 items-center justify-center rounded-full bg-paper-hi text-ink transition-all duration-300 hover:bg-signal disabled:opacity-30"
+                      className="flex h-9 w-9 items-center justify-center rounded-full bg-ink text-cream transition-all duration-300 hover:bg-signal disabled:opacity-30"
                     >
                       <ArrowUpRight className="h-4 w-4 -rotate-45" />
                     </button>
@@ -405,13 +410,13 @@ export function Concierge({ open, onClose }: { open: boolean; onClose: () => voi
                       className="group border-b border-line py-4 text-left transition-colors last:border-0"
                     >
                       <div className="flex items-center justify-between gap-3">
-                        <span className="font-mono text-[10px] text-paper-low">{post.date}</span>
+                        <span className="font-mono text-[10px] text-ink-low">{post.date}</span>
                         <span className="font-mono text-[10px] text-signal/70">{post.readTime}</span>
                       </div>
-                      <p className="mt-1.5 font-display text-[15px] font-semibold text-paper-hi transition-colors group-hover:text-signal">
+                      <p className="mt-1.5 font-display text-[15px] font-semibold text-ink transition-colors group-hover:text-signal">
                         {post.title}
                       </p>
-                      <p className="mt-1 text-[12px] leading-relaxed text-paper-mid">{post.excerpt}</p>
+                      <p className="mt-1 text-[12px] leading-relaxed text-ink-mid">{post.excerpt}</p>
                     </button>
                   ))}
                 </div>
@@ -431,29 +436,29 @@ export function Concierge({ open, onClose }: { open: boolean; onClose: () => voi
                         <p className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-signal">
                           {project.tagline}
                         </p>
-                        <h3 className="mt-2 font-display text-xl font-semibold text-paper-hi">
+                        <h3 className="mt-2 font-display text-xl font-semibold text-ink">
                           {project.name}
                         </h3>
                       </div>
                       <div>
-                        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-paper-low">Problem</p>
-                        <p className="mt-1.5 text-[13px] leading-relaxed text-paper-mid">{project.problem}</p>
+                        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-low">Problem</p>
+                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink-mid">{project.problem}</p>
                       </div>
                       <div>
-                        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-paper-low">Contribution</p>
-                        <p className="mt-1.5 text-[13px] leading-relaxed text-paper-hi/85">{project.contribution}</p>
+                        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-low">Contribution</p>
+                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink/85">{project.contribution}</p>
                       </div>
                       <div className="grid grid-cols-3 gap-2">
                         {project.impact.map((m) => (
-                          <div key={m.label} className="rounded-xl border border-line bg-ink p-3">
-                            <p className="font-display text-lg font-bold text-paper-hi">{m.value}</p>
-                            <p className="mt-0.5 font-mono text-[9px] leading-snug text-paper-low">{m.label}</p>
+                          <div key={m.label} className="rounded-xl border border-ink/10 bg-cream p-3">
+                            <p className="font-display text-lg font-bold text-ink">{m.value}</p>
+                            <p className="mt-0.5 font-mono text-[9px] leading-snug text-ink-low">{m.label}</p>
                           </div>
                         ))}
                       </div>
                       <div className="flex flex-wrap gap-1.5">
                         {project.stack.map((tech) => (
-                          <span key={tech} className="rounded-full border border-line px-2.5 py-1 font-mono text-[10px] text-paper-mid">
+                          <span key={tech} className="rounded-full border border-line px-2.5 py-1 font-mono text-[10px] text-ink-mid">
                             {tech}
                           </span>
                         ))}
@@ -463,7 +468,7 @@ export function Concierge({ open, onClose }: { open: boolean; onClose: () => voi
                           href={project.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-2 rounded-full border border-signal/40 bg-signal-dim py-2.5 font-mono text-[12px] text-signal transition-colors hover:bg-signal hover:text-ink"
+                          className="flex items-center justify-center gap-2 rounded-full border border-signal/40 bg-signal-dim py-2.5 font-mono text-[12px] text-signal transition-colors hover:bg-signal hover:text-white"
                         >
                           {project.linkLabel ?? 'View repository'}
                           <ArrowUpRight className="h-3.5 w-3.5" />
@@ -511,11 +516,11 @@ function BlogPostView({ href }: { href: string }) {
 
   return (
     <div ref={scrollRef} className="panel-scroll flex-1 overflow-y-auto px-5 py-5">
-      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-paper-low">
+      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-low">
         {post?.date} · {post?.readTime} read
       </p>
       {failed && (
-        <p className="mt-6 rounded-xl border border-line bg-ink-card p-4 text-[13px] text-paper-mid">
+        <p className="mt-6 rounded-xl border border-line bg-paper p-4 text-[13px] text-ink-mid">
           The in-panel preview could not load. Open the full article instead:
           <a href={href} className="mt-2 block font-mono text-[12px] text-signal underline">
             {post?.title}

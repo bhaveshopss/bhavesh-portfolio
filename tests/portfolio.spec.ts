@@ -3,7 +3,7 @@ import { execSync } from 'child_process';
 
 const BASE = process.env.BASE_URL ?? 'http://localhost:5190';
 
-const SECTION_IDS = ['career', 'work', 'credentials', 'range', 'about', 'blog', 'contact'];
+const SECTION_IDS = ['about', 'work', 'credentials', 'blog', 'contact'];
 
 test.describe('portfolio core', () => {
   test('home loads with no console errors', async ({ page }) => {
@@ -203,6 +203,7 @@ test.describe('AI concierge', () => {
     });
     const page = await context.newPage();
     await page.goto(BASE);
+    await page.waitForTimeout(2300);
     await page.getByRole('button', { name: /open bhavesh's ai concierge/i }).click();
     const dialog = page.getByRole('dialog');
     await expect(dialog).toBeVisible();

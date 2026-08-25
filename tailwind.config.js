@@ -4,21 +4,20 @@ export default {
   theme: {
     extend: {
       colors: {
+        cream: '#EFEFEA',
+        paper: '#F7F7F4',
         ink: {
-          DEFAULT: '#060605',
-          raised: '#0C0C0B',
-          card: '#111110',
-        },
-        paper: {
-          hi: '#F4F4EF',
-          mid: '#9C9C94',
-          low: '#5F5F58',
+          DEFAULT: '#131311',
+          soft: '#3D3D38',
+          mid: '#6E6E66',
+          low: '#9A9A90',
         },
         signal: {
-          DEFAULT: '#FFB020',
-          dim: 'rgba(255, 176, 32, 0.12)',
+          DEFAULT: '#2B4BF2',
+          soft: '#E4E9FE',
         },
-        line: 'rgba(244, 244, 240, 0.08)',
+        blush: '#E879B9',
+        line: 'rgba(19, 19, 17, 0.1)',
       },
       fontFamily: {
         display: ['Archivo', 'system-ui', 'sans-serif'],
