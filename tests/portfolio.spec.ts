@@ -51,6 +51,8 @@ test.describe('portfolio core', () => {
 
   test('external links are valid URLs with safe attrs', async ({ page }) => {
     await page.goto(BASE);
+    await page.evaluate(() => document.fonts.ready);
+    await page.waitForTimeout(400);
     const links = await page.evaluate(() =>
       Array.from(document.querySelectorAll('a[target="_blank"]')).map((a) => ({
         href: (a as HTMLAnchorElement).href,
