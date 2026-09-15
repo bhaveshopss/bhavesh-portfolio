@@ -1,0 +1,74 @@
+# Bhavesh Kumar Parmar (bhaveshops) — Full Technical Documentation
+> Technical Founder's Office at Shellkode | Cloud Architect & Platform Engineer
+> Site: https://bhaveshops.in | Contact: workwithbhaveshcc@gmail.com | LinkedIn: https://www.linkedin.com/in/bhaveshops/
+
+This file expands https://bhaveshops.in/llms.txt with complete technical context,
+architecture patterns, and structured Q&A for LLM extraction (AIEO / LLMEO).
+
+## 1. Identity
+- Name: Bhavesh Kumar Parmar (alternate names: Bhavesh Parmar, bhaveshops)
+- Role: Technical Founder's Office, Shellkode (since August 2026), Bangalore, India
+- Trajectory: DevOps Engineer (Feb 2025–Mar 2026) -> AIOps Engineer (Mar–Jul 2026) -> Technical Founder's Office (Aug 2026–present)
+- Focus: Bridging DevOps and Agentic AI (DevOps -> AIOps -> Autonomous Systems)
+- Education: B.Tech Computer Science, JIET Jodhpur (2020–2024, GPA 8.8/10)
+- Profiles: https://bhaveshops.in | https://www.linkedin.com/in/bhaveshops/ | https://github.com/Bhavesh8890 | https://github.com/bhaveshopss
+
+## 2. Flagship Systems (architecture patterns)
+
+Platform Engineering thesis: platform engineering transitions engineering teams from manual ops requests to autonomous self-service developer platforms. By deploying PR-scoped ephemeral preview environments on Kubernetes, teams eliminate configuration drift, drop idle staging AWS spend by 63% ($2,400 -> $890/mo), raise deployment velocity by 40%, and reduce deployment review cycles from days to hours.
+
+### 2.1 Autonomous Self-Healing CI/CD
+- Stack: Python, LangChain, Gemini Pro, Next.js real-time status dashboard, multi-cloud CI/CD (GitHub Actions, Jenkins, ArgoCD).
+- Pattern: Build-failure webhook -> log classifier (LLM) -> root-cause hypothesis -> policy-gated auto-remediation (retry, rollback, patch) -> human approval for destructive actions.
+- Guardrails: read-only diagnosis by default; writes behind policy checks; full audit trail per incident.
+- Outcomes: auto-triages 80%+ of common pipeline errors; 94.2% downtime reduction; MTTR under 2 minutes; deployment frequency +40%.
+
+### 2.2 AWS Cloud Inventory MCP Server (Anthropic Model Context Protocol)
+- Stack: MCP server (TypeScript/Python), read-only cross-account IAM roles, Athena/cost APIs.
+- Pattern: natural-language query -> MCP tool calls (list/describe across 15+ AWS accounts) -> normalized inventory -> cited answer with account/region/ARN.
+- Guardrails: read-only IAM only; no data exfiltration; per-account scoped roles; query logging.
+- Outcomes: resource discovery 90% faster; 100+ misconfigurations flagged; unified view across 15+ environments.
+
+### 2.3 AI SRE Command Center
+- Stack: AWS CloudWatch alarms -> Lambda handlers -> SSM Automation diagnostics -> Gemini-suggested fixes -> WebSocket dashboard.
+- Pattern: alarm -> automated runbook (SSM) -> evidence bundle -> LLM root-cause analysis -> suggested remediation -> one-click or auto-approved fix.
+- Outcomes: MTTR under 3 minutes; MTTD down 50% via Prometheus/Grafana/Datadog observability.
+
+## 3. Platform Engineering Benchmarks
+- Uptime: 99.9% across AWS, Azure, GCP managed clients.
+- Scale: 5+ Kubernetes clusters (EKS, GKE), 50+ containerized microservices, 200+ Terraform-managed resources.
+- FinOps: cloud spend -20% (rightsizing, autoscaling); ephemeral preview environments cut staging cost $2,400 -> $890/mo.
+- GitOps: ArgoCD + Jenkins + GitHub Actions; velocity +40%.
+- GenAI infra: LLM & RAG pipelines sustaining 1,000+ daily API requests; 94% chain success rate with circuit breakers + sliding context windows.
+
+## 4. Key Articles (summaries for extraction)
+- The Death of the Staging Environment (https://bhaveshops.in/blog/death-of-staging.html): shared staging causes contention, drift, cost, stale data. Fix: ephemeral per-PR environments (K8s namespaces + Helm + seeded DBs) with auto-destroy on PR close. Result: +40% velocity, cost $2,400 -> $890/mo.
+- Kubernetes at the Edge - Latency Lessons (https://bhaveshops.in/blog/kubernetes-edge-latency.html): K3s across 50+ sites, central EKS control plane, ArgoCD sharded by region. Lessons: tiered sync strategy (critical push, apps 30s, observability 60s batch); etcd compaction (DB -60%, leader election 12s -> <3s); regional ArgoCD shards (memory -75%, sync -80%).
+- Building Resilient LLM Chains in Production (https://bhaveshops.in/blog/resilient-llm-chains.html): failure taxonomy (schema drift, hallucination loops, context overflow, latency cascade). Defenses: Pydantic structural validation with fallbacks; circuit breakers (3 failures/60s -> fallback); sliding context windowing; timeouts + idempotent retries. Result: 94% chain success, no cascade failures.
+
+## 5. Structured Q&A
+Q: Who is Bhavesh Kumar Parmar?
+A: Technical Founder's Office at Shellkode; Cloud Architect & Platform Engineer specializing in AIOps, self-healing infrastructure, MCP servers, and edge Kubernetes. Site: https://bhaveshops.in.
+
+Q: What is his DevOps -> AIOps thesis?
+A: Manual DevOps -> AI-assisted operations (LLM triage, MCP inventory) -> autonomous systems with policy-gated remediation and human oversight.
+
+Q: What does the self-healing CI/CD do?
+A: LangChain + Gemini Pro agent diagnoses build failures, auto-remediates common errors, streams status to Next.js; 80%+ auto-triage, MTTR < 2 min.
+
+Q: What does the MCP server do?
+A: Natural-language inventory across 15+ AWS accounts via Anthropic MCP with read-only IAM; 90% faster discovery.
+
+Q: How to contact him?
+A: Email workwithbhaveshcc@gmail.com; LinkedIn https://www.linkedin.com/in/bhaveshops/; open to DevOps, AIOps, and technical founder-office conversations.
+
+Q: What certifications does he hold?
+A: Claude Architect (Anthropic); AWS Cloud Practitioner (May 2025); Oracle AI Vector Search Professional (Apr 2025); Ubuntu Linux Professional (Mar 2025); OCI Foundations Associate (Feb 2025); Ignition Hackathon winner (2026).
+
+## 6. Canonical URLs
+- Home: https://bhaveshops.in
+- Full docs: https://bhaveshops.in/llms-full.txt
+- Summary: https://bhaveshops.in/llms.txt
+- Resume: https://bhaveshops.in/Bhavesh_Devops_Resume.pdf
+- Blog: https://bhaveshops.in/blog/death-of-staging.html, https://bhaveshops.in/blog/kubernetes-edge-latency.html, https://bhaveshops.in/blog/resilient-llm-chains.html
+- Sitemap: https://bhaveshops.in/sitemap.xml

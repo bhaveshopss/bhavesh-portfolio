@@ -5,7 +5,7 @@ import { PixelFigure } from './PixelArt';
 import { EASE } from './Reveal';
 
 const INTRO_LINES = [
-  `Hi, I'm ${identity.shortName.split(' ')[0]} — a human, not an AI employee.`,
+  `Hi, I'm ${identity.shortName.split(' ')[0]}. A human, not an AI employee.`,
   'I build infrastructure that heals itself and the AI that runs it.',
   'Three years, three roles, one direction: more leverage per decision.',
 ];
@@ -40,7 +40,7 @@ function TypewriterCard() {
       initial={{ opacity: 0, y: -12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
-      className="w-[290px] rounded-xl border border-ink/10 bg-[#E4E4DE] p-5 font-mono text-[12.5px] leading-relaxed text-ink shadow-[0_2px_20px_rgba(19,19,17,0.08)] sm:w-[335px]"
+      className="glass w-[290px] rounded-2xl p-5 font-mono text-[12.5px] leading-relaxed text-ink sm:w-[335px]"
     >
       {INTRO_LINES.slice(0, lineIndex).map((line, i) => (
         <p key={i} className="mb-2.5 last:mb-0">
@@ -77,7 +77,7 @@ export function Hero({ onContactClick }: { onContactClick: () => void }) {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5, ease: EASE }}
-          className="mb-auto mt-10 w-fit rounded-full border border-ink/10 bg-paper px-4 py-2 font-mono text-[11.5px] tracking-wide text-ink-soft"
+          className="glass-chip mb-auto mt-10 w-fit rounded-full px-4 py-2 font-mono text-[11.5px] tracking-wide text-ink-soft"
         >
           {identity.role} · {identity.company} · {identity.location}
         </motion.p>
@@ -95,14 +95,14 @@ export function Hero({ onContactClick }: { onContactClick: () => void }) {
             <PixelFigure cell={6} />
           </motion.div>
           <h1
-            className="relative z-10 select-none whitespace-nowrap text-center font-display text-[24.5vw] font-black leading-[0.78] tracking-[-0.055em] text-ink"
+            className="relative z-10 select-none whitespace-nowrap text-center font-display text-[24.5vw] font-black leading-[0.78] tracking-[-0.055em] text-transparent"
             aria-label="bhavesh"
           >
             <span aria-hidden className="inline-flex">
               {'bhavesh'.split('').map((letter, i) => (
                 <span key={i} className="inline-block overflow-hidden pb-[0.06em] -mb-[0.06em]">
                   <motion.span
-                    className="inline-block will-change-transform"
+                    className="inline-block bg-gradient-to-b from-ink via-ink to-[#33409e] bg-clip-text will-change-transform"
                     initial={{ y: '108%' }}
                     animate={{ y: 0 }}
                     transition={{ duration: 0.9, delay: 0.35 + i * 0.05, ease: EASE }}
@@ -133,7 +133,7 @@ export function Hero({ onContactClick }: { onContactClick: () => void }) {
           >
             <button
               onClick={onContactClick}
-              className="rounded-full bg-ink px-7 py-3 font-mono text-[13.5px] text-cream transition-all duration-200 hover:scale-[1.03] hover:bg-signal active:scale-[0.98]"
+              className="shine rounded-full bg-ink px-7 py-3 font-mono text-[13.5px] text-cream transition-all duration-200 hover:scale-[1.03] hover:bg-signal active:scale-[0.98]"
             >
               Hire Me
             </button>

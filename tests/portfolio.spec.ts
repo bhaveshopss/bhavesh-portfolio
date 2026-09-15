@@ -138,7 +138,7 @@ test.describe('AI concierge', () => {
     await page.getByLabel('Ask the concierge').fill('What is Bhavesh doing now?');
     await page.keyboard.press('Enter');
     await expect(
-      dialog.getByText(/Technical Founder's Office at Shellkode — since August 2026/i)
+      dialog.getByText(/Technical Founder's Office at Shellkode.*since August 2026/i)
     ).toBeVisible({ timeout: 6000 });
   });
 

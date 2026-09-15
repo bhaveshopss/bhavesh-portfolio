@@ -16,7 +16,7 @@ export function BigStatement({ onContactClick }: { onContactClick: () => void })
           <div className="mt-10 flex justify-center">
             <button
               onClick={onContactClick}
-              className="rounded-full bg-ink px-7 py-3 font-mono text-[14px] text-cream transition-all duration-200 hover:scale-[1.04] hover:bg-signal active:scale-[0.98]"
+              className="shine rounded-full bg-ink px-7 py-3 font-mono text-[14px] text-cream transition-all duration-200 hover:scale-[1.04] hover:bg-signal active:scale-[0.98]"
             >
               Hire Me
             </button>

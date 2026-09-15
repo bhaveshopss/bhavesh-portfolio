@@ -11,15 +11,124 @@ function mulberry32(seed: number) {
   };
 }
 
-type SpriteProps = {
-  seed: number;
-  palette: string[];
-  eyeColor?: string;
+/* ------------------------------------------------------------------ */
+/* Hand-authored 12x12 role sprites. Every creature has eyes + feet.  */
+/* ------------------------------------------------------------------ */
+
+export type SpriteKind = 'server' | 'robot' | 'crown' | 'shield' | 'cloud' | 'gear';
+
+const SPRITES: Record<SpriteKind, { palette: Record<string, string>; rows: string[] }> = {
+  server: {
+    palette: { K: '#131311', B: '#2B4BF2', L: '#9DB8FA', W: '#F7F7F4' },
+    rows: [
+      '............',
+      '.KKKKKKKKKK.',
+      '.KBBBBBBBBK.',
+      '.KBWWBBWWBK.',
+      '.KBWKBBKWBK.',
+      '.KBBBBBBBBK.',
+      '.KBKKKKKKBK.',
+      '.KBBBBBBBBK.',
+      '.KBLBBBBLBK.',
+      '.KKKKKKKKKK.',
+      '..KK....KK..',
+      '............',
+    ],
+  },
+  robot: {
+    palette: { K: '#131311', B: '#4C6EF5', P: '#E879B9', W: '#F7F7F4' },
+    rows: [
+      '.....KK.....',
+      '....KPPK....',
+      '..KKKKKKKK..',
+      '.KBBBBBBBBK.',
+      '.KBWWBBWWBK.',
+      '.KBWKBBKWBK.',
+      '.KBBBBBBBBK.',
+      '.KBKKKKKKBK.',
+      '.KBBBBBBBBK.',
+      '.KKKKKKKKKK.',
+      '...KK..KK...',
+      '............',
+    ],
+  },
+  crown: {
+    palette: { K: '#131311', P: '#E879B9', W: '#F7F7F4' },
+    rows: [
+      '............',
+      '..KK.KK.KK..',
+      '..KKKKKKKK..',
+      '..KPPPPPPK..',
+      '..KPWPPWPK..',
+      '..KPKPPKPK..',
+      '..KPPKKPPK..',
+      '..KPPPPPPK..',
+      '.KKKKKKKKKK.',
+      '.KPPPPPPPPK.',
+      '..KKK..KKK..',
+      '............',
+    ],
+  },
+  shield: {
+    palette: { K: '#131311', B: '#2B4BF2', W: '#F7F7F4' },
+    rows: [
+      '............',
+      '..KKKKKKKK..',
+      '.KBBBBBBBBK.',
+      '.KBWWBBWWBK.',
+      '.KBWKBBKWBK.',
+      '.KBBBBBBBBK.',
+      '.KBWWKWWKBK.',
+      '.KBBBBBBBBK.',
+      '..KBBBBBBK..',
+      '...KBBBBK...',
+      '....KKKK....',
+      '............',
+    ],
+  },
+  cloud: {
+    palette: { K: '#131311', L: '#9DB8FA', W: '#F7F7F4' },
+    rows: [
+      '............',
+      '............',
+      '....KKKK....',
+      '...KLLLLK...',
+      '..KLLLLLLK..',
+      '.KLLLLLLLLK.',
+      '.KLWWLLWWLK.',
+      '.KLWKLLKWLK.',
+      '.KLLLLLLLLK.',
+      '.KKKKKKKKKK.',
+      '...KK..KK...',
+      '............',
+    ],
+  },
+  gear: {
+    palette: { K: '#131311', P: '#E879B9', W: '#F7F7F4' },
+    rows: [
+      '............',
+      '...K.KK.K...',
+      '..KKKKKKKK..',
+      'KKKPPPPPPKKK',
+      '.KPPWPPWPPK.',
+      '.KPPPKKPPPK.',
+      '.KPPKKKKPPK.',
+      '.KPPPPPPPPK.',
+      'KKKPPPPPPKKK',
+      '..KKKKKKKK..',
+      '...K.KK.K...',
+      '............',
+    ],
+  },
+};
+
+type RoleIconProps = {
+  kind: SpriteKind;
   size?: number;
   className?: string;
 };
 
-export function PixelSprite({ seed, palette, eyeColor = '#EFEFEA', size = 72, className = '' }: SpriteProps) {
+export function RoleIcon({ kind, size = 64, className = '' }: RoleIconProps) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -28,6 +137,7 @@ export function PixelSprite({ seed, palette, eyeColor = '#EFEFEA', size = 72, cl
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const sprite = SPRITES[kind];
     const G = 12;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = size * dpr;
@@ -35,47 +145,16 @@ export function PixelSprite({ seed, palette, eyeColor = '#EFEFEA', size = 72, cl
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, size, size);
 
-    const rand = mulberry32(seed);
-    const half = G / 2;
-    const cells: (number | null)[][] = Array.from({ length: G }, () => Array<number | null>(G).fill(null));
-
-    for (let y = 2; y < G - 2; y++) {
-      for (let x = 1; x < half; x++) {
-        const edge = y === 2 || y === G - 3;
-        if (rand() > (edge ? 0.55 : 0.22)) {
-          const shade = rand() < 0.6 ? 0 : rand() < 0.75 ? 1 : 2;
-          cells[y][x] = shade;
-          cells[y][G - 1 - x] = shade;
-        }
-      }
-    }
-
-    const eyeY = 4 + Math.floor(rand() * 2);
-    const eyeL = 2 + Math.floor(rand() * 2);
-    cells[eyeY][eyeL] = null;
-    cells[eyeY][G - 1 - eyeL] = null;
-    cells[eyeY + 1][eyeL] = null;
-    cells[eyeY + 1][G - 1 - eyeL] = null;
-
     const px = size / G;
     for (let y = 0; y < G; y++) {
       for (let x = 0; x < G; x++) {
-        const shade = cells[y][x];
-        if (shade === null) continue;
-        ctx.fillStyle = palette[shade] ?? palette[0];
+        const ch = sprite.rows[y][x];
+        if (ch === '.' || !sprite.palette[ch]) continue;
+        ctx.fillStyle = sprite.palette[ch];
         ctx.fillRect(Math.floor(x * px), Math.floor(y * px), Math.ceil(px), Math.ceil(px));
       }
     }
-
-    ctx.fillStyle = eyeColor;
-    ctx.fillRect(Math.floor(eyeL * px), Math.floor(eyeY * px), Math.ceil(px), Math.ceil(px));
-    ctx.fillRect(Math.floor((G - 1 - eyeL) * px), Math.floor(eyeY * px), Math.ceil(px), Math.ceil(px));
-
-    const footY = G - 2;
-    ctx.fillStyle = palette[0];
-    ctx.fillRect(Math.floor(2 * px), Math.floor(footY * px), Math.ceil(px * 2), Math.ceil(px));
-    ctx.fillRect(Math.floor((G - 4) * px), Math.floor(footY * px), Math.ceil(px * 2), Math.ceil(px));
-  }, [seed, palette, eyeColor, size]);
+  }, [kind, size]);
 
   return (
     <canvas
@@ -204,6 +283,28 @@ export function PixelRidge({
       ctx.fillRect(0, 0, rect.width, rect.height);
 
       const rand = mulberry32(seed);
+
+      // pixel sun
+      const sunC = Math.floor(cols * 0.82);
+      const sunR = Math.floor(rows * 0.14);
+      const sunRadius = 3.2;
+      for (let dy = -4; dy <= 4; dy++) {
+        for (let dx = -4; dx <= 4; dx++) {
+          if (dx * dx + dy * dy <= sunRadius * sunRadius) {
+            ctx.fillStyle = accent;
+            ctx.fillRect((sunC + dx) * px, (sunR + dy) * px, px, px);
+          }
+        }
+      }
+
+      // faint stars
+      for (let i = 0; i < Math.floor(cols * 0.35); i++) {
+        const c = Math.floor(rand() * cols);
+        const r = Math.floor(rand() * rows * 0.35);
+        ctx.fillStyle = 'rgba(19, 19, 17, 0.14)';
+        ctx.fillRect(c * px, r * px, px, px);
+      }
+
       const ridges = layers.map((_, li) => {
         const arr: number[] = [];
         let h = 0.2 + li * 0.17;

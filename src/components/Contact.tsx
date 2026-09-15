@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Mail, Phone, ArrowRight, ArrowUpRight } from 'lucide-react';
-import { identity, navLinks, posts } from '../data/content';
+import { identity, navLinks } from '../data/content';
 import { Reveal, Section, SectionLabel } from './Reveal';
 
 export function Contact() {
@@ -9,20 +9,23 @@ export function Contact() {
       <SectionLabel index="05" title="Contact" />
       <Reveal delay={1}>
         <h2 className="mt-10 max-w-3xl font-display text-5xl font-semibold leading-[1.0] tracking-tight text-ink sm:text-6xl md:text-7xl">
-          Let's build what's next.
+          Let's build{' '}
+          <span className="bg-gradient-to-r from-signal to-blush bg-clip-text text-transparent">
+            what's next.
+          </span>
         </h2>
       </Reveal>
       <Reveal delay={2}>
         <p className="mt-6 max-w-md text-[14px] leading-relaxed text-ink-mid">
-          DevOps, AIOps, or technical founder-office work — if you're building something ambitious
+          DevOps, AIOps, or technical founder-office work? If you're building something ambitious
           and need the systems side handled, start a conversation.
         </p>
       </Reveal>
 
       <div className="mt-10 flex flex-wrap gap-2.5">
         {[
-          { label: `Email — ${identity.email}`, href: `mailto:${identity.email}` },
-          { label: `Phone — ${identity.phone}`, href: `tel:${identity.phoneHref}` },
+          { label: `Email · ${identity.email}`, href: `mailto:${identity.email}` },
+          { label: `Phone · ${identity.phone}`, href: `tel:${identity.phoneHref}` },
           { label: 'LinkedIn', href: identity.linkedin, external: true },
           { label: 'GitHub', href: identity.github, external: true },
         ].map((method) => (
@@ -30,45 +33,11 @@ export function Contact() {
             key={method.label}
             href={method.href}
             {...(method.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-            className="group flex items-center gap-2 rounded-full border border-ink/15 bg-paper px-5 py-2.5 font-mono text-[12.5px] text-ink transition-all duration-200 hover:scale-[1.02] hover:border-ink/35"
+            className="glass-chip group flex items-center gap-2 rounded-full px-5 py-2.5 font-mono text-[12.5px] text-ink transition-all duration-200 hover:scale-[1.02] hover:border-signal/40"
           >
             {method.label}
             <ArrowUpRight className="h-3.5 w-3.5 text-ink-mid transition-colors group-hover:text-signal" />
           </a>
-        ))}
-      </div>
-    </Section>
-  );
-}
-
-export function Blog() {
-  return (
-    <Section id="blog" className="pb-8 pt-16">
-      <SectionLabel index="04" title="Writing" />
-      <div className="mt-8">
-        {posts.map((post, i) => (
-          <Reveal key={post.href} delay={Math.min(i, 2)}>
-            <a
-              href={post.href}
-              className="group flex items-start justify-between gap-6 border-b border-ink/10 py-6 first:border-t"
-            >
-              <div>
-                <div className="flex items-center gap-4">
-                  <span className="font-mono text-[10.5px] text-ink-low">{post.date}</span>
-                  <span className="font-mono text-[10.5px] text-signal">
-                    {post.tags.join(' · ')}
-                  </span>
-                </div>
-                <h3 className="mt-2.5 font-display text-xl font-semibold tracking-tight text-ink transition-colors group-hover:text-signal sm:text-2xl">
-                  {post.title}
-                </h3>
-                <p className="mt-1.5 max-w-xl text-[13px] leading-relaxed text-ink-mid">
-                  {post.excerpt}
-                </p>
-              </div>
-              <ArrowUpRight className="mt-2 h-4 w-4 shrink-0 text-ink-low transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-signal" />
-            </a>
-          </Reveal>
         ))}
       </div>
     </Section>
@@ -144,8 +113,16 @@ function DottedWordmark() {
 export function Footer({ onContactClick }: { onContactClick: () => void }) {
   return (
     <footer className="px-4 pb-6 pt-12 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl rounded-[1.75rem] bg-signal p-8 text-cream sm:p-12">
-        <div className="grid gap-10 md:grid-cols-2">
+      <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] bg-signal p-8 text-cream sm:p-12">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/15 blur-3xl"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-32 -left-16 h-80 w-80 rounded-full bg-blush/25 blur-3xl"
+        />
+        <div className="relative grid gap-10 md:grid-cols-2">
           <div>
             <p className="font-mono text-[13px] uppercase tracking-[0.18em]">
               • Reliability is leverage
@@ -220,13 +197,13 @@ export function Footer({ onContactClick }: { onContactClick: () => void }) {
           </div>
         </div>
 
-        <div className="mt-12">
+        <div className="relative mt-12">
           <DottedWordmark />
         </div>
 
-        <div className="mt-8 flex flex-col items-start justify-between gap-3 border-t border-cream/25 pt-6 sm:flex-row sm:items-center">
+        <div className="relative mt-8 flex flex-col items-start justify-between gap-3 border-t border-cream/25 pt-6 sm:flex-row sm:items-center">
           <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] opacity-70">
-            © {new Date().getFullYear()} {identity.name} — {identity.location}
+            © {new Date().getFullYear()} {identity.name} · {identity.location}
           </p>
           <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] opacity-70">
             DevOps → AIOps → Founder's Office

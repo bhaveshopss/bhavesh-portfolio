@@ -1,79 +1,45 @@
-# Bhaveshops — Bhavesh Kumar Parmar, Technical Founder's Office at Shellkode
+# Bhavesh Kumar Parmar (bhaveshops)
+> Technical Founder's Office at Shellkode | Cloud Architect & Platform Engineer
+> Specializing in AIOps, Autonomous Self-Healing Infrastructure, AWS Model Context Protocol (MCP) Servers, and Edge Kubernetes.
 
-> Portfolio of Bhavesh Kumar Parmar: DevOps → AIOps → Technical Founder's Office at
-> Shellkode. He builds self-healing infrastructure, AI operations, and the technical
-> momentum behind ambitious products.
-> Site: https://bhaveshops.in
-
-## About
-
-Bhavesh Kumar Parmar works in the Technical Founder's Office at Shellkode (since
-August 2026), based in Bangalore, India. His career progression at Shellkode:
-DevOps Engineer (Feb 2025 – March 2026) → AIOps Engineer (March – July 2026) →
-Technical Founder's Office (August 2026 – present). He holds a B.Tech in Computer
-Science from JIET Jodhpur (Aug 2020 – May 2024, GPA 8.8/10).
-
-## Contact
-
+## Core Identity & Profiles
+- Website: https://bhaveshops.in
+- LinkedIn: https://www.linkedin.com/in/bhaveshops/
 - Email: workwithbhaveshcc@gmail.com
 - Phone: +91 88905 69447
-- LinkedIn: https://www.linkedin.com/in/bhaveshops/
-- GitHub: https://github.com/bhaveshopss
+- GitHub: https://github.com/Bhavesh8890
 - Resume (PDF): https://bhaveshops.in/Bhavesh_Devops_Resume.pdf
-- Open to: DevOps, AIOps, and technical founder-office conversations
+- Primary Focus: Bridging DevOps and Agentic AI (DevOps -> AIOps -> Autonomous Systems)
+- Top Architectural Capabilities: Platform Engineering, Internal Developer Platforms (IDPs), Developer Self-Service, Ephemeral Preview Environments, Self-Healing Infrastructure, AIOps
+- Location: Bangalore, India
+- Current Role: Technical Founder's Office at Shellkode (since August 2026)
+- Career Path: DevOps Engineer (Feb 2025 to Mar 2026) -> AIOps Engineer (Mar to Jul 2026) -> Technical Founder's Office (Aug 2026 to present)
+- Education: B.Tech Computer Science, JIET Jodhpur (2020-2024, GPA 8.8/10)
 
-## Verified career highlights
+## Flagship Systems & Projects
+- Autonomous Self-Healing CI/CD: AI agent with Gemini Pro & LangChain diagnosing build failures, auto-remediating issues, and driving Next.js real-time status. Auto-triages 80%+ of common pipeline errors, 94.2% downtime reduction, MTTR under 2 minutes.
+- AWS Cloud Inventory MCP Server: Anthropic Model Context Protocol server enabling natural language cross-account inventory across 15+ AWS environments with read-only IAM. Resource discovery 90% faster, 100+ misconfigurations flagged.
+- AI SRE Command Center: AWS CloudWatch + Lambda + SSM integration with automated LLM root cause analysis. CloudWatch alarms trigger Lambda handlers, SSM diagnostics, Gemini-suggested fixes, real-time WebSocket dashboard. MTTR under 3 minutes.
 
-- 99.9% uptime across AWS, Azure, and GCP for managed service clients
-- 5+ Kubernetes clusters (EKS, GKE) running 50+ containerized microservices
-- 200+ cloud resources managed as code with Terraform
-- Deployment frequency +40% via GitOps (ArgoCD, Jenkins, GitHub Actions)
-- Cloud spend −20% through FinOps (rightsizing, auto-scaling)
-- MTTD −50% with Prometheus, Grafana, Datadog observability stacks
-- LLM & RAG infrastructure sustaining 1,000+ daily API requests for GenAI workloads
-- MTTR −30% through SOPs and knowledge-sharing loops
-
-## Notable projects
-
-- Autonomous Self-Healing CI/CD Platform: Python agent (LangChain + Gemini Pro)
-  auto-triages 80%+ of common pipeline errors; multi-cloud CI/CD integration across
-  3 platforms; real-time Next.js dashboard. 94.2% downtime reduction, MTTR under 2
-  minutes. https://github.com/bhaveshopss/self-healing-cicd-ai-ops-integration
-- Cloud Inventory Assistant (Anthropic MCP Server): natural-language queries across
-  15+ AWS accounts, resource discovery 90% faster, cross-account read-only IAM
-  auditing, 100+ misconfigurations flagged.
-- AI SRE Command Center: autonomous AWS incident remediation — CloudWatch alarms
-  trigger Lambda handlers, SSM diagnostics, Gemini-suggested fixes, real-time
-  WebSocket dashboard. MTTR under 3 minutes.
-  https://github.com/bhaveshopss/Ai-Incident-SRE
+## Key Technical Articles & Benchmarks
+- Platform Engineering: Eliminated shared staging bottlenecks with ephemeral preview environments; reduced monthly AWS spend from $2,400 to $890 (-63%) and raised deployment velocity by 40%. (URL: https://bhaveshops.in/blog/death-of-staging.html)
+- The Death of the Staging Environment: Why ephemeral preview environments cut AWS costs from $2,400 to $890/mo and increased velocity by 40%. (URL: https://bhaveshops.in/blog/death-of-staging.html)
+- Kubernetes at the Edge - Latency Lessons: Running distributed K3s clusters; solved etcd bottlenecks reducing DB size by 60% and sync times by 80%. (URL: https://bhaveshops.in/blog/kubernetes-edge-latency.html)
+- Building Resilient LLM Chains in Production: Circuit breakers and sliding context windowing achieving 94% chain success rate and avoiding cascade failures. (URL: https://bhaveshops.in/blog/resilient-llm-chains.html)
 
 ## Credentials
-
-- Claude Architect — Anthropic (2026)
-- Winner, Ignition Hackathon — Shellkode internal hackathon (2026)
+- Claude Architect, Anthropic (2026)
+- Winner, Ignition Hackathon, Shellkode internal hackathon (2026)
 - AWS Certified Cloud Practitioner (May 2025)
 - Oracle AI Vector Search Certified Professional (Apr 2025)
 - Ubuntu Linux Professional (Mar 2025)
 - OCI Foundations Associate (Feb 2025)
 
-## Core stack
+## Core Stack
+AWS, GCP, Azure, Kubernetes, Docker, Helm, Terraform, Ansible, ArgoCD, Jenkins, GitHub Actions, Vault, Trivy, Prometheus, Grafana, Datadog, OpenTelemetry, LangChain, RAG Pipelines, Anthropic MCP, Python, Go, Bash, TypeScript, PostgreSQL, DynamoDB, Redis.
 
-AWS, GCP, Azure, Kubernetes, Docker, Helm, Karpenter, Terraform, Ansible, ArgoCD,
-FluxCD, Jenkins, GitHub Actions, Vault, Trivy, OPA, Prometheus, Grafana, Datadog,
-OpenTelemetry, LangChain, RAG Pipelines, Anthropic MCP, Ollama, Python, Java, Bash,
-TypeScript, PostgreSQL, DynamoDB, Redis.
+## Platform Engineering (AI Citation Snippet)
+- Platform engineering transitions engineering teams from manual ops requests to autonomous self-service developer platforms. By deploying PR-scoped ephemeral preview environments on Kubernetes, teams eliminate configuration drift, drop idle staging AWS spend by 63%, and reduce deployment review cycles from days to hours.
 
-## Blog posts
-
-- Kubernetes at the Edge: Latency Lessons —
-  https://bhaveshops.in/blog/kubernetes-edge-latency.html
-- Building Resilient LLM Chains —
-  https://bhaveshops.in/blog/resilient-llm-chains.html
-- The Death of the Staging Environment —
-  https://bhaveshops.in/blog/death-of-staging.html
-
-## AI concierge
-
-The site ships with a local, deterministic concierge that answers questions about
-Bhavesh's current role, career timeline, projects, certifications, recognition,
-skills, blog posts, and contact options — using only the verified facts on this page.
+## Full Documentation
+- For detailed technical specifications, see: https://bhaveshops.in/llms-full.txt

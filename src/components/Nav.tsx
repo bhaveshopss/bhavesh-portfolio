@@ -26,16 +26,16 @@ export function Nav({ onContactClick }: { onContactClick: () => void }) {
   return (
     <>
       <motion.header
-        initial={{ y: -32, opacity: 0 }}
+        initial={{ y: -48, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
-        className={`fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
-          scrolled ? 'border-b border-line bg-cream/85 backdrop-blur-xl' : 'bg-transparent'
-        }`}
+        className="fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-5 sm:pt-4"
       >
         <nav
           aria-label="Primary"
-          className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8 lg:px-10"
+          className={`mx-auto flex h-14 max-w-6xl items-center justify-between rounded-full px-4 transition-all duration-500 sm:px-6 ${
+            scrolled ? 'glass-deep' : 'glass'
+          }`}
         >
           <a
             href="#top"
@@ -44,17 +44,24 @@ export function Nav({ onContactClick }: { onContactClick: () => void }) {
             bhavesh<span className="text-signal">.</span>
           </a>
 
-          <div className="hidden items-center gap-8 md:flex">
+          <div className="hidden items-center gap-7 md:flex">
             {navLinks.map((link) => (
               <a
                 key={link.id}
                 href={`#${link.id}`}
                 aria-current={active === link.id ? 'true' : undefined}
-                className={`text-[14.5px] font-medium tracking-[-0.01em] transition-colors duration-300 ${
+                className={`relative text-[14px] font-medium tracking-[-0.01em] transition-colors duration-300 ${
                   active === link.id ? 'text-ink' : 'text-ink-mid hover:text-ink'
                 }`}
               >
                 {link.label}
+                {active === link.id && (
+                  <motion.span
+                    layoutId="nav-dot"
+                    className="absolute -bottom-1.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-signal"
+                    transition={{ duration: 0.4, ease: EASE }}
+                  />
+                )}
               </a>
             ))}
             <div className="flex items-center gap-2">
@@ -62,13 +69,13 @@ export function Nav({ onContactClick }: { onContactClick: () => void }) {
                 href="/Bhavesh_Devops_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full border border-ink/15 bg-white/50 px-5 py-2 font-mono text-[13px] text-ink backdrop-blur-sm transition-all duration-200 hover:scale-[1.03] hover:border-ink/30 hover:bg-white"
+                className="glass-chip rounded-full px-5 py-2 font-mono text-[13px] text-ink transition-all duration-200 hover:scale-[1.03] hover:border-ink/25"
               >
                 Résumé
               </a>
               <button
                 onClick={onContactClick}
-                className="rounded-full bg-ink px-5 py-2 font-mono text-[13px] text-cream transition-all duration-200 hover:scale-[1.03] hover:bg-signal hover:text-white active:scale-[0.98]"
+                className="shine rounded-full bg-ink px-5 py-2 font-mono text-[13px] text-cream transition-all duration-200 hover:scale-[1.03] hover:bg-signal hover:text-white active:scale-[0.98]"
               >
                 Hire Me
               </button>
@@ -106,7 +113,7 @@ export function Nav({ onContactClick }: { onContactClick: () => void }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed inset-0 z-[45] flex flex-col justify-between bg-cream px-6 pb-10 pt-24 md:hidden"
+            className="fixed inset-0 z-[45] flex flex-col justify-between bg-cream/80 px-6 pb-10 pt-24 backdrop-blur-2xl md:hidden"
           >
             <nav aria-label="Mobile" className="flex flex-col">
               {navLinks.map((link, i) => (

@@ -13,6 +13,7 @@ import {
   buildReplies,
   greeting,
   postById,
+  projectById,
   projectReply,
   promptChips,
   type AgentAction,
@@ -90,7 +91,7 @@ function MessageBlock({ message }: { message: Message }) {
         className={`max-w-[92%] rounded-2xl px-4 py-3 text-[13px] leading-relaxed whitespace-pre-line ${
           isUser
             ? 'rounded-br-md bg-ink text-cream'
-            : 'rounded-bl-md border border-line bg-paper text-ink/90'
+            : 'rounded-bl-md glass text-ink/90'
         }`}
       >
         {message.text}
@@ -145,11 +146,11 @@ export function Concierge({ open, onClose }: { open: boolean; onClose: () => voi
   const idRef = useRef(messages.length);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-20)));
-    } catch {
-      /* storage unavailable — session-only history */
-    }
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-20)));
+      } catch {
+        /* storage unavailable: session-only history */
+      }
   }, [messages]);
 
   useEffect(() => {
@@ -244,7 +245,7 @@ export function Concierge({ open, onClose }: { open: boolean; onClose: () => voi
                 : posts[2].href
           ) ?? posts[0];
         reply = {
-          text: `Opening "${post.title}" (${post.date} · ${post.readTime} read) — you can also read the full article on its page.`,
+          text: `Opening "${post.title}" (${post.date} · ${post.readTime} read). You can also read the full article on its page.`,
           action: { type: 'openBlogPost', postId: post.href },
           external: [{ label: 'Open full article', url: post.href }],
         };
@@ -302,7 +303,7 @@ export function Concierge({ open, onClose }: { open: boolean; onClose: () => voi
       : view.kind === 'blog-post'
         ? postById(view.href)?.title ?? 'Article'
         : view.kind === 'project'
-          ? projectReply(view.projectId)?.text.split('—')[0] ?? 'Project'
+          ? projectById(view.projectId)?.name ?? 'Project'
           : null;
 
   return (
@@ -327,7 +328,7 @@ export function Concierge({ open, onClose }: { open: boolean; onClose: () => voi
             animate={reducedMotion() ? { opacity: 1 } : { x: 0, opacity: 1 }}
             exit={reducedMotion() ? { opacity: 0 } : { x: '100%', opacity: 0.4 }}
             transition={{ duration: 0.45, ease: EASE }}
-            className="fixed bottom-0 left-1/2 z-50 flex h-[88dvh] w-full -translate-x-1/2 flex-col overflow-hidden rounded-t-2xl border border-line bg-white/95 shadow-[0_-8px_60px_rgba(19,19,17,0.18)] backdrop-blur-2xl md:bottom-4 md:left-auto md:right-4 md:top-4 md:h-auto md:w-[420px] md:translate-x-0 md:rounded-2xl"
+            className="fixed bottom-0 left-1/2 z-50 flex h-[88dvh] w-full -translate-x-1/2 flex-col overflow-hidden rounded-t-2xl glass-deep shadow-[0_-8px_60px_rgba(19,19,17,0.18)] md:bottom-4 md:left-auto md:right-4 md:top-4 md:h-auto md:w-[420px] md:translate-x-0 md:rounded-2xl"
           >
             <div className="flex items-center justify-between border-b border-line px-5 py-4">
               <div className="flex min-w-0 items-center gap-3">

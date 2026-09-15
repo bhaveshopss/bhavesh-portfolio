@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { roleCards, timeline, faqs } from '../data/content';
-import { PixelSprite } from './PixelArt';
+import { RoleIcon } from './PixelArt';
 import { Reveal, EASE } from './Reveal';
 
 type Tab = 'roles' | 'journey' | 'faq';
@@ -18,20 +18,25 @@ function RolesGrid({ onHireClick }: { onHireClick: () => void }) {
 
   return (
     <div className="relative">
-      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-ink/10 sm:grid-cols-3 lg:grid-cols-6">
-        {roleCards.map((role) => (
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+        {roleCards.map((role, i) => (
           <button
             key={role.id}
             onClick={() => setActiveId(role.id === activeId ? null : role.id)}
             onMouseEnter={() => setActiveId(role.id)}
             onFocus={() => setActiveId(role.id)}
             aria-expanded={activeId === role.id}
-            className={`flex min-h-[150px] cursor-pointer flex-col items-center justify-center gap-3 p-4 transition-colors duration-300 ${
-              activeId === role.id ? 'bg-white' : 'bg-cream hover:bg-paper'
+            className={`card-glow glass flex min-h-[150px] cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl p-4 ${
+              activeId === role.id ? '!border-signal/40' : ''
             }`}
           >
-            <div className={`transition-transform duration-300 ${activeId === role.id ? 'scale-110' : ''}`}>
-              <PixelSprite seed={role.seed} palette={role.palette} size={64} />
+            <div
+              className={`icon-bob transition-transform duration-300 ${
+                activeId === role.id ? 'scale-110' : ''
+              }`}
+              style={{ animationDelay: `${i * 0.45}s` }}
+            >
+              <RoleIcon kind={role.sprite} size={60} />
             </div>
             <span className="text-center font-mono text-[11px] leading-tight text-ink-soft">
               {role.title}
@@ -48,7 +53,7 @@ function RolesGrid({ onHireClick }: { onHireClick: () => void }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.35, ease: EASE }}
-            className="mt-6 rounded-2xl border border-ink/10 bg-paper/90 p-6 shadow-[0_4px_30px_rgba(19,19,17,0.08)] backdrop-blur-md sm:p-8"
+            className="glass mt-6 rounded-2xl p-6 card-glow sm:p-8"
           >
             <h3 className="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl lg:text-5xl">
               {active.title}
@@ -74,7 +79,7 @@ function RolesGrid({ onHireClick }: { onHireClick: () => void }) {
       <div className="mt-10 flex justify-center">
         <button
           onClick={onHireClick}
-          className="rounded-full bg-ink px-7 py-3 font-mono text-[13.5px] text-cream transition-all duration-200 hover:scale-[1.03] hover:bg-signal active:scale-[0.98]"
+          className="shine rounded-full bg-ink px-7 py-3 font-mono text-[13.5px] text-cream transition-all duration-200 hover:scale-[1.03] hover:bg-signal active:scale-[0.98]"
         >
           Hire Me
         </button>
@@ -160,7 +165,7 @@ export function AboutMe({ onHireClick }: { onHireClick: () => void }) {
   return (
     <section id="about" className="scroll-mt-20 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
       <Reveal>
-        <div className="mx-auto max-w-6xl rounded-[1.75rem] border border-ink/10 bg-paper shadow-[0_2px_40px_rgba(19,19,17,0.05)]">
+        <div className="glass mx-auto max-w-6xl rounded-[2rem]">
           <div className="grid lg:grid-cols-[220px_1fr]">
             <div className="border-b border-ink/10 p-7 sm:p-9 lg:border-b-0 lg:border-r">
               <p className="font-display text-xl font-semibold tracking-tight text-ink">About me</p>
@@ -177,8 +182,8 @@ export function AboutMe({ onHireClick }: { onHireClick: () => void }) {
                     onClick={() => setTab(t.id)}
                     className={`flex items-center gap-2.5 rounded-full px-5 py-2.5 text-[14.5px] transition-all duration-300 ${
                       tab === t.id
-                        ? 'bg-white font-medium text-ink shadow-[0_2px_12px_rgba(19,19,17,0.08)]'
-                        : 'text-ink-mid hover:bg-white/60 hover:text-ink'
+                        ? 'bg-ink font-medium text-cream shadow-[0_6px_20px_rgba(19,19,17,0.25)]'
+                        : 'glass-chip text-ink-mid hover:text-ink'
                     }`}
                   >
                     <span className="h-2 w-2 rounded-full" style={{ backgroundColor: t.dot }} aria-hidden />
@@ -212,7 +217,7 @@ export function AboutMe({ onHireClick }: { onHireClick: () => void }) {
                   <div className="mt-10 flex justify-center">
                     <button
                       onClick={onHireClick}
-                      className="rounded-full bg-ink px-7 py-3 font-mono text-[13.5px] text-cream transition-all duration-200 hover:scale-[1.03] hover:bg-signal active:scale-[0.98]"
+                      className="shine rounded-full bg-ink px-7 py-3 font-mono text-[13.5px] text-cream transition-all duration-200 hover:scale-[1.03] hover:bg-signal active:scale-[0.98]"
                     >
                       Hire Me
                     </button>
@@ -231,7 +236,7 @@ export function AboutMe({ onHireClick }: { onHireClick: () => void }) {
                   <div className="mt-10 flex justify-center">
                     <button
                       onClick={onHireClick}
-                      className="rounded-full bg-ink px-7 py-3 font-mono text-[13.5px] text-cream transition-all duration-200 hover:scale-[1.03] hover:bg-signal active:scale-[0.98]"
+                      className="shine rounded-full bg-ink px-7 py-3 font-mono text-[13.5px] text-cream transition-all duration-200 hover:scale-[1.03] hover:bg-signal active:scale-[0.98]"
                     >
                       Hire Me
                     </button>

@@ -14,8 +14,10 @@ export function Credentials() {
         {featured.map((cred, i) => (
           <Reveal key={cred.name} delay={i}>
             <div
-              className={`flex h-full items-start justify-between gap-6 rounded-2xl p-7 sm:p-8 ${
-                cred.kind === 'award' ? 'bg-signal text-cream' : 'border border-ink/10 bg-paper'
+              className={`card-glow flex h-full items-start justify-between gap-6 rounded-3xl p-7 sm:p-8 ${
+                cred.kind === 'award'
+                  ? 'shine bg-signal text-cream shadow-[0_16px_40px_-12px_rgba(43,75,242,0.45)]'
+                  : 'glass text-ink'
               }`}
             >
               <div>
@@ -59,7 +61,7 @@ export function Credentials() {
       <div className="mt-4">
         {rest.map((cred, i) => (
           <Reveal key={cred.name} delay={Math.min(i, 2)}>
-            <div className="flex items-baseline justify-between gap-4 border-b border-ink/10 py-4">
+            <div className="flex items-baseline justify-between gap-4 rounded-xl border-b border-ink/10 py-4 transition-all duration-300 hover:translate-x-1 hover:bg-white/40">
               <div className="flex items-baseline gap-4">
                 <span className="font-mono text-[10.5px] text-signal">
                   {String(credentials.indexOf(cred) + 1).padStart(2, '0')}

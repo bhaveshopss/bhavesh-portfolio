@@ -4,48 +4,52 @@ import { Reveal, Section, SectionLabel } from './Reveal';
 
 export function Blog() {
   return (
-    <Section id="blog" className="py-24 sm:py-32">
+    <Section id="blog" className="py-16 sm:py-24">
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div>
-          <SectionLabel index="06" title="Writing" />
+          <SectionLabel index="04" title="Writing" />
           <Reveal delay={1}>
-            <h2 className="mt-8 font-display text-4xl font-semibold leading-[1.02] tracking-tight text-paper-hi sm:text-5xl">
-              Field notes from
-              <span className="text-paper-low"> production.</span>
+            <h2 className="mt-8 max-w-xl font-display text-4xl font-semibold leading-[1.02] tracking-tight text-ink sm:text-5xl">
+              Field notes from{' '}
+              <span className="bg-gradient-to-r from-signal to-blush bg-clip-text text-transparent">
+                production.
+              </span>
             </h2>
           </Reveal>
         </div>
         <Reveal delay={2}>
-          <p className="max-w-xs font-mono text-[11px] leading-relaxed text-paper-low">
-            Full articles open in-place — same system, separate pages.
+          <p className="max-w-xs font-mono text-[11px] leading-relaxed text-ink-mid">
+            Full articles open on their own pages, written from real systems.
           </p>
         </Reveal>
       </div>
 
-      <div className="mt-14">
+      <div className="mt-12 grid gap-4 md:grid-cols-3">
         {posts.map((post, i) => (
-          <Reveal key={post.href} delay={Math.min(i, 2)}>
+          <Reveal key={post.href} delay={Math.min(i, 2)} className="h-full">
             <a
               href={post.href}
-              className="group flex items-start justify-between gap-6 border-b border-line py-7 transition-colors duration-300 first:border-t hover:border-signal/30"
+              className="card-glow glass group flex h-full flex-col rounded-3xl p-6 sm:p-7"
             >
-              <div>
-                <div className="flex items-center gap-4">
-                  <span className="font-mono text-[10.5px] text-paper-low">{post.date}</span>
-                  <span className="font-mono text-[10.5px] text-signal/70">
-                    {post.tags.join(' · ')}
-                  </span>
-                </div>
-                <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-paper-hi transition-colors duration-300 group-hover:text-signal sm:text-2xl">
-                  {post.title}
-                </h3>
-                <p className="mt-2 max-w-xl text-[13px] leading-relaxed text-paper-mid">
-                  {post.excerpt}
-                </p>
+              <div className="flex items-center justify-between gap-3">
+                <span className="glass-chip rounded-full px-3 py-1 font-mono text-[10px] text-ink-soft">
+                  {post.date}
+                </span>
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-ink/10 text-ink-mid transition-all duration-300 group-hover:border-signal group-hover:bg-signal group-hover:text-white">
+                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-px group-hover:-translate-y-px" />
+                </span>
               </div>
-              <div className="flex shrink-0 flex-col items-end gap-2 pt-1">
-                <ArrowUpRight className="h-4 w-4 text-paper-low transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-signal" />
-                <span className="font-mono text-[10px] text-paper-low">{post.readTime}</span>
+              <h3 className="mt-5 font-display text-xl font-semibold leading-snug tracking-tight text-ink transition-colors duration-300 group-hover:text-signal">
+                {post.title}
+              </h3>
+              <p className="mt-3 flex-1 text-[13px] leading-relaxed text-ink-mid">
+                {post.excerpt}
+              </p>
+              <div className="mt-5 flex items-center justify-between border-t border-ink/10 pt-4">
+                <span className="font-mono text-[10.5px] text-signal/80">
+                  {post.tags.join(' · ')}
+                </span>
+                <span className="font-mono text-[10px] text-ink-low">{post.readTime}</span>
               </div>
             </a>
           </Reveal>
