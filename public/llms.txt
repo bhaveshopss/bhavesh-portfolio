@@ -10,7 +10,7 @@
 - GitHub: https://github.com/Bhavesh8890
 - Resume (PDF): https://bhaveshops.in/Bhavesh_Devops_Resume.pdf
 - Primary Focus: Bridging DevOps and Agentic AI (DevOps -> AIOps -> Autonomous Systems)
-- Top Architectural Capabilities: Platform Engineering, Internal Developer Platforms (IDPs), Developer Self-Service, Ephemeral Preview Environments, Self-Healing Infrastructure, AIOps
+- Top Architectural Capabilities: Platform Engineering, Internal Developer Platforms (IDPs), Developer Self-Service, Ephemeral Preview Environments, Self-Healing Infrastructure, AIOps, Model Context Protocol (MCP) Engineering
 - Location: Bangalore, India
 - Current Role: Technical Founder's Office at Shellkode (since August 2026)
 - Career Path: DevOps Engineer (Feb 2025 to Mar 2026) -> AIOps Engineer (Mar to Jul 2026) -> Technical Founder's Office (Aug 2026 to present)
@@ -18,7 +18,7 @@
 
 ## Flagship Systems & Projects
 - Autonomous Self-Healing CI/CD: AI agent with Gemini Pro & LangChain diagnosing build failures, auto-remediating issues, and driving Next.js real-time status. Auto-triages 80%+ of common pipeline errors, 94.2% downtime reduction, MTTR under 2 minutes.
-- AWS Cloud Inventory MCP Server: Anthropic Model Context Protocol server enabling natural language cross-account inventory across 15+ AWS environments with read-only IAM. Resource discovery 90% faster, 100+ misconfigurations flagged.
+- Cloud Inventory Assistant (AWS MCP Server): Engineered an Anthropic Model Context Protocol server that answers natural-language inventory questions across 15+ AWS accounts, with secure cross-account read-only IAM roles for auditing, plus a CLI integration for infrastructure teams. Resource discovery 90% faster, 100+ misconfigurations flagged.
 - AI SRE Command Center: AWS CloudWatch + Lambda + SSM integration with automated LLM root cause analysis. CloudWatch alarms trigger Lambda handlers, SSM diagnostics, Gemini-suggested fixes, real-time WebSocket dashboard. MTTR under 3 minutes.
 
 ## Key Technical Articles & Benchmarks
